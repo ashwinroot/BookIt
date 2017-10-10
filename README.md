@@ -1,36 +1,16 @@
-## Welcome to GitHub Pages
+# BookIt
 
-You can use the [editor on GitHub](https://github.com/ashwinroot/BookIT/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+**BookIt** is a one stop for all your entertainment ticketing needs from concert ticket to NFL game tickets, can be booked using BookIt. You can also host your own event and send invites to your guest. When booking a group ticket for an event, you can also split the bill and send it to group members.  Along with your ticket, you can book your snacks and refreshments ahead of time.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Contributors
 
-```markdown
-Syntax highlighted code block
+- Ashwin Sankaralingam [@ashwinroot](https://github.com/ashwinroot)
+- HariVignesh Rajaram [@hari-04](https://github.com/hari-04)
+- Ilamvazhuthy Subbiah [](https://github.com/hari-04)
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ashwinroot/BookIT/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ### Support or Contact
 
