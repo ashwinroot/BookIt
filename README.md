@@ -1,8 +1,7 @@
 # BookIt
 
 
-**BookIt** is a one stop for all your entertainment ticketing needs from concert ticket to NFL game tickets, can be booked using BookIt. You can also host your own event and send invites to your guest. When booking a group ticket for an event, you can also split the bill and send it to group members.  Along with your ticket, you can book your snacks and refreshments ahead of time.
-
+**BookIt** is a one stop for all your entertainment ticketing needs from concert ticket to NFL game tickets, can be booked using BookIt. View the events happening near you and add them to your wishlist. Get notified if your favourite event is running out of tickets. 
 
 ### Contributors
 
