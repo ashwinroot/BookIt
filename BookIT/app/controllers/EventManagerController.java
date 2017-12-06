@@ -30,5 +30,4 @@ public class EventManagerController extends Controller{
 
     }
 
-
 }
