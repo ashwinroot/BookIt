@@ -1,5 +1,5 @@
 package models;
-import com.sun.javafx.beans.IDProperty;
+
 import io.ebean.*;
 
 import javax.persistence.*;
