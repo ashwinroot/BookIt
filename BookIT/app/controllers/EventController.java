@@ -60,7 +60,13 @@ public class EventController extends Controller{
     }
 
     public Result deleteEvent(Integer eventId){
-        return TODO;
+        Event event = Event.find.byId(eventId.toString());
+        Event.find.byId(eventId.toString()).delete();
+
+        String user = session("connected");
+        User eventManager = User.find.byId(user);
+
+        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
     }
 
 }
