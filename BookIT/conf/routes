@@ -24,6 +24,7 @@ POST    /users/edit                 controllers.UserController.update()
 GET     /users/delete/:id           controllers.UserController.destroy(id : Integer)
 
 
+GET     /eventManager/:email          controllers.EventManagerController.showEventManagerProfile(email : String)
 
 POST    /createUser                 controllers.CustomerController.saveCustomer
 POST    /createEventManager         controllers.EventManagerController.saveEventManager

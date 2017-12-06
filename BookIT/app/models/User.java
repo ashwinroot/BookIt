@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(name="USER_TYPE")
 public class User extends Model{
 

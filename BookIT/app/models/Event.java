@@ -1,5 +1,8 @@
 package models;
 
+import io.ebean.Finder;
+import io.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 @Entity
-public class Event {
+public class Event extends Model{
 
     @Id
     private Integer eventId;
@@ -15,12 +18,14 @@ public class Event {
     private Date eventDate;
     private String eventLocation;
     private float perTicketCost;
-    private EventManager eventOwner;
+    private String eventOwnerEmail;
     private Integer availableNoOfSeats;
     private Integer totalSales;
     private ArrayList<Customer> attendees;
     private ArrayList<Customer> observers;
 
+
+    public static Finder<String, Event> find = new Finder<>(Event.class);
     public ArrayList<Customer> getObservers() {
         return observers;
     }
@@ -29,13 +34,13 @@ public class Event {
         this.observers = observers;
     }
 
-    Event(String eventName, Date eventDate, String eventLocation, float perTicketCost, EventManager eventOwner, Integer availableNoOfSeats){
+    public Event(String eventName, Date eventDate, String eventLocation, float perTicketCost, String eventOwnerEmail, Integer availableNoOfSeats){
 
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventLocation = eventLocation;
         this.perTicketCost = perTicketCost;
-        this.eventOwner = eventOwner;
+        this.eventOwnerEmail = eventOwnerEmail;
         this.availableNoOfSeats = availableNoOfSeats;
         this.totalSales = 0;
     }
@@ -80,12 +85,12 @@ public class Event {
         this.perTicketCost = perTicketCost;
     }
 
-    public EventManager getEventOwner() {
-        return eventOwner;
+    public String getEventOwnerEmail() {
+        return eventOwnerEmail;
     }
 
-    public void setEventOwner(EventManager eventOwner) {
-        this.eventOwner = eventOwner;
+    public void setEventOwnerEmail(String eventOwnerEmail) {
+        this.eventOwnerEmail = eventOwnerEmail;
     }
 
     public Integer getAvailableNoOfSeats() {

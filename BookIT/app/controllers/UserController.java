@@ -44,6 +44,7 @@ public class UserController extends Controller {
             }
 
             else if(userDB.getDecriminatorValue().equals("E")){
+                session("connected", userDB.userEmail);
 
                 return ok(showEventManagerProfile.render());
             }

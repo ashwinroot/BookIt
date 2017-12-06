@@ -9,6 +9,7 @@ create table event (
   event_date                    datetime(6),
   event_location                varchar(255),
   per_ticket_cost               float not null,
+  event_owner_email             varchar(255),
   available_no_of_seats         integer,
   total_sales                   integer,
   constraint pk_event primary key (event_id)
