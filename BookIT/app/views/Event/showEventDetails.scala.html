@@ -1,5 +1,5 @@
 
-@(eventManager: User, ownedEvents : List[Event])
+@(event: Event)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,23 +12,22 @@
         <title>Welcome to BookIT</title>
     </head>
     <body>
-        <h2>Your Profile</h2>
+        <h2>Event Details</h2>
         <ul>
-            <li><strong>Name</strong> @eventManager.userName</li>
-            <li><strong>Email</strong> @eventManager.userEmail</li>
-            <li><strong>Phone</strong> @eventManager.phoneNo</li>
+            <li><strong>Event</strong> @event.getEventName</li>
+            <li><strong>Location</strong> @event.getEventLocation</li>
+            <li><strong>Date</strong> @event.getEventDate</li>
+            <li><Strong>Ticket cost</Strong> @event.getPerTicketCost</li>
         </ul>
-
-        <h2>Your Events</h2>
         <ul>
-            @for(index <- 0 until ownedEvents.size){
-                <li>
-                    <a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>
-                </li>
-            }
-        </ul>
+            <li>
+                <a href="/event/update/@event.getEventId"<button>Update Event</button>
+            </li>
+            <li>
+                <a href="/event/delete/@event.getEventId"<button>Delete Event</button>
+            </li>
 
-        <a href="/event/create"<button>Create Event</button>
+        </ul>
     </body>
 
 </html>
