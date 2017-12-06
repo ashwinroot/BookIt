@@ -5,7 +5,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.User.createEventManager;
+import views.html.EventManager.*;
 
 import javax.inject.Inject;
 
