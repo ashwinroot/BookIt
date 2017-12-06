@@ -12,6 +12,9 @@ import javax.inject.Inject;
 import java.util.List;
 
 import views.html.User.*;
+import views.html.Customer.*;
+import views.html.EventManager.*;
+import views.html.Admin.*;
 
 
 public class UserController extends Controller {

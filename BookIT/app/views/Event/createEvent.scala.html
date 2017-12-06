@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Create Event</title>
+    </head>
+    <body>
+
+        <h1>Create Event</h1>
+
+        <form id="register-form" action="/event/create" method="post" role="form" >
+            <div class="form-group">
+                <input type="text" name="eventname" id="username" tabindex="1" class="form-control" placeholder="Event Name" value="">
+            </div>
+            <div class="form-group">
+                <input type="text" name="eventlocation" id="text" tabindex="1" class="form-control" placeholder="Event Location" value="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" name="date" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker1').datetimepicker();
+                            });
+                    </script>
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" name="cost" class="form-control" aria-label="Amount (to the nearest dollar)">
+            </div>
+            <div class="form-group">
+                <input type="text" name="seats"  tabindex="1" class="form-control" placeholder="Number of seats available" value="">
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

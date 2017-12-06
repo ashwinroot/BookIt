@@ -3,6 +3,17 @@
 
 # --- !Ups
 
+create table event (
+  event_id                      integer auto_increment not null,
+  event_name                    varchar(255),
+  event_date                    datetime(6),
+  event_location                varchar(255),
+  per_ticket_cost               float not null,
+  available_no_of_seats         integer,
+  total_sales                   integer,
+  constraint pk_event primary key (event_id)
+);
+
 create table user (
   user_type                     varchar(31) not null,
   user_email                    varchar(255) not null,
@@ -17,6 +28,8 @@ create table user (
 
 
 # --- !Downs
+
+drop table if exists event;
 
 drop table if exists user;
 
