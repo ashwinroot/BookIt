@@ -46,7 +46,8 @@ public class UserController extends Controller {
             else if(userDB.getDecriminatorValue().equals("E")){
                 session("connected", userDB.userEmail);
 
-                return ok(showEventManagerProfile.render());
+                return redirect(routes.EventManagerController.showEventManagerProfile(userDB.userEmail));
+                //return redirect(showEventManagerProfile.render());
             }
             else if(userDB.getDecriminatorValue().equals("A")){
 

@@ -42,13 +42,9 @@ public class EventManagerController extends Controller{
         List<Event> ownedEvents = Ebean.find(Event.class).where().eq("eventOwnerEmail", eventManagerEmail).findList();
         Iterator<Event> iter = ownedEvents.iterator();
 
-        String message = "";
 
-        while(iter.hasNext()){
-            message += iter.next().getEventName() + " ";
-        }
 
-        return forbidden(message);
+        return ok(showEventManagerProfile.render(eventManager, ownedEvents));
     }
 
 
