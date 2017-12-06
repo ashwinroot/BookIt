@@ -15,38 +15,25 @@ public class EventManager extends User {
     private ArrayList<Event> createdEvents;
     private boolean isApproved;
 
-/*
-
-    EventManager(){
-        isApproved = false;
-    }
-    public boolean createEvent(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        String dateInString = "31-08-1982";
-        Date date = null;
-        try {
-            date = sdf.parse(dateInString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Event E = new Event("NFL", date, "Denver", 100,
-                this, 100);
-
-        return true;
+    public ArrayList<Event> getCreatedEvents() {
+        return createdEvents;
     }
 
-*/
-/*
-    public boolean updateEvent(){
-
+    public void setCreatedEvents(ArrayList<Event> createdEvents) {
+        this.createdEvents = createdEvents;
     }
 
-    public boolean deleteEvent(){
-
+    public boolean isApproved() {
+        return isApproved;
     }
 
-    public void viewEvent(){
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 
-    }*/
+    Event createEvent(String _eventName,String _eventLocation, Date _Date, float _ticketCost, int _availSeats)
+    {
+        Event event = new Event(_eventName,_Date,_eventLocation,_ticketCost,this,_availSeats);
+        return event;
+    }
 }
