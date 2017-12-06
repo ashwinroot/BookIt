@@ -6,6 +6,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.EventManager.*;
+import views.html.User.*;
 
 import javax.inject.Inject;
 
@@ -29,5 +30,6 @@ public class EventManagerController extends Controller{
         return redirect(routes.UserController.index());
 
     }
+
 
 }

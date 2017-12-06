@@ -5,7 +5,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.User.createCustomer;
+import views.html.Customer.*;
 
 import javax.inject.Inject;
 
