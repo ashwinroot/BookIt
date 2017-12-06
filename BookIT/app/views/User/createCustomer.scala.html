@@ -1,0 +1,25 @@
+@(userForm: Form[Customer])
+
+@import helper._
+
+<html>
+    <head>
+        <title>Create User</title>
+    </head>
+    <body>
+
+        <h1>Create User</h1>
+        @helper.form(action = helper.CSRF(routes.CustomerController.saveCustomer())){
+            @helper.inputText(userForm("userName"))
+            @helper.inputText(userForm("userEmail"))
+            @helper.inputText(userForm("userPassword"))
+            @helper.inputText(userForm("phoneNo"))
+
+            <input type="submit" value="Create User">
+        }
+        <p>want to list your Own events?</p>
+        <form action="/create/eventManager ">
+            <input type="submit" value="Sign up as Event Manager">
+        </form>
+    </body>
+</html>

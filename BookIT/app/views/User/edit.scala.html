@@ -1,0 +1,21 @@
+@(userForm: Form[User])
+
+@import helper._
+
+<html>
+    <head>
+        <title>Edit User</title>
+    </head>
+    <body>
+
+        <h1>Edit User</h1>
+        @helper.form(action = helper.CSRF(routes.UserController.update())){
+            @helper.inputText(userForm("userName"))
+            @helper.inputText(userForm("userEmail"))
+            @helper.inputText(userForm("userPassword"))
+
+            <input type="submit" value="Edit User">
+            }
+
+    </body>
+</html>
