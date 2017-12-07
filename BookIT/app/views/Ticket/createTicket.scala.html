@@ -1,4 +1,4 @@
-@(event: Event, userMail: String)
+@(event: Event)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,10 +33,7 @@
             <div class="col">
 
                 <form id="bookTicket-form" action="/event/book/confirm/@event.getEventId" method="POST" role="form" >
-                    <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Enter user mail</label>
-                        <input type="text" name="usermail" id="usermail" tabindex="2" class="form-control" placeholder="User Mail" value="">
-                    </div>
+
                     <div class="form-group col-sm-6">
                         <label>Number of tickets</label>
                         <input type='text' name="numtickets" class="form-control" oninput="totalCost()" value=""/>

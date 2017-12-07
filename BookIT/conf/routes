@@ -49,7 +49,7 @@ GET /event/search/:userMail          controllers.EventController.searchEvent(use
 GET /event/update/:eventId          controllers.EventController.updateEvent(eventId : Integer)
 GET /event/delete/:eventId          controllers.EventController.deleteEvent(eventId : Integer)
 
-GET /event/book/:eventId/:userMail  controllers.TicketController.bookTicket(eventId: Integer,userMail: String)
+GET /event/book/:eventId            controllers.TicketController.bookTicket(eventId: Integer)
 + nocsrf
 POST /event/book/confirm/:eventId    controllers.TicketController.confirmTicket(eventId: Integer)
 + nocsrf

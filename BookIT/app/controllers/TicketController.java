@@ -31,12 +31,12 @@ public class TicketController extends Controller{
     @Inject
     FormFactory formFactory;
 
-    public Result bookTicket(int eventId, String userMail)
+    public Result bookTicket(int eventId)
     {
         Event event = Event.find.byId(new Integer(eventId).toString());
         if(event.getAvailableNoOfSeats() > 0)
         {
-            return ok(createTicket.render(event,userMail));
+            return ok(createTicket.render(event));
         }
 
         return forbidden(""+event.getEventName()+" is full");
@@ -45,10 +45,12 @@ public class TicketController extends Controller{
     public Result confirmTicket(int eventId)
     {
         DynamicForm form = formFactory.form().bindFromRequest();
-        User user = User.find.byId(form.get("usermail"));
+        String mail = session("connected");
+        User user = User.find.byId(mail);
         Event event = Event.find.byId(new Integer(eventId).toString());
 
-        //return forbidden(""+user.userEmail+" "+event.getEventName());
+        //return forbidden(""+mail+" "+event.getEventName());
+
         String eventManager = event.getEventOwnerEmail();
 
         Ticket t;
@@ -64,7 +66,7 @@ public class TicketController extends Controller{
         }
         t.save();
         return forbidden(""+t.getCustomerMail()+" "+t.getNumSeats());
-
+        
         //return TODO;
     }
 
