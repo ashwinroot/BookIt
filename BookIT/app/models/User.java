@@ -11,8 +11,14 @@ import java.math.BigInteger;
 public class User extends Model{
 
 
-    public Integer userID;
-    public String userName;
+    private Integer userID;
+    private String userName;
+    @Id
+    private String userEmail;
+    private String userPassword;
+    private BigInteger phoneNo;
+
+    public static Finder<String, User> find = new Finder<>(User.class);
 
     public String getUserName() {
         return userName;
@@ -46,12 +52,7 @@ public class User extends Model{
         this.phoneNo = phoneNo;
     }
 
-    @Id
-    public String userEmail;
-    public String userPassword;
-    public BigInteger phoneNo;
 
-    public static Finder<String, User> find = new Finder<>(User.class);
 
     @Transient
     public String getDecriminatorValue() {

@@ -31,10 +31,8 @@ public class EventManagerController extends Controller{
 
         Form<EventManager> eventManagerForm= formFactory.form(EventManager.class).bindFromRequest();
         EventManager eventManager = eventManagerForm.get();
-
         eventManager.save();
-        return redirect(routes.UserController.index());
-
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
     public Result showEventManagerDashBoard(String eventManagerEmail){

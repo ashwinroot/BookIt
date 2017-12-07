@@ -39,12 +39,12 @@ public class EventController extends Controller{
         DateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
         try{
             Date date = datef.parse(df.get("date"));
-            Event event = new Event(df.get("eventname"),date,df.get("eventlocation"), Float.parseFloat(df.get("cost")), eventManager.userEmail, Integer.parseInt(df.get("seats")));
+            Event event = new Event(df.get("eventname"),date,df.get("eventlocation"), Float.parseFloat(df.get("cost")), eventManager.getUserEmail(), Integer.parseInt(df.get("seats")));
             event.save();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
     public Result showEvent(Integer eventId){
@@ -69,7 +69,7 @@ public class EventController extends Controller{
         String user = session("connected");
         User eventManager = User.find.byId(user);
 
-        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
     public Result modifyEvent(Integer eventId) {
@@ -94,7 +94,7 @@ public class EventController extends Controller{
         event.setPerTicketCost(Float.parseFloat(df.get("cost")));
         event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
         event.update();
-        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
 }

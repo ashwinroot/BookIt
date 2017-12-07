@@ -56,7 +56,7 @@ public class TicketController extends Controller{
         Ticket t;
         try
         {
-            Ticket temp = new Ticket(form.get("numtickets"),eventManager,event.getEventId(),user.userEmail,TRUE);
+            Ticket temp = new Ticket(form.get("numtickets"),eventManager,event.getEventId(),user.getUserEmail(),TRUE);
             t = temp;
         }
         catch (Exception e)

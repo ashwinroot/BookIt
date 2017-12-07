@@ -29,9 +29,8 @@ public class CustomerController extends Controller{
 
         Form<Customer> customerForm= formFactory.form(Customer.class).bindFromRequest();
         Customer customer = customerForm.get();
-
         customer.save();
-        return redirect(routes.UserController.index());
+        return redirect(routes.CustomerController.showCustomerDashBoard(customer.getUserEmail()));
 
     }
 

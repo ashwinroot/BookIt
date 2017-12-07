@@ -8,9 +8,9 @@
         <h1>All Users</h1>
 
         @for(user <- users){
-            <a href = '#'>@user.userName</a>
-            <p>Email : @user.userEmail</p>
-            <p>Password : @user.userPassword</p>
+            <a href = '#'>@user.getUserName</a>
+            <p>Email : @user.getUserEmail</p>
+            <p>Password : @user.getUserPassword</p>
         }
     </body>
 </html>
