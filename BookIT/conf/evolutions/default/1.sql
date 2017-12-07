@@ -37,6 +37,13 @@ create table user (
   constraint pk_user primary key (user_email)
 );
 
+create table wish_list (
+  wish_id                       integer auto_increment not null,
+  customer_email                varchar(255),
+  event_id                      integer,
+  constraint pk_wish_list primary key (wish_id)
+);
+
 
 # --- !Downs
 
@@ -45,4 +52,6 @@ drop table if exists event;
 drop table if exists ticket;
 
 drop table if exists user;
+
+drop table if exists wish_list;
 
