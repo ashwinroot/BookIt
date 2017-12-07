@@ -37,17 +37,26 @@ public class CustomerController extends Controller{
 
     }
 
-    public Result bookEvent(){
+    public Result showCustomerDashBoard(String customerEmail){
+        User customer = User.find.byId(customerEmail);
 
-        return TODO;
+        return ok(showCustomerDashboard.render(customer));
     }
 
     public Result showCustomerProfile(String customerEmail){
-
         User customer = User.find.byId(customerEmail);
-        //List<Event> bookedEvents = Ebean.find(Event.class).where().eq("eventOwnerEmail", customerEmail).findList();
-        //Iterator<Event> iter = ownedEvents.iterator();
-
         return ok(showCustomerProfile.render(customer));
+    }
+
+    public Result showCustomerBookingHistory(String customerEmail){
+        return TODO;
+    }
+
+    public Result showCustomerWishList(String customerEmail){
+        return TODO;
+    }
+
+    public Result updateCustomerProfile(String customerEmail){
+        return TODO;
     }
 }

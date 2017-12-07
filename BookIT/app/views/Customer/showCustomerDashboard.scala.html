@@ -1,0 +1,40 @@
+
+
+@(customer: User)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-grid.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-reboot.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/custom1.css")">
+        <script src="@routes.Assets.versioned("../../../public/js/custom.js")" type="text/javascript"></script>
+        <title>Welcome to BookIT</title>
+    </head>
+    <body>
+        <h2>Your Profile</h2>
+        <ul>
+            <li><strong>Name</strong> @customer.userName</li>
+            <li><strong>Email</strong> @customer.userEmail</li>
+            <li><strong>Phone</strong> @customer.phoneNo</li>
+        </ul>
+
+        <h2>Popular Events</h2>
+        <ul>
+            <li>Event 1</li>
+            <li>Event 2</li>
+            <li>Event 3</li>
+        </ul>
+        <ul>
+            <a href="/signOut"><button>Sign out</button></a>
+            <a href="/customer/show/@customer.getUserEmail"><button>View Profile</button></a>
+            <a href="/customer/viewHistory/@customer.getUserEmail"><button>View Booking History</button></a>
+            <a href="/customer/viewWishList/@customer.getUserEmail"><button>View Wish List</button></a>
+        </ul>
+        <h5>
+            <a href = "/event/search/@customer.userEmail">Search for events</a>
+        </h5>
+    </body>
+
+</html>

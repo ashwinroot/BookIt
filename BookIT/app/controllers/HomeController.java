@@ -30,5 +30,11 @@ public class HomeController extends Controller {
         return ok(login1.render(loginForm));
     }
 
+    public Result logout(){
+
+        session().remove("connected");
+        return redirect(routes.HomeController.login());
+    }
+
 
 }

@@ -9,6 +9,7 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
+GET     /signOut                    controllers.HomeController.logout
 GET     /login                      controllers.HomeController.login
 POST    /login/user                 controllers.UserController.verifyUser
 GET     /create                     controllers.CustomerController.createCustomer()
@@ -33,10 +34,24 @@ POST    /createEventManager         controllers.EventManagerController.saveEvent
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
+#Customer routes
+GET     /customer/:email            controllers.CustomerController.showCustomerDashBoard(email : String)
+GET     /customer/show/:email       controllers.CustomerController.showCustomerProfile(email : String)
+GET     /customer/viewHistory/:email    controllers.CustomerController.showCustomerBookingHistory(email : String)
+GET     /customer/viewWishList/:email    controllers.CustomerController.showCustomerWishList(email : String)
+GET     /customer/updateProfile/:email   controllers.CustomerController.updateCustomerProfile(email : String)
+
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
 GET /event/show/:eventId            controllers.EventController.showEvent(eventId : Integer)
+GET /event/search/:userMail          controllers.EventController.searchEvent(userMail : String)
 GET /event/update/:eventId          controllers.EventController.updateEvent(eventId : Integer)
 GET /event/delete/:eventId          controllers.EventController.deleteEvent(eventId : Integer)
+
+GET /event/book/:eventId/:userMail  controllers.TicketController.bookTicket(eventId: Integer,userMail: String)
+GET /event/book/confirm             controllers.TicketController.confirmTicket()
 + nocsrf
 POST /event/create                  controllers.EventController.saveEvent()
++ nocsrf
+POST /event/modify/:eventId         controllers.EventController.modifyEvent(eventId : Integer)
+
