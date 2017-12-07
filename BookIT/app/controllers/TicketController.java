@@ -56,7 +56,7 @@ public class TicketController extends Controller{
         Ticket t;
         try
         {
-            Ticket temp = new Ticket(form.get("numtickets"),eventManager,user.userEmail,TRUE);
+            Ticket temp = new Ticket(form.get("numtickets"),eventManager,event.getEventId(),user.userEmail,TRUE);
             t = temp;
         }
         catch (Exception e)
@@ -66,7 +66,7 @@ public class TicketController extends Controller{
         }
         t.save();
         return forbidden(""+t.getCustomerMail()+" "+t.getNumSeats());
-        
+
         //return TODO;
     }
 

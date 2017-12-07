@@ -24,15 +24,19 @@ public class Ticket extends Model {
     //int eventID;
 
     public String eventManagerMail;
-    //int userID;
+    public int eventId;
     public String customerMail;
     public Date bookDate;
     public boolean Status;
 
-    public Ticket(String seats, String eventManagerMail, String customerMail, boolean status) throws Exception
+
+
+    public Ticket(String seats, String eventManagerMail, int eventID, String customerMail, boolean status) throws Exception
     {
         this.numSeats = new Integer(seats);
         this.eventManagerMail = eventManagerMail;
+
+        this.eventId = eventID;
         this.customerMail = customerMail;
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
         SimpleDateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
@@ -41,6 +45,8 @@ public class Ticket extends Model {
         this.Status = status;
 
     }
+
+    public static Finder<String, User> find = new Finder<>(User.class);
 
     public int getTicketId() {
         return ticketId;
@@ -88,5 +94,13 @@ public class Ticket extends Model {
 
     public void setStatus(boolean status) {
         Status = status;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventID) {
+        this.eventId = eventID;
     }
 }
