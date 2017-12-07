@@ -244,6 +244,11 @@
         margin-right: 16px;
     }
 }
+.mc-description
+{
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: black;
+}
 .material-card.mc-active .mc-description {
     top: 50px;
     padding-top: 5.6em;
@@ -272,6 +277,8 @@
 }
 .material-card.mc-active .mc-footer a {
     top: 0;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }
 .material-card.mc-active .mc-footer h4 {
     top: -32px;
@@ -601,7 +608,7 @@
     color: #0D47A1;
 }
 .material-card.Blue .mc-footer a {
-    background-color: #0D47A1;
+    background-color: #0a326e;
 }
 .material-card.Blue.mc-active .mc-content {
     background-color: #E3F2FD;
