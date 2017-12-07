@@ -30,5 +30,9 @@ public class HomeController extends Controller {
         return ok(login1.render(loginForm));
     }
 
+    public Result logout(){
+        return TODO;
+    }
+
 
 }

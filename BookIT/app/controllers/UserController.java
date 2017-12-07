@@ -12,8 +12,6 @@ import javax.inject.Inject;
 import java.util.List;
 
 import views.html.User.*;
-import views.html.Customer.*;
-import views.html.EventManager.*;
 import views.html.Admin.*;
 
 
@@ -40,14 +38,16 @@ public class UserController extends Controller {
         if(userDB != null){
             if(userDB.getDecriminatorValue().equals("C")){
 
-                return ok(showCustomerProfile.render());
+                session("connected", userDB.userEmail);
+                return redirect(routes.CustomerController.showCustomerDashBoard(userDB.userEmail));
+                //return ok(showCustomerProfile.render());
             }
 
             else if(userDB.getDecriminatorValue().equals("E")){
                 session("connected", userDB.userEmail);
 
                 return redirect(routes.EventManagerController.showEventManagerProfile(userDB.userEmail));
-                //return redirect(showEventManagerProfile.render());
+
             }
             else if(userDB.getDecriminatorValue().equals("A")){
 

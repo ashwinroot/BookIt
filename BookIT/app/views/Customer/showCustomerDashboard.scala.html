@@ -1,5 +1,6 @@
 
-@(event: Event)
+
+@(customer: User)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,22 +13,24 @@
         <title>Welcome to BookIT</title>
     </head>
     <body>
-        <h2>Event Details</h2>
+        <h2>Your Profile</h2>
         <ul>
-            <li><strong>Event</strong> @event.getEventName</li>
-            <li><strong>Location</strong> @event.getEventLocation</li>
-            <li><strong>Date</strong> @event.getEventDate</li>
-            <li><Strong>Ticket cost</Strong> @event.getPerTicketCost</li>
-            <li><Strong>Sales so far</Strong> @event.getTotalSales</li>
+            <li><strong>Name</strong> @customer.userName</li>
+            <li><strong>Email</strong> @customer.userEmail</li>
+            <li><strong>Phone</strong> @customer.phoneNo</li>
+        </ul>
+
+        <h2>Popular Events</h2>
+        <ul>
+            <li>Event 1</li>
+            <li>Event 2</li>
+            <li>Event 3</li>
         </ul>
         <ul>
-            <li>
-                <a href="/event/update/@event.getEventId"<button>Update Event</button>
-            </li>
-            <li>
-                <a href="/event/delete/@event.getEventId"<button>Delete Event</button>
-            </li>
-
+            <a href="/signOut"><button>Sign out</button></a>
+            <a href="/customer/show/@customer.getUserEmail"><button>View Profile</button></a>
+            <a href="/event/create"><button>View Booking History</button></a>
+            <a href="/event/create"><button>View Wish List</button></a>
         </ul>
     </body>
 

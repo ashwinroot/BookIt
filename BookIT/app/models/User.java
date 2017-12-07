@@ -13,6 +13,39 @@ public class User extends Model{
 
     public Integer userID;
     public String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public BigInteger getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(BigInteger phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
     @Id
     public String userEmail;
     public String userPassword;
