@@ -68,17 +68,17 @@ public class EventController extends Controller{
 
         DateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
         try{
-
             Date date = datef.parse(df.get("date"));
-            event.setEventName(df.get("eventname"));
-            event.setEventLocation(df.get("eventlocation"));
-            event.setPerTicketCost(Float.parseFloat(df.get("cost")));
             event.setEventDate(date);
-            event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
-            event.update();
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        event.setEventName(df.get("eventname"));
+        event.setEventLocation(df.get("eventlocation"));
+        event.setPerTicketCost(Float.parseFloat(df.get("cost")));
+        event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
+        event.update();
         return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
     }
 

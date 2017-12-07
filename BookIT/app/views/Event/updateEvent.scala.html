@@ -19,26 +19,26 @@
                 <form id="register-form" action="/event/modify/@event.getEventId" method="post" role="form" >
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Enter the event Name</label>
-                        <input type="text" name="eventname" id="username" tabindex="1" class="form-control" placeholder="@event.getEventName" value="" maxlength="20">
+                        <input type="text" name="eventname" id="username" tabindex="1" class="form-control"  value="@event.getEventName" maxlength="20" required>
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Enter the event Location</label>
-                        <input type="text" name="eventlocation" id="text" tabindex="2" class="form-control" placeholder="@event.getEventLocation" value="">
+                        <input type="text" name="eventlocation" id="text" tabindex="2" class="form-control"  value="@event.getEventLocation" required>
                     </div>
                     <div class="form-group col-sm-6">
                         <div class="form-group">
                             <label>Date of the event</label>
-                            <input type='text' class="form-control" name="date" placeholder="@event.getEventDate"/>
+                            <input type='text' class="form-control" name="date"  value="@event.getEventDate"/>
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label> Cost of one ticket</label>
                         <span class="input-group-addon align-content-center">$</span>
-                        <input type="text" name="cost" class="form-control" aria-label="Amount (to the nearest dollar)" tabindex="4" placeholder="@event.getPerTicketCost" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        <input type="text" name="cost" class="form-control" aria-label="Amount (to the nearest dollar)" tabindex="4"  value="@event.getPerTicketCost" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                     </div>
                     <div class="form-group col-3">
                         <label>Number of seats for the event </label>
-                        <input type="text" name="seats" tabindex="5" class="form-control" placeholder="@event.getAvailableNoOfSeats" value="">
+                        <input type="text" name="seats" tabindex="5" class="form-control"  value="@event.getAvailableNoOfSeats">
                     </div>
                     <div class="form-group">
                         <div class="row">
