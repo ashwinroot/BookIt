@@ -31,13 +31,6 @@ a:focus {
  }
 }
 
-body {
-    background: url(http://i.imgur.com/GHr12sH.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 
 .login-form {
     margin-top: 60px;
@@ -72,4 +65,15 @@ form[role=login] > div {
 }
 .form-links a {
     color: #fff;
+}
+
+body {
+    position: relative;
+    background: url('../images/background.png') no-repeat center center fixed;
+    background-size: cover;
+    min-width: 500px;
+    min-height: 200px;
+    color: #fff;
+    font-family: 'Montserrat';
+    height:100vmax;
 }

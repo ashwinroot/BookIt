@@ -3,6 +3,7 @@ package controllers;
 import models.EventManager;
 import models.User;
 import models.Customer;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -30,10 +31,13 @@ public class UserController extends Controller {
     }
 
     public Result verifyUser(){
-        Form<User> loginForm= formFactory.form(User.class).bindFromRequest();
-        User user = loginForm.get();
+        //Form<User> loginForm= formFactory.form(User.class).bindFromRequest();
+        //User user = loginForm.get();
 
-        User userDB = user.find.byId(user.userEmail);
+        DynamicForm df = formFactory.form().bindFromRequest();
+        String userEmail = df.get("email");
+
+        User userDB = User.find.byId(userEmail);
 
         if(userDB != null){
             if(userDB.getDecriminatorValue().equals("C")){
