@@ -16,4 +16,10 @@ public class Customer extends User{
     private boolean hasAny;
 
 
+    public ArrayList<Event> getBookedEvents()
+    {
+        return this.bookedEvents;
+    }
+
+
 }
