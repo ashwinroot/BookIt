@@ -1,17 +1,35 @@
-@(eventManager: User, ownedEvents : List[Event])
+@(eventManager: User, ownedEvents: List[Event])
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-grid.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-reboot.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/custom1.css")">
-        <script src="@routes.Assets.versioned("../../../public/js/custom.js")" type="text/javascript"></script>
-        <title>Welcome to BookIT</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-grid.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-reboot.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/navbar.css")">
+        <script src="@routes.Assets.versioned("js/jquery-3.2.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("js/navbar.js")" type="text/javascript"></script>
+        <title>Event Manager Dashboard</title>
     </head>
+
     <body>
-        <h2>Your Profile</h2>
+            <!--HamBurger Icon-->
+        <div class="bars" id="nav-action">
+            <span class="bar"> </span>
+        </div>
+
+            <!--Navbar Links-->
+        <nav id="nav">
+            <ul>
+                <li class="shape-circle circle-two"><a href="/login">Sign Out</a></li>
+                <li class="shape-circle circle-five">
+                    <a href="#">Profile</a>
+                </li>
+            </ul>
+        </nav>
+
+
+    <div class="container">
         <ul>
             <li><strong>Name</strong> @eventManager.userName</li>
             <li><strong>Email</strong> @eventManager.userEmail</li>
@@ -20,14 +38,13 @@
 
         <h2>Your Events</h2>
         <ul>
-            @for(index <- 0 until ownedEvents.size){
-                <li>
-                    <a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>
-                </li>
-            }
+        @for(index <- 0 until ownedEvents.size) {
+            <li>
+                <a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>
+            </li>
+        }
         </ul>
 
-        <a href="/event/create"><button>Create Event</button></a>
-    </body>
+        <a href="/event/create"><button>Create Event</button></a></body>
 
 </html>
