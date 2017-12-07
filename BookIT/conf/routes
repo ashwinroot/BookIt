@@ -37,6 +37,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 #Customer routes
 GET     /customer/:email            controllers.CustomerController.showCustomerDashBoard(email : String)
 GET     /customer/show/:email       controllers.CustomerController.showCustomerProfile(email : String)
+GET     /customer/viewHistory/:email    controllers.CustomerController.showCustomerBookingHistory(email : String)
+GET     /customer/viewWishList/:email    controllers.CustomerController.showCustomerWishList(email : String)
 
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()

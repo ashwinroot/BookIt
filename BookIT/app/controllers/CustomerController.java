@@ -46,4 +46,12 @@ public class CustomerController extends Controller{
     public Result showCustomerProfile(String customerEmail){
         return TODO;
     }
+
+    public Result showCustomerBookingHistory(String customerEmail){
+        return TODO;
+    }
+
+    public Result showCustomerWishList(String customerEmail){
+        return TODO;
+    }
 }

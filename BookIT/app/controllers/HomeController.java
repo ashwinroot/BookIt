@@ -31,7 +31,9 @@ public class HomeController extends Controller {
     }
 
     public Result logout(){
-        return TODO;
+
+        session().remove("connected");
+        return redirect(routes.HomeController.login());
     }
 
 
