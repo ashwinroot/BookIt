@@ -44,7 +44,8 @@ public class CustomerController extends Controller{
     }
 
     public Result showCustomerProfile(String customerEmail){
-        return TODO;
+        User customer = User.find.byId(customerEmail);
+        return ok(showCustomerProfile.render(customer));
     }
 
     public Result showCustomerBookingHistory(String customerEmail){
@@ -52,6 +53,10 @@ public class CustomerController extends Controller{
     }
 
     public Result showCustomerWishList(String customerEmail){
+        return TODO;
+    }
+
+    public Result updateCustomerProfile(String customerEmail){
         return TODO;
     }
 }

@@ -13,8 +13,13 @@
     </head>
     <body>
         <h1>Customer Profile</h1>
+        <ul>
+            <li><strong>Name</strong> @user.userName</li>
+            <li><strong>Email</strong> @user.userEmail</li>
+            <li><strong>Phone</strong> @user.phoneNo</li>
+        </ul>
         <h5>
-            <a href = "/event/search/@user.userEmail">Search for events</a>
+            <a href = "/customer/updateProfile/@user.userEmail">Update Profile</a>
         </h5>
     </body>
 </html>
