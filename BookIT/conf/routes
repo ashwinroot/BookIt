@@ -41,8 +41,12 @@ GET     /customer/show/:email       controllers.CustomerController.showCustomerP
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
 GET /event/show/:eventId            controllers.EventController.showEvent(eventId : Integer)
+GET /event/search/:userMail          controllers.EventController.searchEvent(userMail : String)
 GET /event/update/:eventId          controllers.EventController.updateEvent(eventId : Integer)
 GET /event/delete/:eventId          controllers.EventController.deleteEvent(eventId : Integer)
+
+GET /event/book/:eventId/:userMail  controllers.TicketController.bookTicket(eventId: Integer,userMail: String)
+GET /event/book/confirm             controllers.TicketController.confirmTicket()
 + nocsrf
 POST /event/create                  controllers.EventController.saveEvent()
 + nocsrf

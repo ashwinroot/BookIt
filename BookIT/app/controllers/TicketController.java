@@ -4,6 +4,7 @@ import io.ebean.Ebean;
 import models.Customer;
 import models.Event;
 import models.User;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -36,6 +37,8 @@ public class TicketController extends Controller{
 
     public Result confirmTicket()
     {
+        DynamicForm form = formFactory.form().bindFromRequest();
+        User user = User.find.byId(form.get("usermail"));
         return TODO;
     }
 

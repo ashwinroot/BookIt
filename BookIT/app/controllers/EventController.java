@@ -10,6 +10,7 @@ import play.mvc.Result;
 
 import views.html.Event.createEvent;
 import views.html.Event.showEventDetails;
+import views.html.Event.showSearchEvents;
 import views.html.Event.updateEvent;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class EventController extends Controller{
 
@@ -52,6 +54,11 @@ public class EventController extends Controller{
     public Result showEvent(Integer eventId){
         Event event = Event.find.byId(eventId.toString());
         return ok(showEventDetails.render(event));
+    }
+
+    public Result searchEvent(String userMail){
+        List<Event> event = Event.find.all();
+        return ok(showSearchEvents.render(event,userMail));
     }
 
     public Result updateEvent(Integer eventId){
