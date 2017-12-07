@@ -26,7 +26,7 @@ http://www.bootstrapzen.com/item/135/simple-login-form-logo/
     padding: 10px;
 @include box-sizing(border-box);
 
-&:focus {
+a:focus {
      z-index: 2;
  }
 }

@@ -243,3 +243,7 @@ article a:hover {
         font-size: 60px;
     }
 }
+
+body{
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
