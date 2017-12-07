@@ -6,7 +6,6 @@
 body {
     position: relative;
     background: url('../images/background.png') no-repeat center center fixed;
-    /*background-color: black;*/
     background-size: cover;
     min-width: 500px;
     min-height: 200px;
@@ -79,6 +78,7 @@ span::after {
     z-index: -1;
     overflow: hidden;
     opacity: 0;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #nav a {
@@ -109,24 +109,24 @@ ul {
 }
 
 .shape-circle {
-    border-radius: 50%;
+    border-radius: 100%;
     width: 20vw;
     height: 20vw;
-    top: -10vw;
-    right: -10vw;
+    top: -15vw;
+    right: -15vw;
     position: absolute;
     transition: all 1s ease-in-out;
-    background: #cbcbce;
+    background: #706f7b;
     box-shadow: 0 0px 0px rgba(4, 26, 62, 0.5);
 }
 
 nav.visible li:first-child {
-    width: 200vw;
-    height: 200vw;
-    top: -100vw;
-    right: -100vw;
-    z-index: 5;
-    transition: all .5s ease-in-out;
+    width: 100vw;
+    height: 100vw;
+    top: -50vw;
+    right: -50vw;
+    z-index: 7;
+    transition: all .7s ease-in-out;
     box-shadow: 0 0px 80px rgba(4, 26, 62, 0.5);
 }
 
@@ -161,8 +161,8 @@ nav.visible li:last-child{
 }
 
 nav.visible li:first-child a {
-    line-height: 265vw !important;
-    text-indent: 15vw !important;
+    line-height: 137vw !important;
+    text-indent: 17vw !important;
 
 }
 
