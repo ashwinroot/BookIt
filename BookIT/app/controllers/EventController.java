@@ -12,6 +12,7 @@ import play.mvc.Result;
 
 import views.html.Event.createEvent;
 import views.html.Event.showEventDetails;
+import views.html.Event.updateEvent;
 
 import javax.inject.Inject;
 import java.text.DateFormat;
@@ -43,10 +44,6 @@ public class EventController extends Controller{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
-        //return ok(showEventManagerProfile.render());
         return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
     }
 
@@ -56,16 +53,39 @@ public class EventController extends Controller{
     }
 
     public Result updateEvent(Integer eventId){
-        return TODO;
+        Event event = Event.find.byId(eventId.toString());
+        return ok(updateEvent.render(event));
     }
 
-    public Result deleteEvent(Integer eventId){
-        Event event = Event.find.byId(eventId.toString());
-        Event.find.byId(eventId.toString()).delete();
+    public Result modifyEvent(Integer eventId)
+    {
 
         String user = session("connected");
         User eventManager = User.find.byId(user);
 
+        DynamicForm df = formFactory.form().bindFromRequest();
+        Event event = Event.find.byId(eventId.toString());
+
+        DateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
+        try{
+
+            Date date = datef.parse(df.get("date"));
+            event.setEventName(df.get("eventname"));
+            event.setEventLocation(df.get("eventlocation"));
+            event.setPerTicketCost(Float.parseFloat(df.get("cost")));
+            event.setEventDate(date);
+            event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
+            event.update();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+    }
+
+    public Result deleteEvent(Integer eventId){
+        Event.find.byId(eventId.toString()).delete();
+        String user = session("connected");
+        User eventManager = User.find.byId(user);
         return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
     }
 

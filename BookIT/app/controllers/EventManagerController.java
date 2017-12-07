@@ -28,22 +28,16 @@ public class EventManagerController extends Controller{
     }
 
     public Result saveEventManager(){
-
         Form<EventManager> eventManagerForm= formFactory.form(EventManager.class).bindFromRequest();
         EventManager eventManager = eventManagerForm.get();
-
         eventManager.save();
         return redirect(routes.UserController.index());
-
     }
 
     public Result showEventManagerProfile(String eventManagerEmail){
         User eventManager = User.find.byId(eventManagerEmail);
         List<Event> ownedEvents = Ebean.find(Event.class).where().eq("eventOwnerEmail", eventManagerEmail).findList();
         Iterator<Event> iter = ownedEvents.iterator();
-
-
-
         return ok(showEventManagerProfile.render(eventManager, ownedEvents));
     }
 
