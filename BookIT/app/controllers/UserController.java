@@ -40,7 +40,7 @@ public class UserController extends Controller {
         if(userDB != null){
             if(userDB.getDecriminatorValue().equals("C")){
 
-                return ok(showCustomerProfile.render());
+                return ok(showCustomerProfile.render(userDB));
             }
 
             else if(userDB.getDecriminatorValue().equals("E")){

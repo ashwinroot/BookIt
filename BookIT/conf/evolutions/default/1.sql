@@ -15,6 +15,16 @@ create table event (
   constraint pk_event primary key (event_id)
 );
 
+create table ticket (
+  ticket_id                     integer auto_increment not null,
+  num_seats                     integer not null,
+  event_manager_mail            varchar(255),
+  customer_mail                 varchar(255),
+  book_date                     datetime(6),
+  status                        tinyint(1) default 0 not null,
+  constraint pk_ticket primary key (ticket_id)
+);
+
 create table user (
   user_type                     varchar(31) not null,
   user_email                    varchar(255) not null,
@@ -31,6 +41,8 @@ create table user (
 # --- !Downs
 
 drop table if exists event;
+
+drop table if exists ticket;
 
 drop table if exists user;
 

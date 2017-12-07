@@ -24,7 +24,7 @@ POST    /users/edit                 controllers.UserController.update()
 GET     /users/delete/:id           controllers.UserController.destroy(id : Integer)
 
 
-GET     /eventManager/:email          controllers.EventManagerController.showEventManagerProfile(email : String)
+GET     /eventManager/:email        controllers.EventManagerController.showEventManagerProfile(email : String)
 
 POST    /createUser                 controllers.CustomerController.saveCustomer
 POST    /createEventManager         controllers.EventManagerController.saveEventManager
@@ -40,3 +40,7 @@ GET /event/update/:eventId          controllers.EventController.updateEvent(even
 GET /event/delete/:eventId          controllers.EventController.deleteEvent(eventId : Integer)
 + nocsrf
 POST /event/create                  controllers.EventController.saveEvent()
+
+GET /event/search/:userMail         controllers.EventController.searchEvent(userMail: String)
+GET /event/book/:eventId/:userMail  controllers.TicketController.bookTicket(eventId: Integer, userMail: String)
+GET /event/book/confirm             controllers.TicketController.confirmTicket()

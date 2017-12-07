@@ -1,0 +1,63 @@
+@(event: Event, userMail: String)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-grid.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-reboot.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/custom1.css")">
+        <script src="@routes.Assets.versioned("../../../public/js/custom.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+        function totalCost()
+        {
+            var num = document.getElementByName("numtickets").value;
+            document.getElementById("test").innerHTML= "Total cost is" + totalCost() * @event.getPerTicketCost;
+        }
+        </script>
+        <title>Welcome to BookIT</title>
+    </head>
+    <body>
+
+        <h1>Create Ticket</h1>
+        <h2>Event Details</h2>
+        <ul>
+
+            <li><strong>Event:</strong> @event.getEventName</li>
+            <li><strong>Location:</strong> @event.getEventLocation</li>
+            <li><strong>Date:</strong> @event.getEventDate</li>
+            <li><Strong>Ticket cost:</Strong> $@event.getPerTicketCost</li><br/>
+        </ul>
+        <div class="col-sm-offset-3"></div>
+        <div class="h-100 row align-items-center">
+            <div class="col">
+
+                <form id="register-form" action="/event/book/confirm" method="GET" role="form" >
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Enter user mail</label>
+                        <input type="text" name="usermail" id="usermail" tabindex="2" class="form-control" placeholder="User Mail" value="">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Number of tickets</label>
+                        <input type='text' name="numtickets" class="form-control" oninput="totalCost()" value=""/>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> Cost of tickets</label>
+                        <span class="input-group-addon align-content-center">$</span>
+                        <input type="text" name="cost" class="form-control" aria-label="Amount (to the nearest dollar)" tabindex="4" value="">
+                    </div>
+                    <p>testing</p>
+                    <p name="test" id="test"></p>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6 col-sm-offset-6">
+                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-primary col-sm-2" value="Book Ticket">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

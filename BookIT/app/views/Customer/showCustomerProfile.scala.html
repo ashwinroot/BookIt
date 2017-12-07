@@ -1,5 +1,4 @@
-
-@()
+@(user: User)
 
 
 <!DOCTYPE html>
@@ -14,5 +13,8 @@
     </head>
     <body>
         <h1>Customer Profile</h1>
+        <h5>
+            <a href = "/event/search/@user.userEmail">Search for events</a>
+        </h5>
     </body>
 </html>
