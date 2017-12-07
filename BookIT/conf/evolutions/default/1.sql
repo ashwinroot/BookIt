@@ -19,6 +19,7 @@ create table ticket (
   ticket_id                     integer auto_increment not null,
   num_seats                     integer not null,
   event_manager_mail            varchar(255),
+  event_id                      integer not null,
   customer_mail                 varchar(255),
   book_date                     datetime(6),
   status                        tinyint(1) default 0 not null,

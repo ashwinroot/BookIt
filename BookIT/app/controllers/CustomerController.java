@@ -1,10 +1,7 @@
 package controllers;
 
 import io.ebean.Ebean;
-import models.Customer;
-import models.Event;
-import models.User;
-import models.WishList;
+import models.*;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -57,8 +54,16 @@ public class CustomerController extends Controller{
         return ok(showCustomerDashboard.render(customer));
     }
 
-    public Result showCustomerBookingHistory(String customerEmail){
-        return TODO;
+    public Result showCustomerBookingHistory(String customerEmail)
+    {
+        User user = User.find.byId(customerEmail);
+        List<Ticket> Tickets = Ebean.find(Ticket.class).where().eq("customerMail", customerEmail).findList();
+        if (Tickets.size() > 0)
+        {
+            return ok(showCustomerBookingHistory.render(Tickets));
+        }
+        else
+            return forbidden("No history to show");
     }
 
     public Result showCustomerWishList(String customerEmail){
