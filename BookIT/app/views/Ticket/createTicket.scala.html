@@ -32,7 +32,7 @@
         <div class="h-100 row align-items-center">
             <div class="col">
 
-                <form id="register-form" action="/event/book/confirm" method="GET" role="form" >
+                <form id="bookTicket-form" action="/event/book/confirm/@event.getEventId" method="POST" role="form" >
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Enter user mail</label>
                         <input type="text" name="usermail" id="usermail" tabindex="2" class="form-control" placeholder="User Mail" value="">
@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6 col-sm-offset-6">
-                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-primary col-sm-2" value="Book Ticket">
+                                <input type="submit" name="book-submit" id="book-submit" tabindex="4" class="form-control btn btn-primary col-sm-2" value="Book Ticket">
                             </div>
                         </div>
                     </div>

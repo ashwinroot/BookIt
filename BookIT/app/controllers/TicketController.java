@@ -1,8 +1,10 @@
 package controllers;
 
+import akka.http.impl.engine.ws.WebSocket;
 import io.ebean.Ebean;
 import models.Customer;
 import models.Event;
+import models.Ticket;
 import models.User;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -16,8 +18,13 @@ import views.html.Ticket.*;
 import views.html.Ticket.createTicket;
 
 import javax.inject.Inject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import static java.lang.Boolean.TRUE;
 
 public class TicketController extends Controller{
 
@@ -35,11 +42,30 @@ public class TicketController extends Controller{
         return forbidden(""+event.getEventName()+" is full");
     }
 
-    public Result confirmTicket()
+    public Result confirmTicket(int eventId)
     {
         DynamicForm form = formFactory.form().bindFromRequest();
         User user = User.find.byId(form.get("usermail"));
-        return TODO;
+        Event event = Event.find.byId(new Integer(eventId).toString());
+
+        //return forbidden(""+user.userEmail+" "+event.getEventName());
+        String eventManager = event.getEventOwnerEmail();
+
+        Ticket t;
+        try
+        {
+            Ticket temp = new Ticket(form.get("numtickets"),eventManager,user.userEmail,TRUE);
+            t = temp;
+        }
+        catch (Exception e)
+        {
+            return forbidden("Error in ticket creation "+e);
+
+        }
+        t.save();
+        return forbidden(""+t.getCustomerMail()+" "+t.getNumSeats());
+
+        //return TODO;
     }
 
 }
