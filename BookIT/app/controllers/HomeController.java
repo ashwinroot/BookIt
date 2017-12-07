@@ -25,9 +25,10 @@ public class HomeController extends Controller {
     }
 
     public Result login(){
-        Form<User> loginForm = formFactoryHome.form(User.class);
-
-        return ok(login1.render(loginForm));
+//        Form<User> loginForm = formFactoryHome.form(User.class);
+//
+//        return ok(login1.render(loginForm));
+        return ok(login2.render());
     }
 
     public Result logout(){

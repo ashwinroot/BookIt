@@ -11,7 +11,8 @@ GET     /message                    controllers.AsyncController.message
 
 GET     /signOut                    controllers.HomeController.logout
 GET     /login                      controllers.HomeController.login
-POST    /login/user                 controllers.UserController.verifyUser
+
+GET    /login/user                  controllers.UserController.verifyUser
 GET     /create                     controllers.CustomerController.createCustomer()
 GET     /create/eventManager        controllers.EventManagerController.createEventManager
 

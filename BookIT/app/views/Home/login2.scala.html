@@ -1,7 +1,6 @@
 
-@(loginForm: Form[User])
+@()
 
-@import helper._
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,23 +16,8 @@
             <div class="row" id="pwd-container">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <h1>Welcome to BookIT</h1>
-                    @helper.form(action = helper.CSRF(routes.UserController.verifyUser())){
-
-                    @helper.inputText(loginForm("userEmail"))
-                    @helper.inputText(loginForm("userPassword"))
-
-
-                    <input type="submit" value="Login">
-                }
-
-
-
                     <section class="login-form">
-
-
-
-                        <form method="Post" action="\login\verifyUser" role="login">
+                        <form method="Get" action="/login/user" role="login">
                             <h2 align="center">Welcome to BookIT</h2>
                             <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
                             <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
