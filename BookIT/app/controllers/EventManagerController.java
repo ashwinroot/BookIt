@@ -37,10 +37,15 @@ public class EventManagerController extends Controller{
 
     }
 
-    public Result showEventManagerProfile(String eventManagerEmail){
+    public Result showEventManagerDashBoard(String eventManagerEmail){
         User eventManager = User.find.byId(eventManagerEmail);
         List<Event> ownedEvents = Ebean.find(Event.class).where().eq("eventOwnerEmail", eventManagerEmail).findList();
-        return ok(showEventManagerProfile.render(eventManager, ownedEvents));
+        return ok(showEventManagerDashBoard.render(eventManager, ownedEvents));
+    }
+
+    public Result showEventManagerProfile(String eventManagerEmail){
+        User eventManager = User.find.byId(eventManagerEmail);
+        return ok(showEventManagerProfile.render(eventManager));
     }
 
 

@@ -26,7 +26,7 @@ POST    /users/edit                 controllers.UserController.update()
 GET     /users/delete/:id           controllers.UserController.destroy(id : Integer)
 
 
-GET     /eventManager/:email          controllers.EventManagerController.showEventManagerProfile(email : String)
+GET     /eventManager/:email          controllers.EventManagerController.showEventManagerDashBoard(email : String)
 
 POST    /createUser                 controllers.CustomerController.saveCustomer
 POST    /createEventManager         controllers.EventManagerController.saveEventManager
@@ -43,6 +43,8 @@ GET     /customer/viewWishList/:email    controllers.CustomerController.showCust
 GET     /customer/updateProfile/:email   controllers.CustomerController.updateCustomerProfile(email : String)
 GET     /customer/addToWishList/:eventId controllers.CustomerController.addToWishList(eventId : Integer)
 
+#Event Manager routes
+GET     /eventManager/showProfile/:email    controllers.EventManagerController.showEventManagerProfile(email : String)
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
 GET /event/show/:eventId            controllers.EventController.showEvent(eventId : Integer)

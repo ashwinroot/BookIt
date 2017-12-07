@@ -44,11 +44,7 @@ public class EventController extends Controller{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
-        //return ok(showEventManagerProfile.render());
-        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.userEmail));
     }
 
     public Result showEvent(Integer eventId){
@@ -73,7 +69,7 @@ public class EventController extends Controller{
         String user = session("connected");
         User eventManager = User.find.byId(user);
 
-        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.userEmail));
     }
 
     public Result modifyEvent(Integer eventId) {
@@ -98,7 +94,7 @@ public class EventController extends Controller{
         event.setPerTicketCost(Float.parseFloat(df.get("cost")));
         event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
         event.update();
-        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.userEmail));
     }
 
 }
