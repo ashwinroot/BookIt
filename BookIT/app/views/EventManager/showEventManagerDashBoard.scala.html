@@ -30,6 +30,7 @@
                 </li>
             </ul>
         </nav>
+
         <br>
         <br>
         <br>
@@ -42,15 +43,18 @@
             <h6> Logged in as @eventManager.getUserEmail</h6>
         </div>
 
-        <div class="container">
-            <div class="row justify-content-start">
-                <h6> Logged in as @eventManager.getUserEmail</h6>
+
+        <div class = "container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <a href="/event/create"><button class="btn btn-lg btn-info btn-block">Create Event</button></a>
+                </div>
             </div>
+
         </div>
 
-
         <div class="container">
-            <h2>Your Events</h2>
+            <h4>Your Events</h4>
             <ul>
                 <li>
                     @*<a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>*@
@@ -90,14 +94,6 @@
             }
             </div>
 
-            <div class = "container">
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <a href="/event/create"><button class="btn btn-lg btn-info btn-block">Create Event</button></a>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </body>
 

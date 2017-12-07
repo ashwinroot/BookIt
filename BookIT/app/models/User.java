@@ -12,7 +12,11 @@ public class User extends Model{
 
 
     private Integer userID;
-    private String userName;
+    private String userFirstName;
+
+
+
+    private String userLastName;
     @Id
     private String userEmail;
     private String userPassword;
@@ -20,12 +24,28 @@ public class User extends Model{
 
     public static Finder<String, User> find = new Finder<>(User.class);
 
-    public String getUserName() {
-        return userName;
+    public User(String userFirstName, String userLastName, String userEmail, String userPassword, BigInteger phoneNo) {
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.phoneNo = phoneNo;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getUserFirstName() {
+        return userFirstName;
+    }
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
+    }
+
+    public String getUserLastName() {
+        return userLastName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
     }
 
     public String getUserEmail() {

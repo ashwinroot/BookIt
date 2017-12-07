@@ -4,6 +4,7 @@ import io.ebean.Ebean;
 import models.Event;
 import models.EventManager;
 import models.User;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -12,6 +13,7 @@ import views.html.EventManager.*;
 import views.html.User.*;
 
 import javax.inject.Inject;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,8 +31,8 @@ public class EventManagerController extends Controller{
 
     public Result saveEventManager(){
 
-        Form<EventManager> eventManagerForm= formFactory.form(EventManager.class).bindFromRequest();
-        EventManager eventManager = eventManagerForm.get();
+        DynamicForm df = formFactory.form().bindFromRequest();
+        EventManager eventManager = new EventManager(df.get("customerFirstName"), df.get("customerLastName"), df.get("customerEmail"), df.get("customerPassword"), BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         eventManager.save();
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }

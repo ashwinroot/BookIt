@@ -2,6 +2,7 @@ package controllers;
 
 import io.ebean.Ebean;
 import models.*;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -9,6 +10,7 @@ import play.mvc.Result;
 import views.html.Customer.*;
 
 import javax.inject.Inject;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,15 +22,15 @@ public class CustomerController extends Controller{
 
     public Result createCustomer(){
 
-        Form<Customer> customerForm = formFactory.form(Customer.class);
-        return ok(createCustomer.render(customerForm));
+        return ok(createCustomer.render());
 
     }
 
     public Result saveCustomer(){
 
-        Form<Customer> customerForm= formFactory.form(Customer.class).bindFromRequest();
-        Customer customer = customerForm.get();
+        DynamicForm df = formFactory.form().bindFromRequest();
+
+        Customer customer = new Customer(df.get("customerFirstName"), df.get("customerLastName"), df.get("customerEmail"), df.get("customerPassword"), BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         customer.save();
         return redirect(routes.CustomerController.showCustomerDashBoard(customer.getUserEmail()));
 
@@ -77,6 +79,7 @@ public class CustomerController extends Controller{
     }
 
     public Result updateCustomerProfile(String customerEmail){
+
         return TODO;
     }
 

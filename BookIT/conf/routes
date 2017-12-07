@@ -28,7 +28,9 @@ GET     /users/delete/:id           controllers.UserController.destroy(id : Inte
 
 GET     /eventManager/:email          controllers.EventManagerController.showEventManagerDashBoard(email : String)
 
++ nocsrf
 POST    /createUser                 controllers.CustomerController.saveCustomer
++ nocsrf
 POST    /createEventManager         controllers.EventManagerController.saveEventManager
 
 # Map static resources from the /public folder to the /assets URL path

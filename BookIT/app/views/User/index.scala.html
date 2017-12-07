@@ -8,7 +8,7 @@
         <h1>All Users</h1>
 
         @for(user <- users){
-            <a href = '#'>@user.getUserName</a>
+            <a href = '#'>@user.getUserFirstName</a>
             <p>Email : @user.getUserEmail</p>
             <p>Password : @user.getUserPassword</p>
         }
