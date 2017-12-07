@@ -40,6 +40,7 @@ GET     /customer/show/:email       controllers.CustomerController.showCustomerP
 GET     /customer/viewHistory/:email    controllers.CustomerController.showCustomerBookingHistory(email : String)
 GET     /customer/viewWishList/:email    controllers.CustomerController.showCustomerWishList(email : String)
 GET     /customer/updateProfile/:email   controllers.CustomerController.updateCustomerProfile(email : String)
+GET     /customer/addToWishList/:eventId controllers.CustomerController.addToWishList(eventId : Integer)
 
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
