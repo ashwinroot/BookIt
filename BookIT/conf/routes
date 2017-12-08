@@ -73,3 +73,5 @@ POST /event/modify/:eventId         controllers.EventController.modifyEvent(even
 #Admin routes
 GET /admin/:email                  controllers.AdminController.showAdminDashboard(email : String)
 GET /admin/:email/manage/em        controllers.AdminController.showManageEM(email : String)
+GET /admin/:email/update/em/:mail   controllers.AdminController.editManageEM(email :String , mail : String)
+GET /admin/:email/delete/em/:mail   controllers.AdminController.deleteManageEM(email :String , mail : String)

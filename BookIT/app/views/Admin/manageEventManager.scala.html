@@ -19,7 +19,7 @@
 
         <div id='cssmenu'>
             <ul>
-                <li ><a href='/admin'>Home</a></li>
+                <li ><a href='/admin/@admin.getUserEmail'>Home</a></li>
                 <li class='active'><a href = "#">Manage EM</a></li>
                 <li><a href='/admin/showProfile/@admin.getUserEmail'>Profile</a></li>
                 <li><a href='/signOut'>Log Out</a></li>
@@ -84,8 +84,8 @@
                         <td>@managers.get(index).getUserLastName</td>
                         <td>@managers.get(index).getUserEmail</td>
                         <td>@managers.get(index).getPhoneNo</td>
-                        <td><button class="btn btn-outline-warning">Update</button> </td>
-                        <td><button class="btn btn-outline-danger">Delete</button> </td>
+                        <td><a href="/admin/@admin.getUserEmail/update/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-warning">Update</button></a> </td>
+                        <td><a href="/admin/@admin.getUserEmail/delete/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-danger">Delete</button> </a></td>
                     </tr>
                 }
 
