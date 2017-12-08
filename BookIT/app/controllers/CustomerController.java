@@ -61,21 +61,21 @@ public class CustomerController extends Controller{
         List<Ticket> Tickets = Ebean.find(Ticket.class).where().eq("customerMail", customerEmail).findList();
         if (Tickets.size() > 0)
         {
-            return ok(showCustomerBookingHistory.render(Tickets));
+            return ok(showCustomerBookingHistory.render(Tickets, user));
         }
         else
             return forbidden("No history to show");
     }
 
     public Result showCustomerWishList(String customerEmail){
-        //List<Event> wishList = Ebean.find(WishList.class).where().eq("eventOwnerEmail", customerEmail).findList();
+       User customer = User.find.byId(customerEmail);
         List<WishList> wishList = Ebean.find(WishList.class).where().eq("customerEmail", customerEmail).findList();
         Iterator<WishList> iter = wishList.iterator();
         List<Event> eventWishList = new ArrayList<>();
         while(iter.hasNext()){
             eventWishList.add(Event.find.byId(iter.next().getEventID().toString()));
         }
-        return ok(showCustomerWishList.render(eventWishList));
+        return ok(showCustomerWishList.render(eventWishList, customer));
     }
 
     public Result updateCustomerProfile(String customerEmail){

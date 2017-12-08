@@ -1,4 +1,4 @@
-@(customer: User)
+@(admin: User)
 <html>
     <head>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
@@ -14,10 +14,10 @@
 
         <div id='cssmenu'>
             <ul>
-                <li><a href='/customer/@customer.getUserEmail'>Home</a></li>
-                <li class='active'><a href='/customer/show/@customer.getUserEmail'>Profile</a></li>
-                <li><a href='/customer/viewHistory/@customer.getUserEmail'>Booking History</a></li>
-                <li><a href='/customer/viewWishList/@customer.getUserEmail'>Wish List</a></li>
+                <li ><a href='/admin/@admin.getUserEmail'>Home</a></li>
+                <li class='active'><a href = "#">Manage EM</a></li>
+                <li><a href = "/admin/@admin.getUserEmail/event">Manage Events</a></li>
+                <li><a href='/admin/showProfile/@admin.getUserEmail'>Profile</a></li>
                 <li><a href='/signOut'>Log Out</a></li>
             </ul>
         </div>
@@ -26,18 +26,18 @@
         <div class="row justify-content-center">
             <div class="col ">
 
-                <form id="register-form" action="/customer/modifyProfile/@customer.getUserEmail" method="post" role="form" >
+                <form id="register-form" action="/admin/modifyProfile/@admin.getUserEmail" method="post" role="form" >
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">First Name</label>
-                        <input type="text" name="customerFirstName" id="username" tabindex="1" class="form-control" placeholder="First Name" value="@customer.getUserFirstName" maxlength="20">
+                        <input type="text" name="customerFirstName" id="username" tabindex="1" class="form-control" placeholder="First Name" value="@admin.getUserFirstName" maxlength="20">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Last Name</label>
-                        <input type="text" name="customerLastName" id="text" tabindex="2" class="form-control" placeholder="Last Name" value="@customer.getUserLastName">
+                        <input type="text" name="customerLastName" id="text" tabindex="2" class="form-control" placeholder="Last Name" value="@admin.getUserLastName">
                     </div>
                     <div class="form-group col-sm-6">
                         <label>Phone Number</label>
-                        <input type="number" name="customerPhoneNo" id="text" tabindex="2" class="form-control" placeholder="Phone Number" value="@customer.getPhoneNo">
+                        <input type="number" name="customerPhoneNo" id="text" tabindex="2" class="form-control" placeholder="Phone Number" value="@admin.getPhoneNo">
                     </div>
                     <div class="form-group">
                         <div class="row">

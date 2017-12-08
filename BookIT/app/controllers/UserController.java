@@ -55,7 +55,7 @@ public class UserController extends Controller {
             }
             else if(userDB.getDecriminatorValue().equals("A")){
 
-                return ok(showAdminProfile.render());
+                return redirect(routes.AdminController.showAdminDashboard(userDB.getUserEmail()));
             }
 
             else

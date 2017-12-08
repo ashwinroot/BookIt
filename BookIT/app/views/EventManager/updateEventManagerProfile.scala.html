@@ -14,10 +14,8 @@
 
         <div id='cssmenu'>
             <ul>
-                <li><a href='/customer/@customer.getUserEmail'>Home</a></li>
+                <li><a href='/eventManager/@customer.getUserEmail'>Home</a></li>
                 <li class='active'><a href='/customer/show/@customer.getUserEmail'>Profile</a></li>
-                <li><a href='/customer/viewHistory/@customer.getUserEmail'>Booking History</a></li>
-                <li><a href='/customer/viewWishList/@customer.getUserEmail'>Wish List</a></li>
                 <li><a href='/signOut'>Log Out</a></li>
             </ul>
         </div>
@@ -26,7 +24,7 @@
         <div class="row justify-content-center">
             <div class="col ">
 
-                <form id="register-form" action="/customer/modifyProfile/@customer.getUserEmail" method="post" role="form" >
+                <form id="register-form" action="/eventManger/modifyProfile/@customer.getUserEmail" method="post" role="form" >
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">First Name</label>
                         <input type="text" name="customerFirstName" id="username" tabindex="1" class="form-control" placeholder="First Name" value="@customer.getUserFirstName" maxlength="20">
