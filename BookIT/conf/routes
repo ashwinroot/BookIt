@@ -51,7 +51,9 @@ POST     /customer/:email/search      controllers.CustomerController.searchEvent
 + nocsrf
 POST    /customer/modifyProfile/:email   controllers.CustomerController.modifyCustomerProfile(email : String)
 #Event Manager routes
+GET     /eventManager/:email            controllers.EventManagerController.showEventManagerDashBoard(email : String)
 GET     /eventManager/showProfile/:email    controllers.EventManagerController.showEventManagerProfile(email : String)
+GET     /eventManager/updateProfile/:email   controllers.EventManagerController.updateEventManagerProfile(email : String)
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
 GET /event/show/:eventId            controllers.EventController.showEvent(eventId : Integer)

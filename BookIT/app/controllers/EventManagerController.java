@@ -48,6 +48,11 @@ public class EventManagerController extends Controller{
         return ok(showEventManagerProfile.render(eventManager));
     }
 
+    public Result updateEventManagerProfile(String eventManagerEmail){
+
+        User eventManager = User.find.byId(eventManagerEmail);
+        return ok(updateEventManagerProfile.render(eventManager));
+    }
 
 
 }
