@@ -3,6 +3,7 @@ package controllers;
 
 import io.ebean.Ebean;
 import models.Event;
+import models.Ticket;
 import models.User;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -20,7 +21,9 @@ import javax.inject.Inject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class EventController extends Controller{
@@ -37,6 +40,8 @@ public class EventController extends Controller{
         DynamicForm df = formFactory.form().bindFromRequest();
 
         String user = session("connected");
+        //return forbidden("user details "+user);
+
         User eventManager = User.find.byId(user);
 
         DateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
@@ -48,6 +53,7 @@ public class EventController extends Controller{
             e.printStackTrace();
         }
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
+
     }
 
     public Result showEvent(Integer eventId){
@@ -66,6 +72,53 @@ public class EventController extends Controller{
         Event event = Event.find.byId(eventId.toString());
         return ok(updateEvent.render(event));
     }
+
+    public boolean updateEvent(Ticket t, Event event){
+        //Event event = Event.find.byId(eventId.toString());
+        User user = User.find.byId(t.getCustomerMail());
+
+        //ArrayList<User> eventObservers = event.getObservers();
+        //eventObservers.add(user);
+        ArrayList<User> eventAttendees = event.getAttendees();
+        int beforeLength;
+        if (eventAttendees==null)
+        {
+            ArrayList<User> temp = new ArrayList<User>();
+            temp.add(user);
+            event.setAttendees(temp);
+            beforeLength = 0;
+        }
+        else
+        {
+            eventAttendees.add(user);
+            event.setAttendees(eventAttendees);
+            beforeLength = eventAttendees.size();
+        }
+
+        ArrayList<User> eventObservers = event.getObservers();
+        if (eventObservers==null)
+        {
+            ArrayList<User> temp = new ArrayList<User>();
+            temp.add(user);
+            event.setObservers(temp);
+        }
+        else
+        {
+            eventObservers.add(user);
+            event.setObservers(eventAttendees);
+        }
+        event.setAvailableNoOfSeats(event.getAvailableNoOfSeats()-t.getNumSeats());
+        event.setTotalSales(event.getTotalSales()+(event.getPerTicketCost() * t.getNumSeats()));
+        event.update();
+        ArrayList<User> temp = event.getAttendees();
+        int afterLength = temp.size();
+
+        if (beforeLength == afterLength)
+            return false;
+        //return ok(updateEvent.render(event));
+        return true;
+    }
+
 
     public Result deleteEvent(Integer eventId){
         Event event = Event.find.byId(eventId.toString());

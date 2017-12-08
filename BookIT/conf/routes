@@ -12,7 +12,8 @@ GET     /message                    controllers.AsyncController.message
 GET     /signOut                    controllers.HomeController.logout
 GET     /login                      controllers.HomeController.login
 
-GET    /login/user                  controllers.UserController.verifyUser
++ nocsrf
+POST    /login/user                  controllers.UserController.verifyUser
 GET     /create                     controllers.CustomerController.createCustomer()
 #GET     /create/eventManager        controllers.EventManagerController.createEventManager
 
@@ -63,7 +64,7 @@ GET /event/book/:eventId            controllers.TicketController.bookTicket(even
 + nocsrf
 POST /event/book/confirm/:eventId    controllers.TicketController.confirmTicket(eventId: Integer)
 + nocsrf
-POST /event/create                  controllers.EventController.saveEvent()
+POST /event/create/save              controllers.EventController.saveEvent()
 + nocsrf
 POST /event/modify/:eventId         controllers.EventController.modifyEvent(eventId : Integer)
 

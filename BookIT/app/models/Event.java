@@ -20,19 +20,13 @@ public class Event extends Model{
     private float perTicketCost;
     private String eventOwnerEmail;
     private Integer availableNoOfSeats;
-    private Integer totalSales;
-    private ArrayList<Customer> attendees;
-    private ArrayList<Customer> observers;
+    private float totalSales;
+    private ArrayList<User> attendees;
+    private ArrayList<User> observers;
 
 
     public static Finder<String, Event> find = new Finder<>(Event.class);
-    public ArrayList<Customer> getObservers() {
-        return observers;
-    }
 
-    public void setObservers(ArrayList<Customer> observers) {
-        this.observers = observers;
-    }
 
     public Event(String eventName, Date eventDate, String eventLocation, float perTicketCost, String eventOwnerEmail, Integer availableNoOfSeats){
 
@@ -101,19 +95,19 @@ public class Event extends Model{
         this.availableNoOfSeats = availableNoOfSeats;
     }
 
-    public Integer getTotalSales() {
+    public float getTotalSales() {
         return totalSales;
     }
 
-    public void setTotalSales(Integer totalSales) {
+    public void setTotalSales(float totalSales) {
         this.totalSales = totalSales;
     }
 
-    public ArrayList<Customer> getAttendees() {
+    public ArrayList<User> getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(ArrayList<Customer> attendees) {
+    public void setAttendees(ArrayList<User> attendees) {
         this.attendees = attendees;
     }
 
@@ -121,6 +115,14 @@ public class Event extends Model{
     {
         this.attendees.add(_cust);
         return true;
+    }
+
+    public ArrayList<User> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(ArrayList<User> observers) {
+        this.observers = observers;
     }
 
     Boolean attachObserver(Customer _cust)

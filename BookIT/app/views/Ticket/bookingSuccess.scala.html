@@ -1,0 +1,37 @@
+@(ticket: Ticket, event: Event)
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+    <head>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-grid.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-reboot.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/navbar.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/cards.css")">
+        <script src="@routes.Assets.versioned("js/jquery-3.2.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("js/navbar.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("js/cards.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+            function calculateCost() {
+                document.getElementById("cost").innerHTML =document.getElementById("cost").innerHTML + @ticket.getNumSeats * @event.getPerTicketCost;
+            }
+
+        </script>
+        <title>Welcome to BookIT</title>
+    </head>
+    <body onload="calculateCost()">
+
+        <h1>Booking successfull</h1>
+        <h2>Ticket Details</h2>
+        <ul>
+
+            <li><strong>Event:</strong> @event.getEventName</li>
+            <li><strong>Location:</strong> @event.getEventLocation</li>
+            <li><strong>Date:</strong> @event.getEventDate</li>
+            <li><Strong>Total number of seats:</Strong> @ticket.getNumSeats</li>
+            <li id="cost"><Strong>Total cost:</Strong></li><br/>
+        </ul>
+        <a href="/customer/@ticket.getCustomerMail">Back to dashboard</a>
+    </body>
+</html>

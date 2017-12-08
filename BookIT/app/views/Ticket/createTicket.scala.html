@@ -14,8 +14,9 @@
         <script type="text/javascript">
         function totalCost()
         {
-            var num = document.getElementByName("numtickets").value;
-            document.getElementById("test").innerHTML= "Total cost is" + totalCost() * @event.getPerTicketCost;
+            var num = document.getElementById("numtickets").value;
+            document.getElementById("cost").innerHTML= "Total cost is " + num * @event.getPerTicketCost;
+
         }
         </script>
         <title>Welcome to BookIT</title>
@@ -39,15 +40,14 @@
 
                     <div class="form-group col-sm-6">
                         <label>Number of tickets</label>
-                        <input type='text' name="numtickets" class="form-control" oninput="totalCost()" value=""/>
+                        <input type='text' id="numtickets" name="numtickets" class="form-control" onchange=totalCost() value=""/>
                     </div>
+
                     <div class="form-group col-sm-6">
                         <label> Cost of tickets</label>
                         <span class="input-group-addon align-content-center">$</span>
-                        <input type="text" name="cost" class="form-control" aria-label="Amount (to the nearest dollar)" tabindex="4" value="">
+                        <p type="text" id="cost" name="cost" class="form-control" aria-label="Amount (to the nearest dollar)" tabindex="4" value=""></p>
                     </div>
-                    <p>testing</p>
-                    <p name="test" id="test"></p>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-3"></div>
