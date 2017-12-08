@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,10 @@ public class EventManager extends User {
     private ArrayList<Event> createdEvents;
     private boolean isApproved;
 
+    public EventManager(String userFirstName, String userLastName, String userEmail, String userPassword, BigInteger phoneNo) {
+        super(userFirstName, userLastName, userEmail, userPassword, phoneNo);
+
+    }
 
     public ArrayList<Event> getCreatedEvents() {
         return createdEvents;
@@ -33,11 +38,5 @@ public class EventManager extends User {
         isApproved = approved;
     }
 
-    /*
-    Event createEvent(String _eventName,String _eventLocation, Date _Date, float _ticketCost, int _availSeats)
-    {
-        Event event = new Event(_eventName,_Date,_eventLocation,_ticketCost,this,_availSeats);
-        return event;
-    }
-    */
+
 }

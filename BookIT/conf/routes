@@ -26,9 +26,11 @@ POST    /users/edit                 controllers.UserController.update()
 GET     /users/delete/:id           controllers.UserController.destroy(id : Integer)
 
 
-GET     /eventManager/:email          controllers.EventManagerController.showEventManagerProfile(email : String)
+GET     /eventManager/:email          controllers.EventManagerController.showEventManagerDashBoard(email : String)
 
++ nocsrf
 POST    /createUser                 controllers.CustomerController.saveCustomer
++ nocsrf
 POST    /createEventManager         controllers.EventManagerController.saveEventManager
 
 # Map static resources from the /public folder to the /assets URL path
@@ -42,11 +44,18 @@ GET     /customer/viewHistory/:email    controllers.CustomerController.showCusto
 GET     /customer/viewWishList/:email    controllers.CustomerController.showCustomerWishList(email : String)
 GET     /customer/updateProfile/:email   controllers.CustomerController.updateCustomerProfile(email : String)
 GET     /customer/addToWishList/:eventId controllers.CustomerController.addToWishList(eventId : Integer)
++ nocsrf
+POST     /customer/:email/search      controllers.CustomerController.searchEventbyName(email :String)
 
++ nocsrf
+POST    /customer/modifyProfile/:email   controllers.CustomerController.modifyCustomerProfile(email : String)
+#Event Manager routes
+GET     /eventManager/showProfile/:email    controllers.EventManagerController.showEventManagerProfile(email : String)
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
 GET /event/show/:eventId            controllers.EventController.showEvent(eventId : Integer)
 GET /event/search/:userMail          controllers.EventController.searchEvent(userMail : String)
+
 GET /event/update/:eventId          controllers.EventController.updateEvent(eventId : Integer)
 GET /event/delete/:eventId          controllers.EventController.deleteEvent(eventId : Integer)
 

@@ -1,6 +1,7 @@
 package controllers;
 
 
+import io.ebean.Ebean;
 import models.Event;
 import models.User;
 import play.data.DynamicForm;
@@ -8,10 +9,12 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import views.html.Customer.showCustomerDashboard;
 import views.html.Event.createEvent;
 import views.html.Event.showEventDetails;
 import views.html.Event.showSearchEvents;
 import views.html.Event.updateEvent;
+
 
 import javax.inject.Inject;
 import java.text.DateFormat;
@@ -39,16 +42,12 @@ public class EventController extends Controller{
         DateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
         try{
             Date date = datef.parse(df.get("date"));
-            Event event = new Event(df.get("eventname"),date,df.get("eventlocation"), Float.parseFloat(df.get("cost")), eventManager.userEmail, Integer.parseInt(df.get("seats")));
+            Event event = new Event(df.get("eventname"),date,df.get("eventlocation"), Float.parseFloat(df.get("cost")), eventManager.getUserEmail(), Integer.parseInt(df.get("seats")));
             event.save();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
-        //return ok(showEventManagerProfile.render());
-        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
     public Result showEvent(Integer eventId){
@@ -60,6 +59,8 @@ public class EventController extends Controller{
         List<Event> event = Event.find.all();
         return ok(showSearchEvents.render(event,userMail));
     }
+
+
 
     public Result updateEvent(Integer eventId){
         Event event = Event.find.byId(eventId.toString());
@@ -73,7 +74,7 @@ public class EventController extends Controller{
         String user = session("connected");
         User eventManager = User.find.byId(user);
 
-        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
     public Result modifyEvent(Integer eventId) {
@@ -98,7 +99,7 @@ public class EventController extends Controller{
         event.setPerTicketCost(Float.parseFloat(df.get("cost")));
         event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
         event.update();
-        return redirect(routes.EventManagerController.showEventManagerProfile(eventManager.userEmail));
+        return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
 }

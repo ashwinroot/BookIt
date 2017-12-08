@@ -42,15 +42,15 @@ public class UserController extends Controller {
         if(userDB != null){
             if(userDB.getDecriminatorValue().equals("C")){
 
-                session("connected", userDB.userEmail);
-                return redirect(routes.CustomerController.showCustomerDashBoard(userDB.userEmail));
+                session("connected", userDB.getUserEmail());
+                return redirect(routes.CustomerController.showCustomerDashBoard(userDB.getUserEmail()));
                 //return ok(showCustomerProfile.render());
             }
 
             else if(userDB.getDecriminatorValue().equals("E")){
-                session("connected", userDB.userEmail);
+                session("connected", userDB.getUserEmail());
 
-                return redirect(routes.EventManagerController.showEventManagerProfile(userDB.userEmail));
+                return redirect(routes.EventManagerController.showEventManagerDashBoard(userDB.getUserEmail()));
                 //return redirect(showEventManagerProfile.render());
             }
             else if(userDB.getDecriminatorValue().equals("A")){

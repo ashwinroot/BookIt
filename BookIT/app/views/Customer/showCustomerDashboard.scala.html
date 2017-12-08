@@ -1,23 +1,92 @@
-@(customer: User)
+@(customer: User ,  allEvents: List[Event])
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-grid.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("../../../public/css/bootstrap-reboot.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/custom1.css")">
-        <script src="@routes.Assets.versioned("../../../public/js/custom.js")" type="text/javascript"></script>
-        <title>Welcome to BookIT</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-grid.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-reboot.min.css")">
+        @*<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/searchBar.css")">*@
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/navbar.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/cards.css")">
+        <script src="@routes.Assets.versioned("js/jquery-3.2.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("js/navbar.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("js/cards.js")" type="text/javascript"></script>
+        <title>Customer Dashboard</title>
     </head>
     <body>
-        <h2>Your Profile</h2>
-        <ul>
-            <li><strong>Name</strong> @customer.userName</li>
-            <li><strong>Email</strong> @customer.userEmail</li>
-            <li><strong>Phone</strong> @customer.phoneNo</li>
-        </ul>
+        <br>
+        <br>
+        <br>
+            <div class="sw">
+                <form action="/customer/@customer.getUserEmail/search" method="post">
+                    <input type="search" class="search" placeholder="Search..." name="query"/>
+                </form>
+                    @*<button class="go"><span class="entypo-search"></span></button>*@
+                    @*<a href="#" class="logo" title="Tuulkit">*@
+                        @*<svg x="0px" y="0px" viewBox="0 0 322 61.797" enable-background="new 0 0 322 61.797" xml:space="preserve">*@
+                            @*<path fill="#FFFFFF" d="M31,15.312v46H18v-46H0v-13h49v13H31z"></path>*@
+                            @*<path fill="#FFFFFF" d="M73,39.228c0,6.916-4.203,10.214-8.99,10.214c-4.704,0-9.01-3.38-9.01-10.214H41 C41,51.944,51.271,61.02,63.51,61.02C75.812,61.02,86,51.944,86,39.228H73z"></path>*@
+                            @*<path fill="#FFFFFF" d="M121,39.228c0,6.916-4.703,10.214-9.49,10.214c-4.704,0-9.51-3.38-9.51-10.214H89 c0,12.715,9.771,21.792,22.01,21.792c12.302,0,21.99-9.076,21.99-21.792H121z"></path>*@
+                            @*<path fill="#FFFFFF" d="M142,61.312v-60h12v60H142z"></path>*@
+                            @*<path fill="#FFFFFF" d="M186.643,37.546l16.375,23.767h-15.382l-9.63-14.602L174,50.965v10.348h-13v-60h13v32.45l12.395-13.45 h16.293L186.643,37.546z"></path>*@
+                            @*<path fill="#FFFFFF" d="M215.173,0.02c4.135,0,7.443,3.308,7.443,7.361c0,4.053-3.308,7.361-7.443,7.361 c-3.969,0-7.278-3.308-7.278-7.361C207.895,3.328,211.203,0.02,215.173,0.02z M209,61.312v-41h13v41H209z"></path>*@
+                            @*<path fill="#FFFFFF" d="M247,20.312h8v11h-8v15.021c0,3.391,1.391,4.301,4.12,4.301c1.324,0,2.88-0.248,2.88-0.414v10.421 c0,0.248-2.432,1.158-6.403,1.158c-8.518,0-13.597-5.045-13.597-13.232V31.312h-7v-11h1.942c4.301,0,6.058-3.256,6.058-7.06v-4.94 h12V20.312z"></path>*@
+                            @*<path fill="#7C67D4" d="M267.407,49.69c3.063,0,5.633,2.516,5.633,5.578c0,3.008-2.57,5.633-5.633,5.633 c-3.063,0-5.579-2.625-5.579-5.633C261.828,52.206,264.344,49.69,267.407,49.69z"></path>*@
+                            @*<path fill="#7C67D4" d="M282.128,21.047c2.734,0,4.922,2.188,4.922,4.867c0,2.68-2.188,4.868-4.922,4.868 c-2.625,0-4.813-2.188-4.813-4.868C277.315,23.235,279.503,21.047,282.128,21.047z M278,61.312v-27h8v27H278z"></path>*@
+                            @*<path fill="#7C67D4" d="M320.52,46.791c0,8.422-6.289,14.438-14.438,14.438c-8.094,0-14.438-6.016-14.438-14.438 s6.344-14.384,14.438-14.384C314.231,32.408,320.52,38.369,320.52,46.791z M312.207,46.791c0-4.594-2.953-6.727-6.125-6.727 c-3.117,0-6.126,2.133-6.126,6.727c0,4.539,3.008,6.782,6.126,6.782C309.254,53.573,312.207,51.385,312.207,46.791z"></path>*@
+                        @*</svg>*@
+            </div>
 
+        <div class="bars" id="nav-action">
+            <span class="bar"> </span>
+        </div>
+
+            <!--Navbar Links-->
+        <nav id="nav">
+            <ul>
+                <li class="shape-circle circle-three"><a href="/customer/viewHistory/@customer.getUserEmail">Booking History</a></li>
+                <li class="shape-circle circle-two"><a href="/signOut">Sign Out</a></li>
+                <li class="shape-circle circle-five">
+                    <a href="/customer/show/@customer.getUserEmail">Profile</a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="row active-with-click">
+        @for(index <- 0 until allEvents.size) {
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <article class="material-card Blue">
+                    <h2>
+                        <p>@allEvents.get(index).getEventName</p>
+                        <strong>
+                            <i class="fa fa-fw fa-star"></i>
+                            @allEvents.get(index).getEventLocation
+                        </strong>
+                    </h2>
+                    <div class="mc-content">
+                        <div class="img-container">
+                            <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
+                        </div>
+                        <div class="mc-description">
+                            <p>Number of Available Seats: <strong> @allEvents.get(index).getAvailableNoOfSeats</strong></p>
+                            <p> Cost per Ticket :<strong>$ @allEvents.get(index).getPerTicketCost</strong></p>
+                        </div>
+                    </div>
+                    <a class="mc-btn-action">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <div class="mc-footer">
+                        @*<button class="btn btn-outline-primary" href="/events/update/@allEvents.get(index).getEventId">Modify</button>*@
+                        @*<button class="btn btn-outline-danger">Delete</button>*@
+                        <button class="btn btn-outline-primary">Book</button>
+                        <button class="btn btn-outline-primary">Add to WishList</button>
+                    </div>
+                </article>
+            </div>
+        }
+        </div>
         <h2>Popular Events</h2>
         <ul>
             <li>Event 1</li>
@@ -25,14 +94,12 @@
             <li>Event 3</li>
         </ul>
         <ul>
-            <a href="/signOut"><button>Sign out</button></a>
-            <a href="/customer/show/@customer.getUserEmail"><button>View Profile</button></a>
-            <a href="/customer/viewHistory/@customer.getUserEmail"><button>View Booking History</button></a>
             <a href="/customer/viewWishList/@customer.getUserEmail"><button>View Wish List</button></a>
         </ul>
         <h5>
             <a href = "/event/search/@customer.getUserEmail">Search for events</a>
         </h5>
+
     </body>
 
 </html>
