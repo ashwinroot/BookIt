@@ -15,6 +15,7 @@ import views.html.Admin.showAdminDashboard;
 import views.html.Admin.manageEventManager;
 import views.html.Admin.updateAdminProfile;
 import views.html.Customer.showCustomerDashboard;
+import views.html.Event.updateEvent;
 import views.html.EventManager.updateEventManagerProfile;
 import views.html.User.index;
 import views.html.Admin.manageEvent;
@@ -95,5 +96,10 @@ public class AdminController extends Controller{
         User admin  =User.find .byId(adminE);
         List<Event> allEvents = Ebean.find(Event.class).where().findList();
         return ok(manageEvent.render(admin,allEvents));
+    }
+
+    public Result updateEvent(String email,Integer eventId){
+        Event event = Event.find.byId(eventId.toString());
+        return ok(updateEvent.render(event));
     }
 }
