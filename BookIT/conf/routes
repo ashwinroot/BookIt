@@ -14,6 +14,7 @@ GET     /login                      controllers.HomeController.login
 
 GET    /login/user                  controllers.UserController.verifyUser
 GET     /create                     controllers.CustomerController.createCustomer()
+GET     /create/eventManager        controllers.EventManagerController.createEventManager
 
 
 GET     /welcome/:name/:lastName    controllers.HomeController.welcome(name : String, lastName : String)
@@ -46,6 +47,8 @@ GET     /customer/addToWishList/:eventId controllers.CustomerController.addToWis
 + nocsrf
 POST     /customer/:email/search      controllers.CustomerController.searchEventbyName(email :String)
 
++ nocsrf
+POST    /customer/modifyProfile/:email   controllers.CustomerController.modifyCustomerProfile(email : String)
 #Event Manager routes
 GET     /eventManager/showProfile/:email    controllers.EventManagerController.showEventManagerProfile(email : String)
 #Event routes

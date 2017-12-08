@@ -80,8 +80,21 @@ public class CustomerController extends Controller{
 
     public Result updateCustomerProfile(String customerEmail){
 
-        return TODO;
+        User customer = Customer.find.byId(customerEmail);
+        return ok(updateCustomerProfile.render(customer));
     }
+
+    public Result modifyCustomerProfile(String customerEmail){
+        User customer = User.find.byId(customerEmail);
+        DynamicForm df = formFactory.form().bindFromRequest();
+        customer.setUserFirstName(df.get("customerFirstName"));
+        customer.setUserLastName(df.get("customerLastName"));
+        customer.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
+        customer.update();
+
+        return ok(showCustomerDashboard.render(customer));
+    }
+
 
     public Result searchEventbyName(String customerEmail)
     {
