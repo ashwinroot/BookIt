@@ -22,15 +22,40 @@
                 <li><a href='/signOut'>Log Out</a></li>
             </ul>
         </div>
-        <ul>
-            <li><strong>Name</strong> @user.getUserFirstName</li>
-            <li><strong>Email</strong> @user.getUserEmail</li>
-            <li><strong>Phone</strong> @user.getPhoneNo</li>
-        </ul>
 
-        <form method="get" action="/customer/updateProfile/@user.getUserEmail">
-            <button class="btn btn-outline-info">Update Profile</button>
-        </form>
-        </h5>
+        <div class="row-sm-offset-10">
+            <p></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col ">
+
+                <form id="register-form" action="/customer/updateProfile/@user.getUserEmail" method="get" role="form" >
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">First Name</label>
+                        <input type="text" name="customerFirstName" id="username" tabindex="1" class="form-control"  value="@user.getUserFirstName" maxlength="20">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Last Name</label>
+                        <input type="text" name="customerLastName" id="text" tabindex="2" class="form-control"  value="@user.getUserLastName">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Phone Number</label>
+                        <input type="number" name="customerPhoneNo" id="text" tabindex="2" class="form-control" value="@user.getPhoneNo">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> Email</label>
+                        <input type="email" name="customerEmail" class="form-control"  tabindex="4" value="@user.getUserEmail">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-6 col-sm-offset-6">
+                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-outline-info col-sm-2" value="Update Profile">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
