@@ -69,11 +69,11 @@ form[role=login] > div {
 
 body {
     position: relative;
-    background: url('../images/background.png') no-repeat center center fixed;
+    background: none;
     background-size: cover;
     min-width: 500px;
     min-height: 200px;
-    color: #fff;
+    color: #000000;
     font-family: 'Montserrat';
     height:100vmax;
 }
