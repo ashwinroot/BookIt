@@ -60,7 +60,7 @@
         <div class="row active-with-click">
         @for(index <- 0 until allEvents.size) {
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <article class="material-card Blue">
+                <article class="material-card Teal">
                     <h2>
                         <p>@allEvents.get(index).getEventName</p>
                         <strong>
@@ -81,27 +81,15 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <div class="mc-footer">
-                        @*<button class="btn btn-outline-primary" href="/events/update/@allEvents.get(index).getEventId">Modify</button>*@
-                        @*<button class="btn btn-outline-danger">Delete</button>*@
-<<<<<<< Updated upstream
-                        <button class="btn btn-outline-primary">Book</button>
-                        <button class="btn btn-outline-primary">Add to WishList</button>
-=======
-                        @*<button class="btn btn-outline-primary">Book</button>*@
-                    <a href="/event/book/@allEvents.get(index).getEventId" class="btn btn-outline-primary">Book</a>
-                    <button class="btn btn-outline-primary">Add to WishList</button>
->>>>>>> Stashed changes
+                        <form method="get" action="/event/book/@allEvents.get(index).getEventId">
+                            <button class="btn btn-outline-info">Book</button>
+                            <button class="btn btn-outline-info" formaction="/customer/addToWishList/@allEvents.get(index).getEventId">Add to WishList</button>
+                        </form>
                     </div>
                 </article>
             </div>
         }
         </div>
-        <h2>Popular Events</h2>
-        <ul>
-            <li>Event 1</li>
-            <li>Event 2</li>
-            <li>Event 3</li>
-        </ul>
         <ul>
             <a href="/customer/viewWishList/@customer.getUserEmail"><button>View Wish List</button></a>
         </ul>
