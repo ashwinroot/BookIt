@@ -79,3 +79,4 @@ GET /admin/showProfile/:email       controllers.AdminController.showAdminProfile
 GET /admin/updateProfile/:email    controllers.AdminController.supdateAdminProfile(email: String)
 + nocsrf
 POST /admin/modifyProfile/:email       controllers.AdminController.updateAdminProfile(email : String)
+GET /admin/:email/event             controllers.AdminController.getEvents(email: String)

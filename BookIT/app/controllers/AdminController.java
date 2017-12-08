@@ -17,6 +17,7 @@ import views.html.Admin.updateAdminProfile;
 import views.html.Customer.showCustomerDashboard;
 import views.html.EventManager.updateEventManagerProfile;
 import views.html.User.index;
+import views.html.Admin.manageEvent;
 
 import javax.inject.Inject;
 import java.math.BigInteger;
@@ -87,5 +88,12 @@ public class AdminController extends Controller{
     {
         User admin= User.find.byId(adminE);
         return ok(updateAdminProfile.render(admin));
+    }
+
+    public Result getEvents(String adminE)
+    {
+        User admin  =User.find .byId(adminE);
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
+        return ok(manageEvent.render(admin,allEvents));
     }
 }

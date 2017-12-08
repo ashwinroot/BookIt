@@ -1,4 +1,4 @@
-@(admin: User, managers: List[User])
+@(admin: User, events: List[Event])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,6 @@
                 <li class='active'><a href = "#">Manage EM</a></li>
                 <li><a href = "/admin/@admin.getUserEmail/event">Manage Events</a></li>
                 <li><a href='/admin/showProfile/@admin.getUserEmail'>Profile</a></li>
-
                 <li><a href='/signOut'>Log Out</a></li>
             </ul>
         </div>
@@ -51,43 +50,44 @@
 
 
         @*<div class = "container">*@
-            @*<div class="row justify-content-center">*@
-                @*<div class="col-md-4">*@
-                    @*<a href="/event/create"><button class="btn btn-lg btn-info btn-block">Create Event</button></a>*@
-                @*</div>*@
-            @*</div>*@
+        @*<div class="row justify-content-center">*@
+        @*<div class="col-md-4">*@
+        @*<a href="/event/create"><button class="btn btn-lg btn-info btn-block">Create Event</button></a>*@
+        @*</div>*@
+        @*</div>*@
 
         @*</div>*@
 
         <div class="container">
-            <h4>Your Events</h4>
-            <ul>
-                <li>
-                    @*<a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>*@
-                </li>
-            </ul>
+            <h4>All events Events</h4>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone Number</th>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">Event Date</th>
+                        <th scope="col">Event Location</th>
+                        <th scope="col">Per Ticket Cost</th>
+                        <th scope="col">Event Owner</th>
+                        <th scope="col">Available Seats</th>
+                        <th scope="col">Total Sales</th>
                         <th scope="col" colspan="2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                @for(index <- 0 until managers.size) {
+                @for(index <- 0 until events.size) {
                     <tr>
-                        <th scope="row">@managers.get(index).getDecriminatorValue</th>
-                        <td>@managers.get(index).getUserFirstName</td>
-                        <td>@managers.get(index).getUserLastName</td>
-                        <td>@managers.get(index).getUserEmail</td>
-                        <td>@managers.get(index).getPhoneNo</td>
-                        <td><a href="/admin/@admin.getUserEmail/update/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-warning">Update</button></a> </td>
-                        <td><a href="/admin/@admin.getUserEmail/delete/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-danger">Delete</button> </a></td>
+                        <th scope="row">@events.get(index).getEventId</th>
+                        <th scope="row">@events.get(index).getEventName</th>
+                        <td>@events.get(index).getEventDate</td>
+                        <td>@events.get(index).getEventLocation</td>
+                        <td>@events.get(index).getPerTicketCost</td>
+                        <td>@events.get(index).getEventOwnerEmail</td>
+                        <td>@events.get(index).getAvailableNoOfSeats</td>
+                        <td>@events.get(index).getTotalSales</td>
+                        <td><a href="/admin/@admin.getUserEmail/update/event/@events.get(index).getEventId"><button class="btn btn-outline-warning">Update</button></a> </td>
+                        <td><a href="/admin/@admin.getUserEmail/delete/event/@events.get(index).getEventId"><button class="btn btn-outline-danger">Delete</button> </a></td>
                     </tr>
                 }
 
