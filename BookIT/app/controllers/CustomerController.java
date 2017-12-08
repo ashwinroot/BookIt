@@ -81,6 +81,7 @@ public class CustomerController extends Controller{
     public Result updateCustomerProfile(String customerEmail){
 
         User customer = Customer.find.byId(customerEmail);
+//        List<Event> allEvents = Ebean.find(Event.class).where().findList();
         return ok(updateCustomerProfile.render(customer));
     }
 
@@ -89,19 +90,28 @@ public class CustomerController extends Controller{
         DynamicForm df = formFactory.form().bindFromRequest();
         customer.setUserFirstName(df.get("customerFirstName"));
         customer.setUserLastName(df.get("customerLastName"));
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
         customer.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         customer.update();
 
-        return ok(showCustomerDashboard.render(customer));
+        return ok(showCustomerDashboard.render(customer,allEvents));
     }
 
 
     public Result searchEventbyName(String customerEmail)
     {
         DynamicForm df = formFactory.form().bindFromRequest();
-        String name = df.get("query");
+        List<Event> eventList = new ArrayList<Event>();
+        String name = df.get("query_name");
+        String location = df.get("query_location");
+        String date = df.get("query_date");
         User customer = User.find.byId(customerEmail);
-        List<Event> eventList = Ebean.find(Event.class).where().like("event_name","%"+name+"%").findList();
+        if(name!="")
+            eventList.addAll(Ebean.find(Event.class).where().like("event_name","%"+name+"%").findList());
+        if(location!="")
+            eventList.addAll(Ebean.find(Event.class).where().like("event_location","%"+location+"%").findList());
+        if(date!="")
+            eventList.addAll(Ebean.find(Event.class).where().like("event_date","%"+date+"%").findList());
         return ok(showCustomerDashboard.render(customer,eventList));
     }
 }
