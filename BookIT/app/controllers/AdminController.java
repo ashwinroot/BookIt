@@ -6,15 +6,20 @@ import models.Admin;
 import models.Event;
 import models.EventManager;
 import models.User;
+import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Admin.showAdminProfile;
+import views.html.Admin.showAdminDashboard;
 import views.html.Admin.manageEventManager;
+import views.html.Admin.updateAdminProfile;
+import views.html.Customer.showCustomerDashboard;
 import views.html.EventManager.updateEventManagerProfile;
 import views.html.User.index;
 
 import javax.inject.Inject;
+import java.math.BigInteger;
 import java.util.List;
 
 import controllers.EventManagerController;
@@ -32,7 +37,7 @@ public class AdminController extends Controller{
     {
         User admin = Admin.find.byId(email);
         List<Event> allEvents = Ebean.find(Event.class).where().findList();
-        return ok(showAdminProfile.render(admin , allEvents));
+        return ok(showAdminDashboard.render(admin , allEvents));
     }
     public Result user(){
 
@@ -60,5 +65,27 @@ public class AdminController extends Controller{
         User.find.ref(emE).delete();
         List <User> em_list = Ebean.find(User.class).where().eq("user_type","E").findList();
         return ok(manageEventManager.render(admin,em_list));
+    }
+    public Result showAdminProfile(String adminE)
+    {
+        User admin = Admin.find.byId(adminE);
+        return ok(showAdminProfile.render(admin));
+    }
+    public Result updateAdminProfile(String adminE)
+    {
+        User admin= User.find.byId(adminE);/**/
+        DynamicForm df = formFactory.form().bindFromRequest();
+        admin.setUserFirstName(df.get("customerFirstName"));
+        admin.setUserLastName(df.get("customerLastName"));
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
+        admin.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
+        admin.update();
+        return ok(showAdminDashboard.render(admin,allEvents));
+    }
+
+    public Result supdateAdminProfile(String adminE)
+    {
+        User admin= User.find.byId(adminE);
+        return ok(updateAdminProfile.render(admin));
     }
 }
