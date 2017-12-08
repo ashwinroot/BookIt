@@ -92,7 +92,9 @@ public class CustomerController extends Controller{
         customer.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         customer.update();
 
-        return ok(showCustomerDashboard.render(customer));
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
+
+        return ok(showCustomerDashboard.render(customer,allEvents));
     }
 
 
