@@ -9,6 +9,7 @@ import models.User;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
+import play.filters.headers.SecurityHeadersFilter;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Customer.*;
@@ -49,6 +50,8 @@ public class TicketController extends Controller{
         User user = User.find.byId(mail);
         Event event = Event.find.byId(new Integer(eventId).toString());
 
+        EventController econ = new EventController();
+
         //return forbidden(""+mail+" "+event.getEventName());
 
         String eventManager = event.getEventOwnerEmail();
@@ -64,9 +67,11 @@ public class TicketController extends Controller{
             return forbidden("Error in ticket creation "+e);
 
         }
-        t.save();
 
-        return forbidden(""+t.getCustomerMail()+" "+t.getNumSeats());
+        t.save();
+        boolean status = econ.updateEvent(t, event);
+
+        return ok(bookingSuccess.render(t,event));
 
         //return TODO;
     }
