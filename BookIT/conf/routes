@@ -70,3 +70,6 @@ POST /event/create/save              controllers.EventController.saveEvent()
 + nocsrf
 POST /event/modify/:eventId         controllers.EventController.modifyEvent(eventId : Integer)
 
+#Admin routes
+GET /admin/:email                  controllers.AdminController.showAdminDashboard(email : String)
+GET /admin/:email/manage/em        controllers.AdminController.showManageEM(email : String)
