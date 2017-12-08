@@ -20,7 +20,10 @@
         <br>
             <div class="sw">
                 <form action="/customer/@customer.getUserEmail/search" method="post">
-                    <input type="search" class="search" placeholder="Search..." name="query"/>
+                    <label>Event Name</label><input type="search" class="search" placeholder="Search..." name="query_name"/>
+                    <label>Location</label><input type="search" class="search" placeholder="Search..." name="query_location"/>
+                    <label>Date</label><input type="search" class="search" placeholder="Search..." name="query_date"/>
+                    <input type="submit" value="submit" class="btn btn-outline-info">
                 </form>
                     @*<button class="go"><span class="entypo-search"></span></button>*@
                     @*<a href="#" class="logo" title="Tuulkit">*@
