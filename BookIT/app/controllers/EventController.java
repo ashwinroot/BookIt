@@ -1,6 +1,7 @@
 package controllers;
 
 
+import io.ebean.Ebean;
 import models.Event;
 import models.User;
 import play.data.DynamicForm;
@@ -8,10 +9,12 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import views.html.Customer.showCustomerDashboard;
 import views.html.Event.createEvent;
 import views.html.Event.showEventDetails;
 import views.html.Event.showSearchEvents;
 import views.html.Event.updateEvent;
+
 
 import javax.inject.Inject;
 import java.text.DateFormat;
@@ -56,6 +59,8 @@ public class EventController extends Controller{
         List<Event> event = Event.find.all();
         return ok(showSearchEvents.render(event,userMail));
     }
+
+
 
     public Result updateEvent(Integer eventId){
         Event event = Event.find.byId(eventId.toString());

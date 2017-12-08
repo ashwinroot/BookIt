@@ -24,10 +24,10 @@ public class EventManagerController extends Controller{
     FormFactory formFactory;
 
 
-    public Result createEventManager(){
-        Form<EventManager> eventManagerForm = formFactory.form(EventManager.class);
-        return ok(createEventManager.render(eventManagerForm));
-    }
+//    public Result createEventManager(){
+//        Form<EventManager> eventManagerForm = formFactory.form(EventManager.class);
+//        return ok(createEventManager.render(eventManagerForm));
+//    }
 
     public Result saveEventManager(){
 

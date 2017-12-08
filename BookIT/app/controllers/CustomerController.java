@@ -3,7 +3,6 @@ package controllers;
 import io.ebean.Ebean;
 import models.*;
 import play.data.DynamicForm;
-import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -38,8 +37,8 @@ public class CustomerController extends Controller{
 
     public Result showCustomerDashBoard(String customerEmail){
         User customer = User.find.byId(customerEmail);
-
-        return ok(showCustomerDashboard.render(customer));
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
+        return ok(showCustomerDashboard.render(customer,allEvents));
     }
 
     public Result showCustomerProfile(String customerEmail){
@@ -51,8 +50,9 @@ public class CustomerController extends Controller{
         String user = session("connected");
         User customer = User.find.byId(user);
         WishList wishList = new WishList(customer.getUserEmail(),eventId);
+        List<Event> allEvents= Ebean.find(Event.class).where().findList();
         wishList.save();
-        return ok(showCustomerDashboard.render(customer));
+        return ok(showCustomerDashboard.render(customer, allEvents));
     }
 
     public Result showCustomerBookingHistory(String customerEmail)
@@ -83,5 +83,12 @@ public class CustomerController extends Controller{
         return TODO;
     }
 
-
+    public Result searchEventbyName(String customerEmail)
+    {
+        DynamicForm df = formFactory.form().bindFromRequest();
+        String name = df.get("query");
+        User customer = User.find.byId(customerEmail);
+        List<Event> eventList = Ebean.find(Event.class).where().like("event_name","%"+name+"%").findList();
+        return ok(showCustomerDashboard.render(customer,eventList));
+    }
 }
