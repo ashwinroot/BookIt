@@ -6,6 +6,8 @@ import models.Customer;
 import models.Event;
 import models.Ticket;
 import models.User;
+import notifiers.MailerService;
+import play.api.libs.mailer.MailerClient;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
@@ -32,6 +34,8 @@ public class TicketController extends Controller{
 
     @Inject
     FormFactory formFactory;
+    @Inject
+    MailerClient mailerClient;
 
     public Result bookTicket(int eventId)
     {
@@ -72,10 +76,12 @@ public class TicketController extends Controller{
         }
 
         t.save();
-        int status = econ.updateEvent(t, event.getEventId());
-        Event temp = Event.find.byId(new Integer(eventId).toString());
-        return forbidden("attendees: "+status);
-        //return ok(bookingSuccess.render(t,event));
+        MailerService m = new MailerService(mailerClient);
+        m.bookingConfirmation(t,event);
+        //int status = econ.updateEvent(t, event.getEventId());
+        //Event temp = Event.find.byId(new Integer(eventId).toString());
+        //return forbidden("attendees: "+status);
+        return ok(bookingSuccess.render(t,event));
 
         //return TODO;
     }
@@ -90,6 +96,8 @@ public class TicketController extends Controller{
         EventController econ = new EventController();
         Integer status = econ.cancelEventTicket(t,event);
         t.delete();
+        MailerService m = new MailerService(mailerClient);
+        m.cancelConfirmation(event,user,ticketId);
         if (status == 0)
             return ok(cancelSuccess.render(user,event));
         else

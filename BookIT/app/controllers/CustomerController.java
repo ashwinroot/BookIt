@@ -4,9 +4,12 @@ import io.ebean.Ebean;
 import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
+import play.libs.mailer.MailerClient;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Customer.*;
+
+import notifiers.MailerService;
 
 import javax.inject.Inject;
 import java.math.BigInteger;
@@ -18,6 +21,8 @@ public class CustomerController extends Controller{
 
     @Inject
     FormFactory formFactory;
+    @Inject
+    MailerClient mailerClient;
 
     public Result createCustomer(){
 
@@ -31,6 +36,8 @@ public class CustomerController extends Controller{
 
         Customer customer = new Customer(df.get("customerFirstName"), df.get("customerLastName"), df.get("customerEmail"), df.get("customerPassword"), BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         customer.save();
+        MailerService m = new MailerService(mailerClient);
+        m.verifyUser((User)customer);
         return redirect(routes.CustomerController.showCustomerDashBoard(customer.getUserEmail()));
 
     }
@@ -113,5 +120,13 @@ public class CustomerController extends Controller{
         if(date!="")
             eventList.addAll(Ebean.find(Event.class).where().like("event_date","%"+date+"%").findList());
         return ok(showCustomerDashboard.render(customer,eventList));
+    }
+
+    public Result sendMail(String mail)
+    {
+        MailerService m = new MailerService(mailerClient);
+        int status = m.sendEmail();
+
+        return forbidden("Mailer service status:"+status);
     }
 }

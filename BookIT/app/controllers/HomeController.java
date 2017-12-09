@@ -2,8 +2,11 @@ package controllers;
 
 
 import models.User;
+import notifiers.MailerService;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
+import play.libs.mailer.MailerClient;
 import play.mvc.*;
 
 import views.html.index;
@@ -15,6 +18,8 @@ import javax.inject.Inject;
 public class HomeController extends Controller {
     @Inject
     FormFactory formFactoryHome;
+    @Inject
+    MailerClient mailerClient;
 
     public Result index() {
         return ok(index.render("Hello world"));
@@ -35,6 +40,23 @@ public class HomeController extends Controller {
 
         session().remove("connected");
         return redirect(routes.HomeController.login());
+    }
+
+    public Result resetPassword()
+    {
+
+        return ok(resetPassword.render());
+    }
+
+    public Result resetSendMail()
+    {
+        MailerService m = new MailerService(mailerClient);
+
+        DynamicForm df = formFactoryHome.form().bindFromRequest();
+        String mail = df.get("email");
+        m.mailPassword(mail);
+
+        return ok(resetPasswordConfirmation.render());
     }
 
 
