@@ -33,21 +33,20 @@
             </ul>
         </div>
         <br>
-
-            <div class = "row justify-content-center">
-                <form class="form-inline" action="/customer/@customer.getUserEmail/search" method="post" role="search">
-                    <input type="search" class="form-control" placeholder="Event" name="query_name"/>
+            <div class="row justify-content-center">
+                <form class="form-inline" action="/customer/@customer.getUserEmail/search" method="post">
+                    <input type="search" class="form-control" placeholder="Event Name" name="query_name"/>
                     <p>&nbsp &nbsp</p>
                     <input type="search" class="form-control" placeholder="Location" name="query_location"/>
                     <p>&nbsp &nbsp</p>
                     <input type="search" class="form-control" placeholder="Date" name="query_date"/>
                     <p>&nbsp &nbsp</p>
-                    <input type="submit" value="Search" class="btn btn-outline-info">
+                    <input type="submit" value="submit" class="btn btn-outline-info">
                 </form>
             </div>
         <br>
-        <div class = "row justify-content-center">
-            <button class="btn btn-outline-dark">Featured Events</button>
+        <div class="row justify-content-center">
+            <button class="form-control btn btn-outline-dark">Featured Events</button>
         </div>
         <br>
         <div class="row active-with-click">
@@ -84,7 +83,7 @@
         }
         </div>
         <h5>
-            <a href = "/mail/@customer.getUserEmail">Mail test</a>
+            <a href = "/event/search/@customer.getUserEmail">Search for events</a>
         </h5>
 
     </body>
