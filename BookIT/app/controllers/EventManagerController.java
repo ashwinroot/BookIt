@@ -23,17 +23,12 @@ public class EventManagerController extends Controller{
     @Inject
     FormFactory formFactory;
 
-
-//    public Result createEventManager(){
-//        Form<EventManager> eventManagerForm = formFactory.form(EventManager.class);
-//        return ok(createEventManager.render(eventManagerForm));
-//    }
-
     public Result saveEventManager(){
 
         DynamicForm df = formFactory.form().bindFromRequest();
         EventManager eventManager = new EventManager(df.get("customerFirstName"), df.get("customerLastName"), df.get("customerEmail"), df.get("customerPassword"), BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         eventManager.save();
+        session("connected", eventManager.getUserEmail());
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 

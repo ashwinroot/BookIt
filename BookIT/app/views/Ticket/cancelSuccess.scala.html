@@ -7,23 +7,36 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-grid.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap-reboot.min.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/navbar.css")">
+        @*<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/navbar.css")">*@
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/cards.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/topBar.css")">
+
         <script src="@routes.Assets.versioned("js/jquery-3.2.1.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("js/navbar.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("js/cards.js")" type="text/javascript"></script>
         <title>Welcome to BookIT</title>
     </head>
     <body onload="calculateCost()">
+        <div id='cssmenu'>
+            <ul>
+                <li class='active'><a href='/customer/@user.getUserEmail'>Home</a></li>
+                <li><a href='/customer/show/@user.getUserEmail'>Profile</a></li>
+                <li><a href='/customer/viewHistory/@user.getUserEmail'>Booking History</a></li>
+                <li><a href='/customer/viewWishList/@user.getUserEmail'>Wish List</a></li>
+                <li><a href='/signOut'>Log Out</a></li>
+            </ul>
+        </div>
+
+
 
         <h1>Cancellation successfull</h1>
         <h2>Cancelled Event Details</h2>
+
         <ul>
 
             <li><strong>Event:</strong> @event.getEventName</li>
             <li><strong>Location:</strong> @event.getEventLocation</li>
             <li><strong>Date:</strong> @event.getEventDate</li>
         </ul>
-        <a href="/customer/@user.getUserEmail">Back to dashboard</a>
     </body>
 </html>
