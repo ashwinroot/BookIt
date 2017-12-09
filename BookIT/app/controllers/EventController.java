@@ -5,8 +5,10 @@ import io.ebean.Ebean;
 import models.Event;
 import models.Ticket;
 import models.User;
+import notifiers.MailerService;
 import play.data.DynamicForm;
 import play.data.FormFactory;
+import play.libs.mailer.MailerClient;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -21,15 +23,14 @@ import javax.inject.Inject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class EventController extends Controller{
 
     @Inject
     FormFactory formFactory;
+    @Inject
+    MailerClient mailerClient;
 
     public Result createEvent()
     {
@@ -237,6 +238,33 @@ public class EventController extends Controller{
         event.setPerTicketCost(Float.parseFloat(df.get("cost")));
         event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
         event.update();
+        MailerService m = new MailerService(mailerClient);
+        m.eventUpdateNotification(event,eventManager);
+        String eventObservers = event.getObservers();
+        String[] temp = eventObservers.split(" ");
+        HashMap<String,Integer> mailList = new HashMap<String,Integer>();
+        for(int i=0;i<temp.length;i++)
+        {
+            if (!mailList.containsKey(temp[i]))
+            {
+                User u = User.find.byId(temp[i]);
+                m.eventUpdateNotification(event,u);
+                mailList.put(temp[i],i);
+            }
+        }
+
+        String eventAttendees = event.getAttendees();
+        temp = eventAttendees.split(" ");
+        for(int i=0;i<temp.length;i++)
+        {
+            if (!mailList.containsKey(temp[i]))
+            {
+                User u = User.find.byId(temp[i]);
+                m.eventUpdateNotification(event,u);
+                mailList.put(temp[i],i);
+            }
+
+        }
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
