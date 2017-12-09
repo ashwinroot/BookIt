@@ -50,22 +50,18 @@
         @*</script>*@
 
 
-        <div class = "container">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <a href="/event/create"><button class="btn btn-lg btn-info btn-block">Create Event</button></a>
-                </div>
-            </div>
+        @*<div class = "container">*@
+            @*<div class="row justify-content-center">*@
+                @*<div class="col-md-4">*@
+                    @*<a href="/event/create"><button class="btn btn-lg btn-info btn-block">Create Event</button></a>*@
+                @*</div>*@
+            @*</div>*@
 
-        </div>
+        @*</div>*@
 
         <div class="container">
-            <h4>Your Events</h4>
-            <ul>
-                <li>
-                    @*<a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>*@
-                </li>
-            </ul>
+            <h4>All Events</h4>
+
             <div class="row active-with-click">
             @for(index <- 0 until ownedEvents.size) {
                 <div class="col-md-4 col-sm-6 col-xs-12">
