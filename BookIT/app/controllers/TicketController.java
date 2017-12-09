@@ -40,9 +40,11 @@ public class TicketController extends Controller{
     public Result bookTicket(int eventId)
     {
         Event event = Event.find.byId(new Integer(eventId).toString());
+        String mail = session("connected");
+        User user = User.find.byId(mail);
         if(event.getAvailableNoOfSeats() > 0)
         {
-            return ok(createTicket.render(event));
+            return ok(createTicket.render(event, user));
         }
 
         return forbidden(""+event.getEventName()+" is full");
