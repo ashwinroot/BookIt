@@ -46,7 +46,7 @@ public class Ticket extends Model {
 
     }
 
-    public static Finder<String, User> find = new Finder<>(User.class);
+    public static Finder<String, Ticket> find = new Finder<>(Ticket.class);
 
     public int getTicketId() {
         return ticketId;

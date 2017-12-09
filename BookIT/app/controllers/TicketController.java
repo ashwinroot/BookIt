@@ -21,6 +21,7 @@ import views.html.Ticket.createTicket;
 import javax.inject.Inject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -69,11 +70,32 @@ public class TicketController extends Controller{
         }
 
         t.save();
-        boolean status = econ.updateEvent(t, event);
-
-        return ok(bookingSuccess.render(t,event));
+        int status = econ.updateEvent(t, event.getEventId());
+        Event temp = Event.find.byId(new Integer(eventId).toString());
+        return forbidden("attendees: "+status);
+        //return ok(bookingSuccess.render(t,event));
 
         //return TODO;
     }
 
+    public Result cancelTicket(Integer ticketId)
+    {
+        Ticket t = Ticket.find.byId(ticketId.toString());
+        String userId = session("connected");
+        User user = User.find.byId(userId);
+        Event event = Event.find.byId(new Integer(t.getEventId()).toString());
+
+        EventController econ = new EventController();
+        Integer status = econ.cancelEventTicket(t,event);
+        t.delete();
+        if (status == 0)
+            return ok(cancelSuccess.render(user,event));
+        else
+            //return forbidden("Error in cancelling ticket "+status+" "+event.getEventId()+" "+event.getAttendees().size());
+            return forbidden("Error in cancelling ticket "+status);
+
+    }
+
+
 }
+

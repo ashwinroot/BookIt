@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 @Entity
 public class Event extends Model{
@@ -21,11 +22,14 @@ public class Event extends Model{
     private String eventOwnerEmail;
     private Integer availableNoOfSeats;
     private float totalSales;
-    private ArrayList<User> attendees;
-    private ArrayList<User> observers;
-
+    private String attendees;
+    private String observers;
+    private Integer numAttendees;
+    private Integer numObservers;
 
     public static Finder<String, Event> find = new Finder<>(Event.class);
+
+
 
 
     public Event(String eventName, Date eventDate, String eventLocation, float perTicketCost, String eventOwnerEmail, Integer availableNoOfSeats){
@@ -37,6 +41,34 @@ public class Event extends Model{
         this.eventOwnerEmail = eventOwnerEmail;
         this.availableNoOfSeats = availableNoOfSeats;
         this.totalSales = 0;
+        this.attendees = "";
+        this.observers = "";
+        this.numAttendees = 0;
+        this.numObservers = 0;
+    }
+
+    public Integer getNumAttendees() {
+        return numAttendees;
+    }
+
+    public void setNumAttendees(Integer size) {
+
+        //Integer numAttendees = 0;
+        //String[] aList = this.attendees.split(" ");
+        //numAttendees = aList.length;
+        this.numAttendees = size;
+    }
+
+    public Integer getNumObservers() {
+        return numObservers;
+    }
+
+    public void setNumObservers(Integer size) {
+
+        //Integer numObservers = 0;
+        //String[] aList = this.observers.split(" ");
+        //numObservers = aList.length;
+        this.numObservers = size;
     }
 
     public Integer getEventId() {
@@ -103,36 +135,35 @@ public class Event extends Model{
         this.totalSales = totalSales;
     }
 
-    public ArrayList<User> getAttendees() {
+    public String getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(ArrayList<User> attendees) {
-        this.attendees = attendees;
-    }
-
-    Boolean addAttendees(Customer _cust)
+    public void setAttendees(String attendees)
     {
-        this.attendees.add(_cust);
-        return true;
+        this.attendees = attendees;
+        //setNumAttendees();
     }
 
-    public ArrayList<User> getObservers() {
+    public String getObservers() {
         return observers;
     }
 
-    public void setObservers(ArrayList<User> observers) {
+    public void setObservers(String observers)
+    {
         this.observers = observers;
+        //setNumObservers();
     }
 
-    Boolean attachObserver(Customer _cust)
+    Boolean attachObserver(String _cust)
     {
-        this.observers.add(_cust);
+       // this.observers.add(_cust);
         return true;
     }
 
     Boolean detachObserver(Customer _cust)
     {
+        /*
         Iterator iter = observers.iterator();
         while(iter.hasNext())
         {
@@ -142,6 +173,7 @@ public class Event extends Model{
                 return true;
             }
         }
+        */
         return false;
     }
 

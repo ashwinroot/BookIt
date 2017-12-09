@@ -69,6 +69,7 @@ POST /event/book/confirm/:eventId    controllers.TicketController.confirmTicket(
 POST /event/create/save              controllers.EventController.saveEvent()
 + nocsrf
 POST /event/modify/:eventId         controllers.EventController.modifyEvent(eventId : Integer)
+GET  /event/cancel/:ticketId        controllers.TicketController.cancelTicket(ticketId: Integer)
 
 #Admin routes
 GET /admin/:email                  controllers.AdminController.showAdminDashboard(email : String)

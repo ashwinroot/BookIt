@@ -32,7 +32,7 @@
                     <li><Strong>Event ID:</Strong> @ticket.getEventId()</li>
                     <li><strong>Number of Seats Booked:</strong> @ticket.getNumSeats()</li><br>
 
-                    @*<a href="/event/book/@event.getEventId/@userMail"><button>Book event</button></a>*@
+                    <a href="/event/cancel/@ticket.getTicketId"><button>Cancel Ticket</button></a>
                 </ul>
             }
         }

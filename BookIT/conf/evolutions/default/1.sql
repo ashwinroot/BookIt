@@ -12,6 +12,10 @@ create table event (
   event_owner_email             varchar(255),
   available_no_of_seats         integer,
   total_sales                   float not null,
+  attendees                     varchar(255),
+  observers                     varchar(255),
+  num_attendees                 integer,
+  num_observers                 integer,
   constraint pk_event primary key (event_id)
 );
 
