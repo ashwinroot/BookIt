@@ -113,11 +113,12 @@ public class CustomerController extends Controller{
         String location = df.get("query_location");
         String date = df.get("query_date");
         User customer = User.find.byId(customerEmail);
-        if(name!="")
+
+        if(!name.equals(""))
             eventList.addAll(Ebean.find(Event.class).where().like("event_name","%"+name+"%").findList());
-        if(location!="")
+        if(!location.equals(""))
             eventList.addAll(Ebean.find(Event.class).where().like("event_location","%"+location+"%").findList());
-        if(date!="")
+        if(!date.equals(""))
             eventList.addAll(Ebean.find(Event.class).where().like("event_date","%"+date+"%").findList());
         return ok(showCustomerDashboard.render(customer,eventList));
     }
