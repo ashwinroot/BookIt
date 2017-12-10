@@ -46,7 +46,7 @@
             </div>
         <br>
         <div class="row justify-content-center">
-            <button class="form-control btn btn-outline-dark">Featured Events</button>
+            <p class="form-control btn btn-outline-dark">Featured Events</p>
         </div>
         <br>
         <div class="row active-with-click">
@@ -57,7 +57,7 @@
                         <p>@allEvents.get(index).getEventName</p>
                         <strong>
                             <i class="fa fa-fw fa-star"></i>
-                            @allEvents.get(index).getEventLocation
+                            Location: @allEvents.get(index).getEventLocation
                         </strong>
                     </h2>
                     <div class="mc-content">
@@ -67,6 +67,7 @@
                         <div class="mc-description">
                             <p>Number of Available Seats: <strong> @allEvents.get(index).getAvailableNoOfSeats</strong></p>
                             <p> Cost per Ticket :<strong>$ @allEvents.get(index).getPerTicketCost</strong></p>
+                            <p>Date of the event: <strong>@allEvents.get(index).getEventDate </strong></p>
                         </div>
                     </div>
                     <a class="mc-btn-action">
@@ -82,9 +83,6 @@
             </div>
         }
         </div>
-        <h5>
-            <a href = "/event/search/@customer.getUserEmail">Search for events</a>
-        </h5>
 
     </body>
 

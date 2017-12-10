@@ -11,6 +11,7 @@ import play.mvc.*;
 
 import views.html.index;
 import views.html.Home.*;
+import views.html.User.*;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ public class HomeController extends Controller {
     MailerClient mailerClient;
 
     public Result index() {
-        return ok(index.render("Hello world"));
+        return ok(login2.render());
     }
 
     public Result welcome(String name, String lastName){

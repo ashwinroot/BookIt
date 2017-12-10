@@ -58,7 +58,7 @@
 
         </div>
 
-        <div class="container">
+
             <h4>Your Events</h4>
             <ul>
                 <li>
@@ -68,21 +68,24 @@
             <div class="row active-with-click">
             @for(index <- 0 until ownedEvents.size) {
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                    <article class="material-card Blue">
+                    <article class="material-card Teal">
                         <h2>
                             <p>@ownedEvents.get(index).getEventName</p>
                             <strong>
                                 <i class="fa fa-fw fa-star"></i>
                                 @ownedEvents.get(index).getEventLocation
                             </strong>
+                             @*Sales: <strong> @ownedEvents.get(index).getTotalSales</strong>*@
                         </h2>
                         <div class="mc-content">
                             <div class="img-container">
                                 <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
                             </div>
                             <div class="mc-description">
-                            <p>Number of Available Seats: <strong> @ownedEvents.get(index).getAvailableNoOfSeats</strong></p>
+                                <p>Location : <strong>@ownedEvents.get(index).getEventLocation</strong></p>
+                                <p>Number of Available Seats: <strong> @ownedEvents.get(index).getAvailableNoOfSeats</strong></p>
                                 <p> Cost per Ticket :<strong>$ @ownedEvents.get(index).getPerTicketCost</strong></p>
+                                <p> Total Sales : <h4>$ @ownedEvents.get(index).getTotalSales </h4></p>
                             </div>
                         </div>
                         <a class="mc-btn-action">
@@ -99,7 +102,6 @@
             }
             </div>
 
-        </div>
     </body>
 
 
