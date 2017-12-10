@@ -49,6 +49,8 @@ GET     /customer/addToWishList/:eventId controllers.CustomerController.addToWis
 POST     /customer/:email/search      controllers.CustomerController.searchEventbyName(email :String)
 
 + nocsrf
+POST     /customer/:email/search1      controllers.CustomerController.searchEvent(email :String)
++ nocsrf
 POST    /customer/modifyProfile/:email   controllers.CustomerController.modifyCustomerProfile(email : String)
 #Event Manager routes
 GET     /eventManager/:email            controllers.EventManagerController.showEventManagerDashBoard(email : String)

@@ -14,7 +14,10 @@ import java.util.List;
 public class Event extends Model{
 
     @Id
-    private Integer eventId;
+    public Integer eventId;
+    //private Integer eventId;
+
+
     private String eventName;
     private Date eventDate;
     private String eventLocation;
