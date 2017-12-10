@@ -1,6 +1,9 @@
 package controllers;
 
 import io.ebean.Ebean;
+import io.ebean.Query;
+import io.ebean.RawSql;
+import io.ebean.RawSqlBuilder;
 import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -13,7 +16,10 @@ import notifiers.MailerService;
 
 import javax.inject.Inject;
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -124,6 +130,34 @@ public class CustomerController extends Controller{
         if(!date.equals(""))
             eventList.addAll(Ebean.find(Event.class).where().like("event_date","%"+date+"%").findList());
         return ok(showCustomerDashboard.render(customer,eventList));
+    }
+
+    public Result searchEvent(String customerEmail)
+    {
+        DynamicForm df = formFactory.form().bindFromRequest();
+
+        String name = df.get("query_name");
+        String location = df.get("query_location");
+        String date = df.get("query_date");
+        User customer = User.find.byId(customerEmail);
+        String  eventDate = new String();
+        SimpleDateFormat datef = new SimpleDateFormat("MM/dd/yyyy");
+        try{
+            Date d = datef.parse(date);
+            datef.applyPattern("yyyy-MM-dd HH:mm:ss.ssss");
+            eventDate = datef.format(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        Search search = new DateSearchDecorator(new LocationSearchDecorator(new EventSearchDecorator(new SimpleSearch(), name), location),eventDate) ;
+        String sql = search.generateQuery();
+        RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("event_id","eventId").create();
+        Query<Event> query1 = Ebean.find(Event.class);
+        query1.setRawSql(rawSql);
+        List<Event> list = query1.findList();
+        return ok(showCustomerDashboard.render(customer,list));
+
     }
 
     public Result sendMail(String mail)
