@@ -81,7 +81,7 @@ public class TicketController extends Controller{
         int status = econ.updateEvent(t, event.getEventId());
         //Event temp = Event.find.byId(new Integer(eventId).toString());
         //return forbidden("attendees: "+status);
-        return ok(bookingSuccess.render(t,event));
+        return ok(bookingSuccess.render(t,event,user));
 
         //return TODO;
     }
