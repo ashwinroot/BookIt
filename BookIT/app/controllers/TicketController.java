@@ -78,10 +78,10 @@ public class TicketController extends Controller{
         t.save();
         MailerService m = new MailerService(mailerClient);
         m.bookingConfirmation(t,event);
-        //int status = econ.updateEvent(t, event.getEventId());
+        int status = econ.updateEvent(t, event.getEventId());
         //Event temp = Event.find.byId(new Integer(eventId).toString());
         //return forbidden("attendees: "+status);
-        return ok(bookingSuccess.render(t,event));
+        return ok(bookingSuccess.render(t,event,user));
 
         //return TODO;
     }

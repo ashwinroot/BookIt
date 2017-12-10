@@ -16,7 +16,6 @@ import notifiers.MailerService;
 
 import javax.inject.Inject;
 import java.math.BigInteger;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +63,8 @@ public class CustomerController extends Controller{
         String user = session("connected");
         User customer = User.find.byId(user);
         WishList wishList = new WishList(customer.getUserEmail(),eventId);
+        Event e = Event.find.byId(new Integer(eventId).toString());
+        e.addObserver(customer.getUserEmail());
         List<Event> allEvents= Ebean.find(Event.class).where().findList();
         wishList.save();
         return ok(showCustomerDashboard.render(customer, allEvents));
@@ -75,10 +76,13 @@ public class CustomerController extends Controller{
         List<Ticket> Tickets = Ebean.find(Ticket.class).where().eq("customerMail", customerEmail).findList();
         if (Tickets.size() > 0)
         {
-            return ok(showCustomerBookingHistory.render(Tickets, user));
+            String message = new String();
+            return ok(showCustomerBookingHistory.render(Tickets, user, message));
         }
-        else
-            return forbidden("No history to show");
+        else {
+            String message = new String("No Booking History");
+            return ok(showCustomerBookingHistory.render(Tickets, user, message));
+        }
     }
 
     public Result showCustomerWishList(String customerEmail){
@@ -147,16 +151,9 @@ public class CustomerController extends Controller{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //Search search = new LocationSearchDecorator(new EventSearchDecorator(new SimpleSearch(), name), location) ;
 
         Search search = new DateSearchDecorator(new LocationSearchDecorator(new EventSearchDecorator(new SimpleSearch(), name), location),eventDate) ;
         String sql = search.generateQuery();
-
-
-//        return forbidden(sql);
-
-
-//        String sql1 = "select event_id from event where event_name = \"DJ Nite\" and event_location = \"boulder\"";
         RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("event_id","eventId").create();
         Query<Event> query1 = Ebean.find(Event.class);
         query1.setRawSql(rawSql);

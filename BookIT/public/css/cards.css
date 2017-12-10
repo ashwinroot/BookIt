@@ -251,9 +251,9 @@
 }
 .material-card.mc-active .mc-description {
     top: 50px;
-    padding-top: 5.6em;
+    padding-top: 4.6em;
     opacity: 1;
-    filter: alpha(opacity=100);
+    /*filter: alpha(opacity=100);*/
 }
 @media screen and (max-width: 767px) {
     .material-card.mc-active .mc-description {

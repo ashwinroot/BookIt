@@ -3,6 +3,13 @@
 
 # --- !Ups
 
+create table eobserver (
+  id                            integer auto_increment not null,
+  customer_email                varchar(255),
+  event_id                      integer,
+  constraint pk_eobserver primary key (id)
+);
+
 create table event (
   event_id                      integer auto_increment not null,
   event_name                    varchar(255),
@@ -52,6 +59,8 @@ create table wish_list (
 
 
 # --- !Downs
+
+drop table if exists eobserver;
 
 drop table if exists event;
 

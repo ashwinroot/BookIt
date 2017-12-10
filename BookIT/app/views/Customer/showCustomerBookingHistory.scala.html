@@ -1,4 +1,4 @@
-@(Tickets: List[Ticket], user: User)
+@(Tickets: List[Ticket], user: User, message : String)
 
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@
                 <li><a href='/signOut'>Log Out</a></li>
             </ul>
         </div>
-
+            <div class="h4">@message</div>
         @for(ticket <- Tickets){
              @if(ticket.isStatus()){
                 <ul>

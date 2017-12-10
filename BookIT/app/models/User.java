@@ -8,7 +8,7 @@ import java.math.BigInteger;
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(name="USER_TYPE")
-public class User extends Model{
+public class User extends Model implements EventObserver{
 
 
     private Integer userID;
@@ -78,5 +78,7 @@ public class User extends Model{
     public String getDecriminatorValue() {
         return this.getClass().getAnnotation(DiscriminatorValue.class).value();
     }
+
+
 
 }
