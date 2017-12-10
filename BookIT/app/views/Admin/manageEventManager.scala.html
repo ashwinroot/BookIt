@@ -60,12 +60,7 @@
         @*</div>*@
 
         <div class="container">
-            <h4>Your Events</h4>
-            <ul>
-                <li>
-                    @*<a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>*@
-                </li>
-            </ul>
+            <h4>Event manager</h4>
             <table class="table">
                 <thead>
                     <tr>
@@ -87,7 +82,7 @@
                         <td>@managers.get(index).getUserEmail</td>
                         <td>@managers.get(index).getPhoneNo</td>
                         <td><a href="/admin/@admin.getUserEmail/update/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-warning">Update</button></a> </td>
-                        <td><a href="/admin/@admin.getUserEmail/delete/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-danger">Delete</button> </a></td>
+                        <td><a href="/admin/@admin.getUserEmail/delete/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-danger">Blacklist</button> </a></td>
                     </tr>
                 }
 

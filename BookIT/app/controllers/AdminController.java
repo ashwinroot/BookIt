@@ -103,4 +103,24 @@ public class AdminController extends Controller{
         User admin= User.find.byId(email);
         return ok(updateEventAdmin.render(event,admin));
     }
+
+    public Result deleteEvent(String mail,Integer eventId)
+    {
+        Event event = Event.find.byId(eventId.toString());
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
+        Event.find.byId(eventId.toString()).delete();
+        User admin = User.find.byId(mail);
+        //event.notifyObserver();
+        return redirect(routes.AdminController.showAdminDashboard(mail));
+    }
+
+    public Result deleteEvent_fromManageEvent(String mail,Integer eventId)
+    {
+        Event event = Event.find.byId(eventId.toString());
+        List<Event> allEvents = Ebean.find(Event.class).where().findList();
+        Event.find.byId(eventId.toString()).delete();
+        User admin = User.find.byId(mail);
+        //event.notifyObserver();
+        return redirect(routes.AdminController.getEvents(mail));
+    }
 }

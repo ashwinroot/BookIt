@@ -84,7 +84,8 @@ GET /admin/updateProfile/:email    controllers.AdminController.supdateAdminProfi
 POST /admin/modifyProfile/:email       controllers.AdminController.updateAdminProfile(email : String)
 GET /admin/:email/event             controllers.AdminController.getEvents(email: String)
 GET /admin/:email/updateevent/:id             controllers.AdminController.updateEvent(email: String , id : Integer)
-
+GET /admin/:email/deleteevent/:id      controllers.AdminController.deleteEvent(email: String , id : Integer)
+GET /admin/:email/event/delete/:id     controllers.AdminController.deleteEvent_fromManageEvent(email: String , id : Integer)
 GET /mail/:email                    controllers.UserController.sendMail(email: String)
 
 GET /password/reset                 controllers.HomeController.resetPassword()
