@@ -15,8 +15,20 @@
         <script type="text/javascript">
         function totalCost()
         {
+            checkTicketSize();
             var num = document.getElementById("numtickets").value;
-            document.getElementById("cost").innerHTML= "Total cost is " + num * @event.getPerTicketCost;
+            document.getElementById("cost").innerHTML= "Total cost " + num * @event.getPerTicketCost;
+
+        }
+        function checkTicketSize() {
+
+            var num = document.getElementById("numtickets").value;
+            if (num > @event.getAvailableNoOfSeats) {
+
+                document.getElementById("numtickets").value= 0;
+                alert("Number of tickets greater than the available number of tickets. Available size:"+@event.getAvailableNoOfSeats);
+
+            }
 
         }
         </script>
