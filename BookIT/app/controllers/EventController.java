@@ -2,6 +2,7 @@ package controllers;
 
 
 import io.ebean.Ebean;
+import models.EObserver;
 import models.Event;
 import models.Ticket;
 import models.User;
@@ -78,7 +79,7 @@ public class EventController extends Controller{
 
         Event event = Event.find.byId(eventId.toString());
         //User user = User.find.byId(t.getCustomerMail());
-
+        /*
         String eventAttendees = event.getAttendees();
         int aCount = 0;
         int beforeLength = event.getNumAttendees();
@@ -124,18 +125,15 @@ public class EventController extends Controller{
             }
 
         }
+        */
         event.setAvailableNoOfSeats(event.getAvailableNoOfSeats()-t.getNumSeats());
         event.setTotalSales(event.getTotalSales()+(event.getPerTicketCost() * t.getNumSeats()));
-        event.setNumAttendees(aCount);
-        event.setNumObservers(oCount);
+        //event.setNumAttendees(aCount);
+        //event.setNumObservers(oCount);
+        event.addObserver(t.customerMail);
         event.update();
-        int temp = event.getNumAttendees();
-        //int afterLength = temp.size();
-
-        //if (beforeLength == afterLength)
-        //    return false;
-        //return ok(updateEvent.render(event));
-        return temp;
+        //int temp = event.getNumAttendees();
+        return 0;
     }
 
     public Integer cancelEventTicket(Ticket t, Event event){
@@ -143,8 +141,10 @@ public class EventController extends Controller{
         String userMail = session("connected");
         User user = User.find.byId(userMail);
 
+        //if ()
         //ArrayList<User> eventObservers = event.getObservers();
         //eventObservers.add(user);
+        /*
         String eventAttendees = event.getAttendees();
         int beforeLength;
         if (eventAttendees.equals(""))
@@ -193,13 +193,14 @@ public class EventController extends Controller{
             event.setObservers(newObservers);
             event.setNumObservers(count);
         }
+        */
         event.setAvailableNoOfSeats(event.getAvailableNoOfSeats()+ t.getNumSeats());
         event.setTotalSales(event.getTotalSales()-(event.getPerTicketCost() * t.getNumSeats()));
         event.update();
-
-        int temp = event.getNumAttendees();
-        if (beforeLength == temp)
-            return 3;
+        event.removeObserver(user.getUserEmail());
+        //int temp = event.getNumAttendees();
+        //if (beforeLength == temp)
+        //    return 3;
         //return ok(updateEvent.render(event));
         return 0;
     }
@@ -212,11 +213,11 @@ public class EventController extends Controller{
 
         String user = session("connected");
         User eventManager = User.find.byId(user);
-
+        //event.notifyObserver();
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 
-    public Result modifyEvent(Integer eventId) {
+    public Result modifyEvent(Integer eventId) throws Exception{
         DynamicForm df = formFactory.form().bindFromRequest();
 
         String user = session("connected");
@@ -238,8 +239,11 @@ public class EventController extends Controller{
         event.setPerTicketCost(Float.parseFloat(df.get("cost")));
         event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
         event.update();
+        event.notifyObserver();
+
         MailerService m = new MailerService(mailerClient);
-        m.eventUpdateNotification(event,eventManager);
+        m.eventUpdateNotification(event.getEventId(),eventManager.getUserEmail());
+        /*
         String eventObservers = event.getObservers();
         String[] temp = eventObservers.split(" ");
         HashMap<String,Integer> mailList = new HashMap<String,Integer>();
@@ -265,6 +269,10 @@ public class EventController extends Controller{
             }
 
         }
+        */
+        //return ok();
+        //Date date = datef.parse(df.get("date"));
+        //return forbidden(df.get("eventname")+" "+df.get("eventlocation")+" "+df.get("cost")+" "+df.get("seats")+" "+date);
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 

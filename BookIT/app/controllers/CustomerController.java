@@ -63,6 +63,8 @@ public class CustomerController extends Controller{
         String user = session("connected");
         User customer = User.find.byId(user);
         WishList wishList = new WishList(customer.getUserEmail(),eventId);
+        Event e = Event.find.byId(new Integer(eventId).toString());
+        e.addObserver(customer.getUserEmail());
         List<Event> allEvents= Ebean.find(Event.class).where().findList();
         wishList.save();
         return ok(showCustomerDashboard.render(customer, allEvents));

@@ -92,10 +92,10 @@
                             <i class="fa fa-bars"></i>
                         </a>
                         <div class="mc-footer">
-                            <button class="btn btn-outline-primary" href="/events/update/@ownedEvents.get(index).getEventId">Modify</button>
-                            <button class="btn btn-outline-danger">Delete</button>
-                            @*<button class="btn btn-outline-primary">Book</button>*@
-                            @*<button class="btn btn-outline-primary">Add to WishList</button>*@
+                            <form method="get" action="/event/update/@ownedEvents.get(index).getEventId">
+                                <button class="btn btn-outline-info">Modify</button>
+                                <button class="btn btn-outline-info" formaction="/event/delete/@ownedEvents.get(index).getEventId">Delete</button>
+                            </form>
                         </div>
                     </article>
                 </div>

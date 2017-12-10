@@ -1,17 +1,22 @@
 package models;
 
+import io.ebean.Ebean;
 import io.ebean.Finder;
 import io.ebean.Model;
+import notifiers.MailerService;
+import play.libs.mailer.MailerClient;
 
+import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.io.FileWriter;
+import java.util.*;
 
 @Entity
-public class Event extends Model{
+public class Event extends Model implements EventObservable{
+
+    //@Inject
+    //MailerClient mailerClient;
 
     @Id
     private Integer eventId;
@@ -155,30 +160,48 @@ public class Event extends Model{
         //setNumObservers();
     }
 
-    Boolean attachObserver(String _cust)
+    public void addObserver(String userMail)
     {
-       // this.observers.add(_cust);
-        return true;
+
+        List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID",this.eventId).findList();
+        if(!userList.contains(userMail))
+        {
+            EObserver e = new EObserver(userMail,eventId);
+            e.save();
+        }
+
     }
 
-    Boolean detachObserver(Customer _cust)
+    public void removeObserver(String user)
     {
-        /*
-        Iterator iter = observers.iterator();
-        while(iter.hasNext())
+        List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID",this.eventId).findList();
+        Iterator it = userList.iterator();
+        while(it.hasNext())
         {
-            if(iter.next() == _cust)
+            EObserver temp = (EObserver)it.next();
+            if(temp.getCustomerEmail().equals(user))
             {
-                observers.remove(_cust);
-                return true;
+                int id = temp.getID();
+                EObserver eobs = EObserver.find.byId(new Integer(id).toString());
+                eobs.delete();
             }
         }
-        */
-        return false;
     }
 
-    Boolean notifyObserver()
-    {
-        return true;
+    public void notifyObserver() {
+
+        //MailerService m = new MailerService(mailerClient);
+        List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID", this.eventId).findList();
+        Iterator it = userList.iterator();
+
+        while (it.hasNext()) {
+            EObserver temp = (EObserver) it.next();
+            User user = User.find.byId(temp.getCustomerEmail());
+
+            //m.eventUpdateNotification(this.getEventId(), user.getUserEmail());
+            //int t = m.sendEmail();
+            user.update();
+        }
+
     }
 }

@@ -6,8 +6,11 @@ import models.User;
 import play.libs.mailer.Email;
 import play.libs.mailer.MailerClient;
 import javax.inject.Inject;
+//import javax.xml.transform.Result;
+import play.mvc.Result;
 import java.io.File;
 import org.apache.commons.mail.EmailAttachment;
+import play.mvc.Controller;
 
 public class MailerService {
     MailerClient mailerClient;
@@ -23,7 +26,7 @@ public class MailerService {
             Email email = new Email();
             email.setSubject("Simple email");
             email.setFrom("bookit5448@gmail.com");
-            email.addTo("ilsu0801@colorado.edu");
+            email.addTo("hara3180@colorado.edu");
             email.setBodyText("A text message");
             //email.setBodyHtml("<html><body><p>An <b>html</b> message with cid <img src=\"cid:" + cid + "\"></p></body></html>");
             if (email==null)
@@ -69,20 +72,24 @@ public class MailerService {
         mailerClient.send(email);
     }
 
-    public void eventUpdateNotification(Event event, User user)
+    public void eventUpdateNotification(Integer eventId, String userMail)
     {
         Email email = new Email();
+        Event event = Event.find.byId(new Integer(eventId).toString());
+        User user = User.find.byId(userMail);
         email.setSubject("Event update notification");
         email.setFrom("bookit5448@gmail.com");
-        email.addTo(user.getUserEmail());
+        //email.addTo(user.getUserEmail());
+        email.addTo("hara3180@colorado.edu");
         email.setBodyText("Event details has been changed.");
-        email.setBodyHtml("<html><body> <h2>Event Details</h2>" +
-                "        <ul>" +
-                "            <li><strong>Event: </strong>"+ event.getEventName() +"</li>" +
-                "            <li><strong>Event Location: </strong>"+ event.getEventLocation() +"</li>" +
-                "            <li><strong>Event Date: </strong>"+ event.getEventDate() +"</li>" +
-                "        </ul>" +
-                "        <ul></body></html>");
+        //email.setBodyHtml("<html><body> <h2>Event Details</h2>" +
+        //        "        <ul>" +
+        //        "            <li><strong>Event: </strong>"+ event.getEventName() +"</li>" +
+        //        "            <li><strong>Event Location: </strong>"+ event.getEventLocation() +"</li>" +
+        //        "            <li><strong>Event Date: </strong>"+ event.getEventDate() +"</li>" +
+        //        "        </ul>" +
+        //        "        <ul></body></html>");
+        //return forbidden("mail: "+user.getUserEmail()+" "+event.getEventName());
         mailerClient.send(email);
     }
 
