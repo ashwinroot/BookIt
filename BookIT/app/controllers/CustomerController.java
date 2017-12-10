@@ -43,7 +43,7 @@ public class CustomerController extends Controller{
         Customer customer = new Customer(df.get("customerFirstName"), df.get("customerLastName"), df.get("customerEmail"), df.get("customerPassword"), BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         customer.save();
         MailerService m = new MailerService(mailerClient);
-        m.verifyUser((User)customer);
+        m.verifyUser(customer);
         return redirect(routes.CustomerController.showCustomerDashBoard(customer.getUserEmail()));
 
     }

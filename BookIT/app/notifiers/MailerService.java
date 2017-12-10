@@ -25,7 +25,7 @@ public class MailerService {
         //{
             Email email = new Email();
             email.setSubject("Simple email");
-            email.setFrom("bookit5448@gmail.com");
+            email.setFrom("bookitcsci5448@gmail.com");
             email.addTo("hara3180@colorado.edu");
             email.setBodyText("A text message");
             //email.setBodyHtml("<html><body><p>An <b>html</b> message with cid <img src=\"cid:" + cid + "\"></p></body></html>");
@@ -46,7 +46,7 @@ public class MailerService {
         Email email = new Email();
         User user = User.find.byId(mailId);
         email.setSubject("Password reset mail");
-        email.setFrom("bookit5448@gmail.com");
+        email.setFrom("bookitcsci5448@gmail.com");
         email.addTo(user.getUserEmail());
         email.setBodyText("Your password is: "+user.getUserPassword());
         mailerClient.send(email);
@@ -56,7 +56,7 @@ public class MailerService {
     {
         Email email = new Email();
         email.setSubject("Account verification");
-        email.setFrom("bookit5448@gmail.com");
+        email.setFrom("bookitcsci5448@gmail.com");
         email.addTo(user.getUserEmail());
         email.setBodyText("Your mail-id has been used to create an account in BookIt. If this action is not performed by you. Please contact BookIt.");
         mailerClient.send(email);
@@ -66,7 +66,7 @@ public class MailerService {
     {
         Email email = new Email();
         email.setSubject("Booking confirmation mail");
-        email.setFrom("bookit5448@gmail.com");
+        email.setFrom("bookitcsci5448@gmail.com");
         email.addTo(t.getCustomerMail());
         email.setBodyText("Your booking for the event" +" "+event.getEventName()+" is confirmed. Ticket id: "+t.getTicketId());
         mailerClient.send(email);
@@ -78,7 +78,7 @@ public class MailerService {
         Event event = Event.find.byId(new Integer(eventId).toString());
         User user = User.find.byId(userMail);
         email.setSubject("Event update notification");
-        email.setFrom("bookit5448@gmail.com");
+        email.setFrom("bookitcsci5448@gmail.com");
         //email.addTo(user.getUserEmail());
         email.addTo("hara3180@colorado.edu");
         email.setBodyText("Event details has been changed.");
@@ -97,7 +97,7 @@ public class MailerService {
     {
         Email email = new Email();
         email.setSubject("Ticket cancellation confirmation");
-        email.setFrom("bookit5448@gmail.com");
+        email.setFrom("bookitcsci5448@gmail.com");
         email.addTo(user.getUserEmail());
         email.setBodyText("Your event ticket has been cancelled");
         email.setBodyHtml("<html><body> <h2>Ticket Details</h2>" +

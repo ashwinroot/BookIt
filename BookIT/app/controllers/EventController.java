@@ -17,7 +17,7 @@ import views.html.Customer.showCustomerDashboard;
 import views.html.Event.createEvent;
 import views.html.Event.showEventDetails;
 import views.html.Event.showSearchEvents;
-import views.html.Event.updateEvent;
+import views.html.EventManager.updateEvent;
 
 
 import javax.inject.Inject;
@@ -59,6 +59,8 @@ public class EventController extends Controller{
     }
 
     public Result showEvent(Integer eventId){
+        String user = session("connected");
+        User eventManager = User.find.byId(user);
         Event event = Event.find.byId(eventId.toString());
         return ok(showEventDetails.render(event));
     }
@@ -71,8 +73,10 @@ public class EventController extends Controller{
 
 
     public Result updateEvent(Integer eventId){
+        String user = session("connected");
+        User eventManager = User.find.byId(user);
         Event event = Event.find.byId(eventId.toString());
-        return ok(updateEvent.render(event));
+        return ok(updateEvent.render(event,eventManager));
     }
 
     public int updateEvent(Ticket t, Integer eventId){
@@ -130,7 +134,7 @@ public class EventController extends Controller{
         event.setTotalSales(event.getTotalSales()+(event.getPerTicketCost() * t.getNumSeats()));
         //event.setNumAttendees(aCount);
         //event.setNumObservers(oCount);
-        event.addObserver(t.customerMail);
+        event.addObserver(t.getCustomerMail());
         event.update();
         //int temp = event.getNumAttendees();
         return 0;
