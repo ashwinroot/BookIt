@@ -68,10 +68,13 @@ public class CustomerController extends Controller{
         List<Ticket> Tickets = Ebean.find(Ticket.class).where().eq("customerMail", customerEmail).findList();
         if (Tickets.size() > 0)
         {
-            return ok(showCustomerBookingHistory.render(Tickets, user));
+            String message = new String();
+            return ok(showCustomerBookingHistory.render(Tickets, user, message));
         }
-        else
-            return forbidden("No history to show");
+        else {
+            String message = new String("No Booking History");
+            return ok(showCustomerBookingHistory.render(Tickets, user, message));
+        }
     }
 
     public Result showCustomerWishList(String customerEmail){
