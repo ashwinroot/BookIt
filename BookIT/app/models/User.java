@@ -1,8 +1,11 @@
 package models;
 
+import controllers.CustomerController;
+import controllers.UserController;
 import io.ebean.*;
 
 import javax.persistence.*;
+import java.io.FileWriter;
 import java.math.BigInteger;
 
 @Entity
@@ -77,6 +80,44 @@ public class User extends Model implements EventObserver{
     @Transient
     public String getDecriminatorValue() {
         return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+    }
+
+    public void mailUser(){
+
+        UserController ccon = new UserController();
+        try{
+
+            FileWriter fw=new FileWriter("user_mailuser.txt");
+            fw.write("Welcome to javaTpoint. "+this.getUserEmail()+" "+this.getUserFirstName()  );
+            fw.flush();
+            fw.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        ccon.sendMail(this.getUserEmail());
+
+    }
+
+    public void updateUser(){
+
+        //CustomerController ccon = new CustomerController();
+
+        try{
+
+            FileWriter fw=new FileWriter("user_updateuser.txt");
+            fw.write("Welcome to javaTpoint. "+this.getUserEmail()+" "+this.getUserFirstName()  );
+            fw.flush();
+            fw.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        mailUser();
+
     }
 
 

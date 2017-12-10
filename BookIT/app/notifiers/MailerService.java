@@ -9,6 +9,8 @@ import javax.inject.Inject;
 //import javax.xml.transform.Result;
 import play.mvc.Result;
 import java.io.File;
+import java.io.FileWriter;
+
 import org.apache.commons.mail.EmailAttachment;
 import play.mvc.Controller;
 
@@ -19,7 +21,9 @@ public class MailerService {
         this.mailerClient = mailerClient;
     }
 
-    public int sendEmail() {
+    public int sendEmail(MailerClient mclient){
+
+        this.mailerClient = mclient;
         String cid = "1234";
         //try
         //{
@@ -27,11 +31,37 @@ public class MailerService {
             email.setSubject("Simple email");
             email.setFrom("bookitcsci5448@gmail.com");
             email.addTo("hara3180@colorado.edu");
-            email.setBodyText("A text message");
+            email.setBodyText("A text message -- sample mail body");
             //email.setBodyHtml("<html><body><p>An <b>html</b> message with cid <img src=\"cid:" + cid + "\"></p></body></html>");
-            if (email==null)
-                return 0;
-            mailerClient.send(email);
+            //if (email==null)
+             //   return 0;
+
+        try{
+
+            FileWriter fw=new FileWriter("testout.txt");
+            fw.write("Welcome to javaTpoint. "+email.getBodyText()+" body");
+            fw.flush();
+            fw.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        if (mailerClient==null)
+        {
+            try{
+
+                FileWriter fw=new FileWriter("mailclientnull.txt");
+                fw.write("Welcome to javaTpoint. "+email.getBodyText()+" body");
+                fw.flush();
+                fw.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        mailerClient.send(email);
             return 1;
         //}
         //catch (Exception e)

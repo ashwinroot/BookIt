@@ -7,7 +7,7 @@ import io.ebean.RawSqlBuilder;
 import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
-import play.libs.mailer.MailerClient;
+import play.api.libs.mailer.MailerClient;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Customer.*;
@@ -151,7 +151,7 @@ public class CustomerController extends Controller{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
         Search search = new DateSearchDecorator(new LocationSearchDecorator(new EventSearchDecorator(new SimpleSearch(), name), location),eventDate) ;
         String sql = search.generateQuery();
         RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("event_id","eventId").create();
@@ -165,7 +165,7 @@ public class CustomerController extends Controller{
     public Result sendMail(String mail)
     {
         MailerService m = new MailerService(mailerClient);
-        int status = m.sendEmail();
+        int status = m.sendEmail(mailerClient);
 
         return forbidden("Mailer service status:"+status);
     }
