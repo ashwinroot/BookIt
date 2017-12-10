@@ -2,5 +2,5 @@ package models;
 
 public interface EventObserver {
 
-    public void update();
+    public void updateUser();
 }

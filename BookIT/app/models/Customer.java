@@ -7,6 +7,7 @@ import controllers.CustomerController;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.FileWriter;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -30,10 +31,23 @@ public class Customer extends User implements EventObserver{
         return this.bookedEvents;
     }
 
-    public void update()
+    /*
+    public void updateUser()
     {
         CustomerController ccon = new CustomerController();
+        try{
+
+            FileWriter fw=new FileWriter("customer_updateuser.txt");
+            fw.write("Welcome to javaTpoint. "+this.getUserEmail()+" "+this.getUserFirstName()  );
+            fw.flush();
+            fw.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         ccon.sendMail(this.getUserEmail());
     }
+    */
 
 }

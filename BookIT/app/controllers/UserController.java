@@ -3,13 +3,16 @@ package controllers;
 import models.EventManager;
 import models.User;
 import models.Customer;
+import notifiers.MailerService;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
+import play.libs.mailer.MailerClient;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.io.FileWriter;
 import java.util.List;
 
 import views.html.User.*;
@@ -20,6 +23,9 @@ public class UserController extends Controller {
 
     @Inject
     FormFactory formFactory;
+    @Inject
+    MailerClient mailerClient;
+
 
 
 
@@ -82,6 +88,24 @@ public class UserController extends Controller {
         return TODO;
     }
 
+    public Result sendMail(String mail)
+    {
+        MailerService m = new MailerService(mailerClient);
+        try{
+
+            FileWriter fw=new FileWriter("usercon_sendmail.txt");
+            fw.write("Welcome to bookit. "+mail);
+            fw.flush();
+            fw.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        int status = m.sendEmail(mailerClient);
+
+        return forbidden("Mailer service status:"+status);
+    }
 
 
 }
