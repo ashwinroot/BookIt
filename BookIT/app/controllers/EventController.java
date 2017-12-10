@@ -130,7 +130,7 @@ public class EventController extends Controller{
         event.setTotalSales(event.getTotalSales()+(event.getPerTicketCost() * t.getNumSeats()));
         //event.setNumAttendees(aCount);
         //event.setNumObservers(oCount);
-        event.addObserver(t.customerMail);
+        event.addObserver(t.getCustomerMail());
         event.update();
         //int temp = event.getNumAttendees();
         return 0;

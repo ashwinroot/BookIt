@@ -15,8 +15,8 @@ import java.util.*;
 @Entity
 public class Event extends Model implements EventObservable{
 
-    //@Inject
-    //MailerClient mailerClient;
+    @Inject
+    MailerClient mailerClient;
 
     @Id
     public Integer eventId;
@@ -163,6 +163,7 @@ public class Event extends Model implements EventObservable{
         //setNumObservers();
     }
 
+    @Override
     public void addObserver(String userMail)
     {
 
@@ -175,6 +176,7 @@ public class Event extends Model implements EventObservable{
 
     }
 
+    @Override
     public void removeObserver(String user)
     {
         List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID",this.eventId).findList();
@@ -191,9 +193,10 @@ public class Event extends Model implements EventObservable{
         }
     }
 
+    @Override
     public void notifyObserver() {
 
-        //MailerService m = new MailerService(mailerClient);
+        MailerService m = new MailerService(mailerClient);
         List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID", this.eventId).findList();
         Iterator it = userList.iterator();
 
@@ -201,9 +204,21 @@ public class Event extends Model implements EventObservable{
             EObserver temp = (EObserver) it.next();
             User user = User.find.byId(temp.getCustomerEmail());
 
-            //m.eventUpdateNotification(this.getEventId(), user.getUserEmail());
-            //int t = m.sendEmail();
-            user.update();
+            m.eventUpdateNotification(this.getEventId(), user.getUserEmail());
+            int t = m.sendEmail(mailerClient);
+            try{
+
+                FileWriter fw=new FileWriter("event_notifyobserver.txt");
+                fw.write("Welcome to javaTpoint. "+user.getUserEmail()+" mailId");
+                fw.flush();
+                fw.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            user.updateUser();
         }
 
     }
