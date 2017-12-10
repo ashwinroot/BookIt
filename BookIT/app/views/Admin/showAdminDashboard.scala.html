@@ -58,8 +58,6 @@
             @*</div>*@
 
         @*</div>*@
-
-        <div class="container">
             <h4>All Events</h4>
 
             <div class="row active-with-click">
@@ -78,16 +76,18 @@
                                 <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
                             </div>
                             <div class="mc-description">
-                                <p>Date of the Event<strong>@ownedEvents.get(index).getEventDate</strong></p>
+                                <p>Date of the Event: <strong>@ownedEvents.get(index).getEventDate</strong></p>
+                                <p>Owner of the Event: <strong> @ownedEvents.get(index).getEventOwnerEmail</strong></p>
                                 <p>Number of Available Seats: <strong> @ownedEvents.get(index).getAvailableNoOfSeats</strong></p>
-                                <p> Cost per Ticket :<strong>$ @ownedEvents.get(index).getPerTicketCost</strong></p>
+                                <p> Cost per Ticket: <strong>$ @ownedEvents.get(index).getPerTicketCost</strong></p>
+                                <p> Sales: <h4> @ownedEvents.get(index).getTotalSales</h4></p>
                             </div>
                         </div>
                         <a class="mc-btn-action">
                             <i class="fa fa-bars"></i>
                         </a>
                         <div class="mc-footer">
-                            <button class="btn btn-outline-primary" href="/events/update/@ownedEvents.get(index).getEventId">Modify</button>
+                            <a href="/admin/@admin.getUserEmail/updateevent/@ownedEvents.get(index).getEventId"> <button class="btn btn-outline-primary" >Modify</button></a>
                             <button class="btn btn-outline-danger">Delete</button>
                             @*<button class="btn btn-outline-primary">Book</button>*@
                             @*<button class="btn btn-outline-primary">Add to WishList</button>*@
@@ -96,8 +96,6 @@
                 </div>
             }
             </div>
-
-        </div>
     </body>
 
 

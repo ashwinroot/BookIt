@@ -14,8 +14,8 @@ import views.html.Admin.showAdminProfile;
 import views.html.Admin.showAdminDashboard;
 import views.html.Admin.manageEventManager;
 import views.html.Admin.updateAdminProfile;
+import views.html.Admin.updateEventAdmin;
 import views.html.Customer.showCustomerDashboard;
-import views.html.Event.updateEvent;
 import views.html.EventManager.updateEventManagerProfile;
 import views.html.User.index;
 import views.html.Admin.manageEvent;
@@ -100,6 +100,7 @@ public class AdminController extends Controller{
 
     public Result updateEvent(String email,Integer eventId){
         Event event = Event.find.byId(eventId.toString());
-        return ok(updateEvent.render(event));
+        User admin= User.find.byId(email);
+        return ok(updateEventAdmin.render(event,admin));
     }
 }
