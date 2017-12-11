@@ -30,7 +30,7 @@ public class MailerService {
             Email email = new Email();
             email.setSubject("Simple email");
             email.setFrom("bookitcsci5448@gmail.com");
-            email.addTo("hara3180@colorado.edu");
+            email.addTo("ashwinoscar@gmail.com");
             email.setBodyText("A text message -- sample mail body");
             //email.setBodyHtml("<html><body><p>An <b>html</b> message with cid <img src=\"cid:" + cid + "\"></p></body></html>");
             //if (email==null)
@@ -110,7 +110,7 @@ public class MailerService {
         email.setSubject("Event update notification");
         email.setFrom("bookitcsci5448@gmail.com");
         //email.addTo(user.getUserEmail());
-        email.addTo("hara3180@colorado.edu");
+        email.addTo("assa41530@colorado.edu");
         email.setBodyText("Event details has been changed.");
         //email.setBodyHtml("<html><body> <h2>Event Details</h2>" +
         //        "        <ul>" +

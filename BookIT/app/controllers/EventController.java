@@ -243,7 +243,7 @@ public class EventController extends Controller{
         event.setPerTicketCost(Float.parseFloat(df.get("cost")));
         event.setAvailableNoOfSeats(Integer.parseInt(df.get("seats")));
         event.update();
-        event.notifyObserver();
+        event.notifyObserver(mailerClient);
 
         MailerService m = new MailerService(mailerClient);
         m.eventUpdateNotification(event.getEventId(),eventManager.getUserEmail());

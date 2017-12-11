@@ -92,15 +92,7 @@ public class CustomerController extends Controller{
 
         Event e = Event.find.byId(new Integer(eventId).toString());
         e.removeObserver(customer.getUserEmail());
-        List<Event> allEvents= Ebean.find(Event.class).where().findList();
-
-        List<EventManager> allEventManager = new ArrayList<>();
-        for(Event es: allEvents)
-        {
-            EventManager em = EventManager.find.byId(es.getEventOwnerEmail());
-            allEventManager.add(em);
-        }
-        return ok(showCustomerDashboard.render(customer, allEvents,allEventManager));
+        return redirect(routes.CustomerController.showCustomerWishList(user));
     }
 
     public Result showCustomerBookingHistory(String customerEmail)
