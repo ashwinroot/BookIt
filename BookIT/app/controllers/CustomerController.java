@@ -109,7 +109,7 @@ public class CustomerController extends Controller{
             while(iter.hasNext())
             {
                Ticket t = iter.next();
-               Event e = Event.find.byId(Integer.toString(t.getTicketId()));
+               Event e = Event.find.byId(Integer.toString(t.getEventId()));
                listOfEvents.add(e);
             }
 
