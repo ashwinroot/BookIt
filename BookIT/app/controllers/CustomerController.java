@@ -191,6 +191,7 @@ public class CustomerController extends Controller{
 
     }
 
+    /*
     public Result sendMail(String mail)
     {
         MailerService m = new MailerService(mailerClient);
@@ -198,4 +199,5 @@ public class CustomerController extends Controller{
 
         return forbidden("Mailer service status:"+status);
     }
+    */
 }

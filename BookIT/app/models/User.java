@@ -82,6 +82,7 @@ public class User extends Model implements EventObserver{
         return this.getClass().getAnnotation(DiscriminatorValue.class).value();
     }
 
+    /*
     public void mailUser(){
 
         UserController ccon = new UserController();
@@ -99,24 +100,14 @@ public class User extends Model implements EventObserver{
         ccon.sendMail(this.getUserEmail());
 
     }
+    */
 
     public void updateUser(){
 
         //CustomerController ccon = new CustomerController();
 
-        try{
 
-            FileWriter fw=new FileWriter("user_updateuser.txt");
-            fw.write("Welcome to javaTpoint. "+this.getUserEmail()+" "+this.getUserFirstName()  );
-            fw.flush();
-            fw.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        mailUser();
+        //mailUser();
 
     }
 

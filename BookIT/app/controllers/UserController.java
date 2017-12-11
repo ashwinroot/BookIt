@@ -88,6 +88,7 @@ public class UserController extends Controller {
         return TODO;
     }
 
+    /*
     public Result sendMail(String mail)
     {
         MailerService m = new MailerService(mailerClient);
@@ -106,6 +107,7 @@ public class UserController extends Controller {
 
         return forbidden("Mailer service status:"+status);
     }
+    */
 
 
 }

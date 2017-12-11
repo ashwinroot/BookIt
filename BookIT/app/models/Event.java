@@ -200,19 +200,7 @@ public class Event extends Model implements EventObservable{
         while (it.hasNext()) {
             EObserver temp = (EObserver) it.next();
             User user = User.find.byId(temp.getCustomerEmail());
-            int t = m.sendEmail(mailerClient);
-            try{
-                FileWriter fw=new FileWriter("event_notifyobserver.txt");
-                fw.write("Welcome to javaTpoint. "+user.getUserEmail()+" mailId");
-                fw.flush();
-                fw.close();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-
-//            user.updateUser();
+            m.eventUpdateNotification(this.getEventId(),user.getUserEmail());
         }
 
     }

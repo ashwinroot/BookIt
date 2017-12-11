@@ -82,130 +82,21 @@ public class EventController extends Controller{
     public int updateEvent(Ticket t, Integer eventId){
 
         Event event = Event.find.byId(eventId.toString());
-        //User user = User.find.byId(t.getCustomerMail());
-        /*
-        String eventAttendees = event.getAttendees();
-        int aCount = 0;
-        int beforeLength = event.getNumAttendees();
-        if (eventAttendees.equals(""))
-        {
-            //String temp = new ArrayList<String>();
-            //temp.add(t.getCustomerMail());
-            event.setAttendees(t.getCustomerMail());
-            aCount = 1;
-        }
-        else
-        {
-            aCount = event.getNumAttendees();
-            String[] temp = eventAttendees.split(" ");
-            List<Ticket> tList = Ebean.find(Ticket.class).where().eq("customerMail", t.getCustomerMail()).findList();
-            if(tList.size() < 2)
-            {
-                //eventAttendees.add(t.getCustomerMail());
-                event.setAttendees(eventAttendees+" "+t.getCustomerMail());
-                aCount+=1;
-
-            }
-        }
-
-        int oCount = 0;
-        String eventObservers = event.getObservers();
-        if (eventObservers.equals(""))
-        {
-            event.setObservers(t.getCustomerMail());
-            oCount = 1;
-        }
-        else
-        {
-            oCount = event.getNumObservers();
-            String[] temp = eventObservers.split(" ");
-            List<Ticket> tList = Ebean.find(Ticket.class).where().eq("customerMail", t.getCustomerMail()).findList();
-            if(tList.size() < 2)
-            {
-                //eventAttendees.add(t.getCustomerMail());
-                event.setObservers(eventObservers+" "+t.getCustomerMail());
-                oCount+=1;
-
-            }
-
-        }
-        */
         event.setAvailableNoOfSeats(event.getAvailableNoOfSeats()-t.getNumSeats());
         event.setTotalSales(event.getTotalSales()+(event.getPerTicketCost() * t.getNumSeats()));
-        //event.setNumAttendees(aCount);
-        //event.setNumObservers(oCount);
         event.addObserver(t.getCustomerMail());
         event.update();
-        //int temp = event.getNumAttendees();
         return 0;
     }
 
     public Integer cancelEventTicket(Ticket t, Event event){
-        //Event event = Event.find.byId(eventId.toString());
+
         String userMail = session("connected");
         User user = User.find.byId(userMail);
-
-        //if ()
-        //ArrayList<User> eventObservers = event.getObservers();
-        //eventObservers.add(user);
-        /*
-        String eventAttendees = event.getAttendees();
-        int beforeLength;
-        if (eventAttendees.equals(""))
-        {
-            return 1;
-        }
-        else
-        {
-            beforeLength = event.getNumAttendees();
-            String[] temp = eventAttendees.split(" ");
-            String newAttendees = "";
-            int count=0;
-            for(int i=0;i<temp.length;i++)
-            {
-                if (!temp[i].equals(user.getUserEmail()))
-                {
-                    newAttendees = newAttendees+" "+temp[i];
-                    count = count+1;
-                }
-
-
-            }
-            event.setAttendees(newAttendees);
-            event.setNumAttendees(count);
-        }
-
-        String eventObservers = event.getObservers();
-        if (eventObservers.equals(""))
-        {
-            return 2;
-        }
-        else
-        {
-            String[] temp = eventObservers.split(" ");
-            String newObservers = "";
-            int count=0;
-            for(int i=0;i<temp.length;i++)
-            {
-                if (!temp[i].equals(user.getUserEmail()))
-                {
-                    newObservers = newObservers+" "+temp[i];
-                    count = count+1;
-                }
-
-            }
-            event.setObservers(newObservers);
-            event.setNumObservers(count);
-        }
-        */
         event.setAvailableNoOfSeats(event.getAvailableNoOfSeats()+ t.getNumSeats());
         event.setTotalSales(event.getTotalSales()-(event.getPerTicketCost() * t.getNumSeats()));
         event.update();
         event.removeObserver(user.getUserEmail());
-        //int temp = event.getNumAttendees();
-        //if (beforeLength == temp)
-        //    return 3;
-        //return ok(updateEvent.render(event));
         return 0;
     }
 
@@ -247,36 +138,6 @@ public class EventController extends Controller{
 
         MailerService m = new MailerService(mailerClient);
         m.eventUpdateNotification(event.getEventId(),eventManager.getUserEmail());
-        /*
-        String eventObservers = event.getObservers();
-        String[] temp = eventObservers.split(" ");
-        HashMap<String,Integer> mailList = new HashMap<String,Integer>();
-        for(int i=0;i<temp.length;i++)
-        {
-            if (!mailList.containsKey(temp[i]))
-            {
-                User u = User.find.byId(temp[i]);
-                m.eventUpdateNotification(event,u);
-                mailList.put(temp[i],i);
-            }
-        }
-
-        String eventAttendees = event.getAttendees();
-        temp = eventAttendees.split(" ");
-        for(int i=0;i<temp.length;i++)
-        {
-            if (!mailList.containsKey(temp[i]))
-            {
-                User u = User.find.byId(temp[i]);
-                m.eventUpdateNotification(event,u);
-                mailList.put(temp[i],i);
-            }
-
-        }
-        */
-        //return ok();
-        //Date date = datef.parse(df.get("date"));
-        //return forbidden(df.get("eventname")+" "+df.get("eventlocation")+" "+df.get("cost")+" "+df.get("seats")+" "+date);
         return redirect(routes.EventManagerController.showEventManagerDashBoard(eventManager.getUserEmail()));
     }
 

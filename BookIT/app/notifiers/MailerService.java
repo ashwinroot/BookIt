@@ -110,15 +110,15 @@ public class MailerService {
         email.setSubject("Event update notification");
         email.setFrom("bookitcsci5448@gmail.com");
         //email.addTo(user.getUserEmail());
-        email.addTo("assa41530@colorado.edu");
+        email.addTo(user.getUserEmail());
         email.setBodyText("Event details has been changed.");
-        //email.setBodyHtml("<html><body> <h2>Event Details</h2>" +
-        //        "        <ul>" +
-        //        "            <li><strong>Event: </strong>"+ event.getEventName() +"</li>" +
-        //        "            <li><strong>Event Location: </strong>"+ event.getEventLocation() +"</li>" +
-        //        "            <li><strong>Event Date: </strong>"+ event.getEventDate() +"</li>" +
-        //        "        </ul>" +
-        //        "        <ul></body></html>");
+        email.setBodyHtml("<html><body> <h2>Event Details</h2>" +
+                "        <ul>" +
+                "            <li><strong>Event: </strong>"+ event.getEventName() +"</li>" +
+                "            <li><strong>Event Location: </strong>"+ event.getEventLocation() +"</li>" +
+                "            <li><strong>Event Date: </strong>"+ event.getEventDate() +"</li>" +
+                "        </ul>" +
+                "        <ul></body></html>");
         //return forbidden("mail: "+user.getUserEmail()+" "+event.getEventName());
         mailerClient.send(email);
     }

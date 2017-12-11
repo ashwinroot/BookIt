@@ -30,7 +30,8 @@
                 <li><strong>Location:</strong> @event.getEventLocation</li>
                 <li><strong>Date:</strong> @event.getEventDate</li>
                 <li><Strong>Total number of seats:</Strong> @ticket.getNumSeats</li>
-                <li id="cost"><Strong>Total cost:</Strong></li>@ticket.getNumSeats<br/>
+                <li id="cost"><Strong>Total cost:</Strong> @{ticket.getNumSeats*event.getPerTicketCost}</li>
+                <br>
             </ul>
     </body>
 </html>
