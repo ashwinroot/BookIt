@@ -51,7 +51,7 @@ public class AdminController extends Controller{
     public Result showManageEM(String email)
     {
         User admin = Admin.find.byId(email);
-        List <User> em = Ebean.find(User.class).where().eq("user_type","E").findList();
+        List <EventManager> em = Ebean.find(EventManager.class).where().eq("user_type","E").findList();
         return ok(manageEventManager.render(admin,em));
     }
 
@@ -65,7 +65,7 @@ public class AdminController extends Controller{
     {
         User admin = Admin.find.byId(adminE);
         User.find.ref(emE).delete();
-        List <User> em_list = Ebean.find(User.class).where().eq("user_type","E").findList();
+        List <EventManager> em_list = Ebean.find(EventManager.class).where().eq("user_type","E").findList();
         return ok(manageEventManager.render(admin,em_list));
     }
     public Result showAdminProfile(String adminE)
@@ -83,6 +83,17 @@ public class AdminController extends Controller{
         admin.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         admin.update();
         return ok(showAdminDashboard.render(admin,allEvents));
+    }
+
+    public Result updateApproval(String adminE , String eventManager)
+    {
+        EventManager em= (EventManager) EventManager.find.byId(eventManager);
+        em.setApproved(true);
+        em.update();
+        User admin = Admin.find.byId(adminE);
+        List <EventManager> em_list = Ebean.find(EventManager.class).where().eq("user_type","E").findList();
+        return ok(manageEventManager.render(admin,em_list));
+
     }
 
     public Result supdateAdminProfile(String adminE)
