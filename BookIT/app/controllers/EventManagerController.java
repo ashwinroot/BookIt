@@ -49,5 +49,18 @@ public class EventManagerController extends Controller{
         return ok(updateEventManagerProfile.render(eventManager));
     }
 
+    public Result modifyEventManagerProfile(String eventManagerEmail){
+        User eventManager = User.find.byId(eventManagerEmail);
+        DynamicForm df = formFactory.form().bindFromRequest();
+        eventManager.setUserFirstName(df.get("customerFirstName"));
+        eventManager.setUserLastName(df.get("customerLastName"));
+        eventManager.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
+        eventManager.update();
+
+        List<Event> ownedEvents = Ebean.find(Event.class).where().eq("eventOwnerEmail", eventManagerEmail).findList();
+
+        return ok(showEventManagerDashBoard.render(eventManager,ownedEvents));
+    }
+
 
 }
