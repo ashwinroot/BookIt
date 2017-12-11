@@ -78,6 +78,7 @@ GET /admin/:email                  controllers.AdminController.showAdminDashboar
 GET /admin/:email/manage/em        controllers.AdminController.showManageEM(email : String)
 GET /admin/:email/update/em/:mail   controllers.AdminController.editManageEM(email :String , mail : String)
 GET /admin/:email/delete/em/:mail   controllers.AdminController.deleteManageEM(email :String , mail : String)
+GET /admin/:email/approve/:mail   controllers.AdminController.updateApproval(email :String , mail : String)
 GET /admin/showProfile/:email       controllers.AdminController.showAdminProfile(email : String)
 GET /admin/updateProfile/:email    controllers.AdminController.supdateAdminProfile(email: String)
 + nocsrf
