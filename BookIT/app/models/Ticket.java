@@ -19,15 +19,15 @@ import java.util.Iterator;
 public class Ticket extends Model {
 
     @Id
-    public int ticketId;
-    public int numSeats;
+    private int ticketId;
+    private int numSeats;
     //int eventID;
 
-    public String eventManagerMail;
-    public int eventId;
-    public String customerMail;
-    public Date bookDate;
-    public boolean Status;
+    private String eventManagerMail;
+    private int eventId;
+    private String customerMail;
+    private Date bookDate;
+    private boolean Status;
 
 
 

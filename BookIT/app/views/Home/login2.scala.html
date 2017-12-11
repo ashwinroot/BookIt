@@ -1,4 +1,3 @@
-
 @()
 
 <!DOCTYPE html>
@@ -12,22 +11,29 @@
         <title>Welcome to BookIT</title>
     </head>
     <body>
-        <div class="container">
-            <div class="row" id="pwd-container">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <section class="login-form">
-                        <form method="POST" action="/login/user" role="login">
-                            <h2 align="center">Welcome to BookIT</h2>
-                            <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
-                            <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
-                            <div class="pwstrength_viewport_progress"></div>
-                            <button type="submit" name="go" class="btn btn-lg btn-info btn-block">Sign in</button>
-                            <div>
-                                <a href="/create">Create account</a> or <a href="/password/reset">reset password</a>
-                            </div>
-                        </form>
-                    </section>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-3">BookIt</h1>
+                <p class="lead">An one stop platform to book your tickets- from NFL games to house parties.</p>
+            </div>
+
+            <div class="container">
+                <div class="row" id="pwd-container">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <section class="login-form">
+                            <form method="POST" action="/login/user" role="login">
+                                <h2 align="center">Welcome to BookIT</h2>
+                                <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
+                                <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+                                <div class="pwstrength_viewport_progress"></div>
+                                <button type="submit" name="go" class="btn btn-lg btn-info btn-block">Sign in</button>
+                                <div>
+                                    <a href="/create">Create account</a> or <a href="/password/reset">reset password</a>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>

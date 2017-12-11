@@ -1,25 +1,30 @@
 package models;
 
+import akka.http.impl.engine.ws.WebSocket;
 import io.ebean.Ebean;
 import io.ebean.Finder;
 import io.ebean.Model;
 import notifiers.MailerService;
 import play.libs.mailer.MailerClient;
-
+import play.filters.headers.SecurityHeadersFilter;
 import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.FileWriter;
 import java.util.*;
+import akka.http.impl.engine.ws.WebSocket;
 
 @Entity
 public class Event extends Model implements EventObservable{
 
-    @Inject
-    MailerClient mailerClient;
+//    @Inject
+//    MailerClient mailerClient;
 
     @Id
-    private Integer eventId;
+    public Integer eventId;
+    //private Integer eventId;
+
+
     private String eventName;
     private Date eventDate;
     private String eventLocation;
@@ -157,10 +162,8 @@ public class Event extends Model implements EventObservable{
     public void setObservers(String observers)
     {
         this.observers = observers;
-        //setNumObservers();
     }
 
-    @Override
     public void addObserver(String userMail)
     {
 
@@ -173,7 +176,6 @@ public class Event extends Model implements EventObservable{
 
     }
 
-    @Override
     public void removeObserver(String user)
     {
         List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID",this.eventId).findList();
@@ -190,9 +192,7 @@ public class Event extends Model implements EventObservable{
         }
     }
 
-    @Override
-    public void notifyObserver() {
-
+    public void notifyObserver(MailerClient mailerClient) {
         MailerService m = new MailerService(mailerClient);
         List<EObserver> userList = Ebean.find(EObserver.class).where().eq("eventID", this.eventId).findList();
         Iterator it = userList.iterator();
@@ -200,11 +200,8 @@ public class Event extends Model implements EventObservable{
         while (it.hasNext()) {
             EObserver temp = (EObserver) it.next();
             User user = User.find.byId(temp.getCustomerEmail());
-
-            m.eventUpdateNotification(this.getEventId(), user.getUserEmail());
             int t = m.sendEmail(mailerClient);
             try{
-
                 FileWriter fw=new FileWriter("event_notifyobserver.txt");
                 fw.write("Welcome to javaTpoint. "+user.getUserEmail()+" mailId");
                 fw.flush();
@@ -215,7 +212,7 @@ public class Event extends Model implements EventObservable{
                 e.printStackTrace();
             }
 
-            user.updateUser();
+//            user.updateUser();
         }
 
     }

@@ -12,7 +12,7 @@
         <script src="@routes.Assets.versioned("js/navbar.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("js/cards.js")" type="text/javascript"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <title>Event Manager Dashboard</title>
+        <title>Admin Dashboard</title>
     </head>
 
     <body>
@@ -20,8 +20,8 @@
         <div id='cssmenu'>
             <ul>
                 <li ><a href='/admin/@admin.getUserEmail'>Home</a></li>
-                <li class='active'><a href = "#">Manage EM</a></li>
-                <li><a href = "/admin/@admin.getUserEmail/event">Manage Events</a></li>
+                <li ><a href = "/admin/@admin.getUserEmail/manage/em">Manage EM</a></li>
+                <li class='active'><a href = "/admin/@admin.getUserEmail/event">Manage Events</a></li>
                 <li><a href='/admin/showProfile/@admin.getUserEmail'>Profile</a></li>
                 <li><a href='/signOut'>Log Out</a></li>
             </ul>
@@ -87,7 +87,7 @@
                         <td>@events.get(index).getAvailableNoOfSeats</td>
                         <td>@events.get(index).getTotalSales</td>
                         <td><a href="/admin/@admin.getUserEmail/updateevent/@events.get(index).getEventId"><button class="btn btn-outline-warning">Update</button></a> </td>
-                        <td><a href="/admin/@admin.getUserEmail/delete/event/@events.get(index).getEventId"><button class="btn btn-outline-danger">Delete</button> </a></td>
+                        <td><a href="/admin/@admin.getUserEmail/event/delete/@events.get(index).getEventId"><button class="btn btn-outline-danger">Delete</button> </a></td>
                     </tr>
                 }
 

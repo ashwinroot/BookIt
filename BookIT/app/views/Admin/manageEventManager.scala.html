@@ -1,4 +1,4 @@
-@(admin: User, managers: List[User])
+@(admin: User, managers: List[EventManager])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
         <script src="@routes.Assets.versioned("js/navbar.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("js/cards.js")" type="text/javascript"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <title>Event Manager Dashboard</title>
+        <title>Admin Dashboard</title>
     </head>
 
     <body>
@@ -60,12 +60,7 @@
         @*</div>*@
 
         <div class="container">
-            <h4>Your Events</h4>
-            <ul>
-                <li>
-                    @*<a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>*@
-                </li>
-            </ul>
+            <h4>Event manager</h4>
             <table class="table">
                 <thead>
                     <tr>
@@ -74,6 +69,7 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone Number</th>
+                        <th scope="col">Approval</th>
                         <th scope="col" colspan="2">Actions</th>
                     </tr>
                 </thead>
@@ -86,8 +82,10 @@
                         <td>@managers.get(index).getUserLastName</td>
                         <td>@managers.get(index).getUserEmail</td>
                         <td>@managers.get(index).getPhoneNo</td>
+                        <td>@managers.get(index).getisApproved()</td>
+                        <td><a href="/admin/@admin.getUserEmail/approve/@managers.get(index).getUserEmail"><button class="btn btn-outline-success">Approve</button> </a></td>
                         <td><a href="/admin/@admin.getUserEmail/update/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-warning">Update</button></a> </td>
-                        <td><a href="/admin/@admin.getUserEmail/delete/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-danger">Delete</button> </a></td>
+                        <td><a href="/admin/@admin.getUserEmail/delete/em/@managers.get(index).getUserEmail"><button class="btn btn-outline-danger">Blacklist</button> </a></td>
                     </tr>
                 }
 
