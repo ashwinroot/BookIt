@@ -82,6 +82,27 @@ public class CustomerController extends Controller{
         return ok(showCustomerDashboard.render(customer, allEvents,allEventManager));
     }
 
+    public Result removeFromWishList(Integer eventId){
+        String user = session("connected");
+        User customer = User.find.byId(user);
+
+        WishList wishList = Ebean.find(WishList.class).where().eq("event_id", eventId).where().eq("customerEmail", customer.getUserEmail()).findUnique();
+        wishList.delete();
+
+
+        Event e = Event.find.byId(new Integer(eventId).toString());
+        e.removeObserver(customer.getUserEmail());
+        List<Event> allEvents= Ebean.find(Event.class).where().findList();
+
+        List<EventManager> allEventManager = new ArrayList<>();
+        for(Event es: allEvents)
+        {
+            EventManager em = EventManager.find.byId(es.getEventOwnerEmail());
+            allEventManager.add(em);
+        }
+        return ok(showCustomerDashboard.render(customer, allEvents,allEventManager));
+    }
+
     public Result showCustomerBookingHistory(String customerEmail)
     {
         User user = User.find.byId(customerEmail);

@@ -45,6 +45,8 @@ GET     /customer/viewHistory/:email    controllers.CustomerController.showCusto
 GET     /customer/viewWishList/:email    controllers.CustomerController.showCustomerWishList(email : String)
 GET     /customer/updateProfile/:email   controllers.CustomerController.updateCustomerProfile(email : String)
 GET     /customer/addToWishList/:eventId controllers.CustomerController.addToWishList(eventId : Integer)
+GET     /customer/removeFromWishList/:eventId controllers.CustomerController.removeFromWishList(eventId : Integer)
+
 + nocsrf
 POST     /customer/:email/search      controllers.CustomerController.searchEvent(email :String)
 
