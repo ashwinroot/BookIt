@@ -56,14 +56,15 @@ POST    /customer/modifyProfile/:email   controllers.CustomerController.modifyCu
 GET     /eventManager/:email            controllers.EventManagerController.showEventManagerDashBoard(email : String)
 GET     /eventManager/showProfile/:email    controllers.EventManagerController.showEventManagerProfile(email : String)
 GET     /eventManager/updateProfile/:email   controllers.EventManagerController.updateEventManagerProfile(email : String)
++ nocsrf
+POST    /eventManger/modifyProfile/:email   controllers.EventManagerController.modifyEventManagerProfile(email : String)
+
 #Event routes
 GET /event/create                   controllers.EventController.createEvent()
 GET /event/show/:eventId            controllers.EventController.showEvent(eventId : Integer)
 GET /event/search/:userMail          controllers.EventController.searchEvent(userMail : String)
-
 GET /event/update/:eventId          controllers.EventController.updateEvent(eventId : Integer)
 GET /event/delete/:eventId          controllers.EventController.deleteEvent(eventId : Integer)
-
 GET /event/book/:eventId            controllers.TicketController.bookTicket(eventId: Integer)
 + nocsrf
 POST /event/book/confirm/:eventId    controllers.TicketController.confirmTicket(eventId: Integer)
