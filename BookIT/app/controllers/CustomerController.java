@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.common.base.Ticker;
 import io.ebean.Ebean;
 import io.ebean.Query;
 import io.ebean.RawSql;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import play.api.Logger;
 
 public class CustomerController extends Controller{
 
@@ -29,6 +31,7 @@ public class CustomerController extends Controller{
     FormFactory formFactory;
     @Inject
     MailerClient mailerClient;
+
 
     public Result createCustomer(){
 
@@ -99,14 +102,23 @@ public class CustomerController extends Controller{
     {
         User user = User.find.byId(customerEmail);
         List<Ticket> Tickets = Ebean.find(Ticket.class).where().eq("customerMail", customerEmail).findList();
+        List<Event> listOfEvents = new ArrayList<>();
         if (Tickets.size() > 0)
         {
+            Iterator<Ticket> iter = Tickets.iterator();
+            while(iter.hasNext())
+            {
+               Ticket t = iter.next();
+               Event e = Event.find.byId(Integer.toString(t.getTicketId()));
+               listOfEvents.add(e);
+            }
+
             String message = new String();
-            return ok(showCustomerBookingHistory.render(Tickets, user, message));
+            return ok(showCustomerBookingHistory.render(Tickets, user, message,listOfEvents));
         }
         else {
             String message = new String("No Booking History");
-            return ok(showCustomerBookingHistory.render(Tickets, user, message));
+            return ok(showCustomerBookingHistory.render(Tickets, user, message,listOfEvents));
         }
     }
 
@@ -149,7 +161,6 @@ public class CustomerController extends Controller{
     public Result searchEvent(String customerEmail)
     {
         DynamicForm df = formFactory.form().bindFromRequest();
-
         String name = df.get("query_name");
         String location = df.get("query_location");
         String date = df.get("query_date");

@@ -58,7 +58,9 @@
             @*</div>*@
 
         @*</div>*@
-            <h4>All Events</h4>
+        <div class="row justify-content-center">
+            <p class="form-control btn btn-outline-dark">All Events</p>
+        </div>
 
             <div class="row active-with-click">
             @for(index <- 0 until ownedEvents.size) {
@@ -73,7 +75,7 @@
                         </h2>
                         <div class="mc-content">
                             <div class="img-container">
-                                <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
+                                <img class="img-responsive" src="@routes.Assets.versioned("images/concert2_EventManager.jpg")">
                             </div>
                             <div class="mc-description">
                                 <p>Date of the Event: <strong>@ownedEvents.get(index).getEventDate</strong></p>

@@ -1,4 +1,4 @@
-@(Tickets: List[Ticket], user: User, message : String)
+@(Tickets: List[Ticket], user: User, message : String, Events : List[Event])
 
 
 <!DOCTYPE html>
@@ -24,18 +24,40 @@
             </ul>
         </div>
             <div class="h4">@message</div>
-        @for(ticket <- Tickets){
-             @if(ticket.isStatus()){
-                <ul>
 
-                    <li><strong>Ticket ID:</strong> @ticket.getTicketId()</li>
-                    <li><Strong>Event ID:</Strong> @ticket.getEventId()</li>
-                    <li><strong>Number of Seats Booked:</strong> @ticket.getNumSeats()</li><br>
+        <div class="container">
+            <h4>Event manager</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">No of Tickets</th>
+                        <th scope="col">Total Cost</th>
+                        <th scope="col" colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+        @for(index <- 0 until Tickets.size) {
+                @*<ul>*@
 
-                    <a href="/event/cancel/@ticket.getTicketId"><button>Cancel Ticket</button></a>
-                </ul>
-            }
+                    @*<li><strong>Ticket ID:</strong> @Tickets.get(index).getTicketId()</li>*@
+                    @*<li><Strong>Event ID:</Strong>  @Tickets.get(index).getEventId()</li>*@
+                    @*<li><strong>Number of Seats Booked:</strong>  @Tickets.get(index).getNumSeats()</li><br>*@
+                    @*<li>@Events.get(index).getEventName</li>*@
+                    @*<a href="/event/cancel/ @Tickets.get(index).getTicketId"><button>Cancel Ticket</button></a>*@
+                @*</ul>*@
+
+            <tr>
+                <th scope="row">@Tickets.get(index).getTicketId</th>
+                <td>@Events.get(index).getEventName</td>
+                <td>@Tickets.get(index).getNumSeats</td>
+                <td>@{Tickets.get(index).getNumSeats() * Events.get(index).getPerTicketCost}</td>
+                <td><a href="/event/cancel/@Tickets.get(index).getTicketId"><button class="btn btn-outline-danger">Cancel Ticket</button> </a></td>
+            </tr>
         }
-
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
