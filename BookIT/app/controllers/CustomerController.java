@@ -51,7 +51,13 @@ public class CustomerController extends Controller{
     public Result showCustomerDashBoard(String customerEmail){
         User customer = User.find.byId(customerEmail);
         List<Event> allEvents = Ebean.find(Event.class).where().findList();
-        return ok(showCustomerDashboard.render(customer,allEvents));
+        List<EventManager> allEventManager = new ArrayList<>();
+        for(Event e: allEvents)
+        {
+            EventManager em = EventManager.find.byId(e.getEventOwnerEmail());
+            allEventManager.add(em);
+        }
+        return ok(showCustomerDashboard.render(customer,allEvents,allEventManager));
     }
 
     public Result showCustomerProfile(String customerEmail){
@@ -67,7 +73,13 @@ public class CustomerController extends Controller{
         e.addObserver(customer.getUserEmail());
         List<Event> allEvents= Ebean.find(Event.class).where().findList();
         wishList.save();
-        return ok(showCustomerDashboard.render(customer, allEvents));
+        List<EventManager> allEventManager = new ArrayList<>();
+        for(Event es: allEvents)
+        {
+            EventManager em = EventManager.find.byId(es.getEventOwnerEmail());
+            allEventManager.add(em);
+        }
+        return ok(showCustomerDashboard.render(customer, allEvents,allEventManager));
     }
 
     public Result showCustomerBookingHistory(String customerEmail)
@@ -111,28 +123,15 @@ public class CustomerController extends Controller{
         List<Event> allEvents = Ebean.find(Event.class).where().findList();
         customer.setPhoneNo(BigInteger.valueOf(Long.parseLong(df.get("customerPhoneNo"))));
         customer.update();
-
-        return ok(showCustomerDashboard.render(customer,allEvents));
+        List<EventManager> allEventManager = new ArrayList<>();
+        for(Event e: allEvents)
+        {
+            EventManager em = EventManager.find.byId(e.getEventOwnerEmail());
+            allEventManager.add(em);
+        }
+        return ok(showCustomerDashboard.render(customer,allEvents,allEventManager));
     }
 
-
-    public Result searchEventbyName(String customerEmail)
-    {
-        DynamicForm df = formFactory.form().bindFromRequest();
-        List<Event> eventList = new ArrayList<Event>();
-        String name = df.get("query_name");
-        String location = df.get("query_location");
-        String date = df.get("query_date");
-        User customer = User.find.byId(customerEmail);
-
-        if(!name.equals(""))
-            eventList.addAll(Ebean.find(Event.class).where().like("event_name","%"+name+"%").findList());
-        if(!location.equals(""))
-            eventList.addAll(Ebean.find(Event.class).where().like("event_location","%"+location+"%").findList());
-        if(!date.equals(""))
-            eventList.addAll(Ebean.find(Event.class).where().like("event_date","%"+date+"%").findList());
-        return ok(showCustomerDashboard.render(customer,eventList));
-    }
 
     public Result searchEvent(String customerEmail)
     {
@@ -158,7 +157,13 @@ public class CustomerController extends Controller{
         Query<Event> query1 = Ebean.find(Event.class);
         query1.setRawSql(rawSql);
         List<Event> list = query1.findList();
-        return ok(showCustomerDashboard.render(customer,list));
+        List<EventManager> allEventManager = new ArrayList<>();
+        for(Event e: list)
+        {
+            EventManager em = EventManager.find.byId(e.getEventOwnerEmail());
+            allEventManager.add(em);
+        }
+        return ok(showCustomerDashboard.render(customer,list,allEventManager));
 
     }
 
