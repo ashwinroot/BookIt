@@ -35,16 +35,14 @@
                     <a href="/event/create"><button class="btn btn-lg btn-outline-info">Create Event</button></a>
                 </div>
             </div>
+        </div>
+        <br>
 
+
+        <div class="row justify-content-center">
+            <p class="form-control btn btn-outline-info">Your Events</p>
         </div>
 
-
-            <h4>Your Events</h4>
-            <ul>
-                <li>
-                    @*<a href ="/event/show/@ownedEvents.get(index).getEventId">@ownedEvents.get(index).getEventName</a>*@
-                </li>
-            </ul>
             <div class="row active-with-click">
             @for(index <- 0 until ownedEvents.size) {
                 <div class="col-md-4 col-sm-6 col-xs-12">
@@ -59,7 +57,7 @@
                         </h2>
                         <div class="mc-content">
                             <div class="img-container">
-                                <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
+                                <img class="img-responsive" src="@routes.Assets.versioned("images/concert2_EventManager.jpg")">
                             </div>
                             <div class="mc-description">
                                 <p>Location : <strong>@ownedEvents.get(index).getEventLocation</strong></p>
