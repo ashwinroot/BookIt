@@ -238,6 +238,9 @@
     /*-o-transition: all 0.9s;*/
     /*transition: all 0.9s;*/
 /*}*/
+.img-responsive{
+    height: 114%;
+}
 .material-card .img-container {
     overflow: hidden;
     position: absolute;

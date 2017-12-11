@@ -72,7 +72,7 @@
                         </h2>
                         <div class="mc-content">
                             <div class="img-container">
-                                <img class="img-responsive" src="@routes.Assets.versioned("images/concert2_Customer.jpg")">
+                                <img class="img-responsive" src="@routes.Assets.versioned("images/events.jpg")">
                             </div>
                             <div class="mc-description">
                                 <p>Number of Available Seats: <strong> @allEvents.get(index).getAvailableNoOfSeats</strong></p>
@@ -94,6 +94,42 @@
                 </div>
             }
             </div>
+        <div class="row active-with-click">
+        @for(index <- 0 until allEvents.size) {
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <article class="material-card Teal">
+                    <h2>
+                        <p>@allEvents.get(index).getEventName</p>
+                        <strong>
+                            <i class="fa fa-fw fa-star"></i>
+                            Location: @allEvents.get(index).getEventLocation
+                        </strong>
+                    </h2>
+                    <div class="mc-content">
+                        <div class="img-container">
+                            <img class="img-responsive" src="@routes.Assets.versioned("images/concert2_Customer.jpg")">
+                        </div>
+                        <div class="mc-description">
+                            <p>Number of Available Seats: <strong> @allEvents.get(index).getAvailableNoOfSeats</strong></p>
+                            <p> Cost per Ticket :<strong>$ @allEvents.get(index).getPerTicketCost</strong></p>
+                            <p>Date of the event: <strong>@allEvents.get(index).getEventDate </strong></p>
+                            <p>Event owner : @allEvents.get(index).getEventOwnerEmail</p>
+                        </div>
+                    </div>
+                    <a class="mc-btn-action">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <div class="mc-footer">
+                        <form method="get" action="/event/book/@allEvents.get(index).getEventId">
+                            <button class="btn btn-outline-info">Book</button>
+                            <button class="btn btn-outline-info" formaction="/customer/addToWishList/@allEvents.get(index).getEventId">Add to WishList</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        }
+        </div>
+        </div>
         <a href="/mail/@customer.getUserEmail">Send mail</a>
     </body>
 
