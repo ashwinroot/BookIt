@@ -1,4 +1,4 @@
-@(customer: User ,  allEvents: List[Event])
+@(customer: User, allEvents: List[Event], eventManager: List[EventManager])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,58 +33,67 @@
             </ul>
         </div>
         <br>
-            <div class="row justify-content-center">
-                <form class="form-inline" action="/customer/@customer.getUserEmail/search1" method="post">
-                    <input type="search" class="form-control" placeholder="Event Name" name="query_name"/>
-                    <p>&nbsp &nbsp</p>
-                    <input type="search" class="form-control" placeholder="Location" name="query_location"/>
-                    <p>&nbsp &nbsp</p>
-                    <input type="search" class="form-control" placeholder="Date" name="query_date"/>
-                    <p>&nbsp &nbsp</p>
-                    <input type="submit" value="Search" class="btn btn-outline-info">
-                </form>
-            </div>
+        <div class="row justify-content-center">
+            <form class="form-inline" action="/customer/@customer.getUserEmail/search1" method="post">
+                <input type="search" class="form-control" placeholder="Event Name" name="query_name"/>
+                <p>&nbsp &nbsp</p>
+                <input type="search" class="form-control" placeholder="Location" name="query_location"/>
+                <p>&nbsp &nbsp</p>
+                <input type="search" class="form-control" placeholder="Date" name="query_date"/>
+                <p>&nbsp &nbsp</p>
+                <input type="submit" value="Search" class="btn btn-outline-info">
+            </form>
+        </div>
         <br>
         <div class="row justify-content-center">
             <p class="form-control btn btn-outline-dark">Featured Events</p>
         </div>
         <br>
         <div class="container">
-        <div class="row active-with-click">
-        @for(index <- 0 until allEvents.size) {
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <article class="material-card Teal">
-                    <h2>
-                        <p>@allEvents.get(index).getEventName</p>
-                        <strong>
-                            <i class="fa fa-fw fa-star"></i>
-                            Location: @allEvents.get(index).getEventLocation
-                        </strong>
-                    </h2>
-                    <div class="mc-content">
-                        <div class="img-container">
-                            <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
+            <div class="row active-with-click">
+            @for(index <- 0 until allEvents.size) {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <article class="material-card Teal">
+                        <h2>
+                            <span>@allEvents.get(index).getEventName
+                            @{
+                                if(eventManager.get(index).getisApproved()) {
+                                        <span class="checkmark">
+                                        <div class="checkmark_stem"></div>
+                                        <div class="checkmark_kick"></div>
+                                        </span>
+                                }
+                            }</span>
+                            <strong>
+                                <i class="fa fa-fw fa-star"></i>
+                                Location: @allEvents.get(index).getEventLocation
+                                <p></p>
+                            </strong>
+                        </h2>
+                        <div class="mc-content">
+                            <div class="img-container">
+                                <img class="img-responsive" src="@routes.Assets.versioned("images/dummy.jpg")">
+                            </div>
+                            <div class="mc-description">
+                                <p>Number of Available Seats: <strong> @allEvents.get(index).getAvailableNoOfSeats</strong></p>
+                                <p> Cost per Ticket :<strong>$ @allEvents.get(index).getPerTicketCost</strong></p>
+                                <p>Date of the event: <strong>@allEvents.get(index).getEventDate </strong></p>
+                                <p>Event owner : @allEvents.get(index).getEventOwnerEmail</p>
+                            </div>
                         </div>
-                        <div class="mc-description">
-                            <p>Number of Available Seats: <strong> @allEvents.get(index).getAvailableNoOfSeats</strong></p>
-                            <p> Cost per Ticket :<strong>$ @allEvents.get(index).getPerTicketCost</strong></p>
-                            <p>Date of the event: <strong>@allEvents.get(index).getEventDate </strong></p>
-                            <p>Event owner : @allEvents.get(index).getEventOwnerEmail</p>
+                        <a class="mc-btn-action">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="mc-footer">
+                            <form method="get" action="/event/book/@allEvents.get(index).getEventId">
+                                <button class="btn btn-outline-info">Book</button>
+                                <button class="btn btn-outline-info" formaction="/customer/addToWishList/@allEvents.get(index).getEventId">Add to WishList</button>
+                            </form>
                         </div>
-                    </div>
-                    <a class="mc-btn-action">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                    <div class="mc-footer">
-                        <form method="get" action="/event/book/@allEvents.get(index).getEventId">
-                            <button class="btn btn-outline-info">Book</button>
-                            <button class="btn btn-outline-info" formaction="/customer/addToWishList/@allEvents.get(index).getEventId">Add to WishList</button>
-                        </form>
-                    </div>
-                </article>
+                    </article>
+                </div>
+            }
             </div>
-        }
-        </div>
         </div>
         <a href="/mail/@customer.getUserEmail">Send mail</a>
     </body>

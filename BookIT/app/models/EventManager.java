@@ -19,7 +19,7 @@ public class EventManager extends User {
     private ArrayList<Event> createdEvents;
     private boolean isApproved;
 
-    public static Finder<String, User> find = new Finder<>(User.class);
+    public static Finder<String, EventManager> find = new Finder<>(EventManager.class);
 
     public EventManager(String userFirstName, String userLastName, String userEmail, String userPassword, BigInteger phoneNo) {
         super(userFirstName, userLastName, userEmail, userPassword, phoneNo);
